@@ -1,27 +1,37 @@
 # Group Training
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Vinny1892/progweb-template)
-![GitHub contributors](https://img.shields.io/github/contributors/Vinny1892/progweb-template)
+![GitHub repo size](https://img.shields.io/github/repo-size/Vinny1892/Group-Training)
+![GitHub contributors](https://img.shields.io/github/contributors/Vinny1892/Group-Training)
 
 O objetivo do trabalho é desenvolver uma plataforma de comunicação para auxiliar pessoas a se encontrarem para realizar esporte ou exercícios físicos em conjunto. O usuário tem a opção de filtrar pela modalidade de interesse e, através de chat, consegue estabelecer contato com os demais integrantes para marcar um local e horário para realizar a atividade física
 
 
 ## Pré-requisitos
 
-```docker```
+```
+docker
+```
 
-```docker-compose```
+```
+docker-compose
+```
 
 ## Como executar
 ```
 git clone https://github.com/Vinny1892/Group-Training.git 
 ```
 
-```cd Group-Training/```
+```
+cd Group-Training/
+```
 
-```docker-compose up```
+```
+docker-compose up
+```
 
-```abre seu navegador localhost:8080```
+```
+abre seu navegador localhost:8080
+```
 
 
 
