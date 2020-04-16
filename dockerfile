@@ -44,6 +44,9 @@ RUN composer install
 
 RUN php artisan key:generate
 
+#generate jwt key
+RUN  php artisan jwt:secret
+
 #change uid and gid of apache to docker user uid/gid
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
