@@ -1,5 +1,4 @@
 vendor
 docker-compose.yml
 dockerfile
-.env
 node_modules
