@@ -8,6 +8,10 @@ services:
         environment:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: passwordRoot
+          MONGO_INITDB_DATABASE: laravel-dev
+          MONGODB_DATABASE: laravel-dev
+        volumes:
+          - ./mongosetup.js:/docker-entrypoint-initdb.d/mongosetup.js
         networks:
           custom_network:
             ipv4_address: 172.100.0.3
