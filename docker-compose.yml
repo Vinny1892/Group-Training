@@ -9,7 +9,7 @@ services:
       - 27017:27017
     networks:
       network-database:
-        ipv4_address: 173.20.0.4
+        ipv4_address: 172.100.0.4
 
   mongo-express:
     image: mongo-express
@@ -20,7 +20,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: passwordRoot
       ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
-      ME_CONFIG_MONGODB_SERVER: 173.20.0.4
+      ME_CONFIG_MONGODB_SERVER: 172.100.0.4
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "false"
       ME_CONFIG_MONGODB_AUTH_USERNAME: app
@@ -30,7 +30,7 @@ services:
       - mongo
     networks:
       network-database:
-        ipv4_address: 173.20.0.5
+        ipv4_address: 172.100.0.5
   php-apache:
     build:
       dockerfile: ./docker/dockerfile.app
@@ -44,7 +44,7 @@ services:
       - /var/www/html/vendor
     networks:
       network-database:
-        ipv4_address: 173.20.0.6
+        ipv4_address: 172.100.0.6
 
 networks:
   network-database:
@@ -52,4 +52,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 173.20.0.0/24
+        - subnet: 172.100.0.0/24

@@ -36,7 +36,7 @@
           </div>
 
           <div class="registrar">
-            <p>Não tem conta? <a href="cadastro.html">Registre-se</a></p>
+          <p>Não tem conta? <a href="{{ route('register.show') }}">Registre-se</a></p>
           </div>
           
         </form>

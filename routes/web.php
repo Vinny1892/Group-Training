@@ -13,8 +13,13 @@
 
 
 
-Route::get('/', function () {
+Route::group(['namespace' => 'Auth'] , function(){
+    Route::get('/',  "LoginController@show")->name('login.show');
+    Route::get('/registrar' ,"RegisterController@show")->name('register.show');
+    
 });
+
+
 
 
 
