@@ -3,3 +3,4 @@ docker-compose.yml
 docker/dockerfile.app
 docker/Dockerfile.mongo
 node_modules
+.env
