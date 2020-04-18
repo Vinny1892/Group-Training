@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+    <title>Group Training</title>
+  </head>
+<main class="tela-login" >
+  <section class="row z-depth-3 ">
+    <h4 class="center-align" >Registrar-se</h4>
+    <form method="POST" action="#" class="row">
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<link href="style.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<title>Group Training</title>
-</head>
-<main class="tela-login">
-	<section class="card-login">
-		<h4>Cadastro</h4>
-		<form method="POST" action="#">
-			<div class="card-component">
-				<div> <label for="email" >Email</label> </div>
-          <input id="email" type="email">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">person</i>
+          <input id="email" type="email" class="validate">
+          <label for="user">Usuário</label>
         </div>
-        <div>
-          <div>
-            <label for="senha">Senha</label>
-          </div>
-          <input type="password"  id="senha" placeholder="senha" >
-        </div>
+      </div>
 
-        <div class="btn-cadastrar"> 
-          <input class="waves-effect waves-light btn" type="submit" value="Cadastrar">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">email</i>
+          <input id="email" type="email" class="validate">
+          <label for="user">Email</label>
         </div>
-      </form>
-    </section>
+      </div>
 
-    <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-  </script>
-</main>
+      <div class="row">
+          <div class="input-field col s12 ">
+            <i class="material-icons prefix">lock</i>
+            <input id="password" type="password" class="validate">
+            <label class="" for="password">Senha</label>
+      </div>
+
+      <div class="center-align"> 
+        <input class="waves-effect waves-light btn" type="submit" value="Cadastrar">
+      </div>
+      
+    </form>
+  </section>
+  <script src="script.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </main>
 </html>
