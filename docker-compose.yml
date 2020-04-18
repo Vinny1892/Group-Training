@@ -1,54 +1,55 @@
-version: '3.3'
+version: "3.7"
 services:
-    mongo:
-        image: mongo
-        container_name: mongo-database
-        ports:
-          - 27017:27017
-        environment:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: passwordRoot
-          MONGO_INITDB_DATABASE: laravel-dev
-          MONGODB_DATABASE: laravel-dev
-        volumes:
-          - ./mongosetup.js:/docker-entrypoint-initdb.d/mongosetup.js
-        networks:
-          custom_network:
-            ipv4_address: 172.100.0.3
-    mongo-express:
-        image: mongo-express
-        container_name: mongo-express-interface
-        ports:
-          - 8082:8081
-        environment:
-          ME_CONFIG_MONGODB_ADMINUSERNAME: root
-          ME_CONFIG_MONGODB_ADMINPASSWORD: passwordRoot
-          ME_CONFIG_OPTIONS_EDITORTHEME: ambiance 
-          ME_CONFIG_MONGODB_SERVER: 172.100.0.3
-          ME_CONFIG_MONGODB_PORT: 27017
-          ME_CONFIG_BASICAUTH_USERNAME: root
-          ME_CONFIG_BASICAUTH_PASSWORD: passwordRoot
-        depends_on: 
-          - mongo
-        networks:
-          custom_network:
-            ipv4_address: 172.100.0.5
-    php-apache:
-        container_name: "app-Laravel"
-        build: .
-        #command: "composer install"
-        ports:
-            - 8080:80
-        volumes:
-            - .:/var/www/html
-            - /var/www/html/vendor
-        networks: 
-            custom_network:
-                ipv4_address: 172.100.0.4    
+  mongo:
+    build:
+      dockerfile: ./docker/Dockerfile.mongo
+      context: .
+    container_name: mongo-database
+    ports:
+      - 27017:27017
+    networks:
+      network-database:
+        ipv4_address: 173.20.0.4
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express-interface
+    ports:
+      - 8082:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: passwordRoot
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      ME_CONFIG_MONGODB_SERVER: 173.20.0.4
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "false"
+      ME_CONFIG_MONGODB_AUTH_USERNAME: app
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: passwordApp
+      ME_CONFIG_MONGODB_AUTH_DATABASE: app
+    depends_on:
+      - mongo
+    networks:
+      network-database:
+        ipv4_address: 173.20.0.5
+  php-apache:
+    build:
+      dockerfile: ./docker/dockerfile.app
+      context: .
+    container_name: "app-Laravel"
+    #command: "composer install"
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/vendor
+    networks:
+      network-database:
+        ipv4_address: 173.20.0.6
+
 networks:
-  custom_network:
+  network-database:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: 172.100.0.0/24
+        - subnet: 173.20.0.0/24
