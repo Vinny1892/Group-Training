@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Jenssegers\Mongodb\Eloquent\Model  as Authenticatable;
-use Illumiate\Auth\Authenticatable as AuthenticableTrait;
-use Illumiate\Contracts\Auth\Authenticable;
-class User extends Authenticatable implements Authenticatable
+use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
+class User extends Eloquent implements Authenticatable
 {
     use Notifiable;
+    use AuthenticableTrait;
 
 
     protected $connection = "mongodb";

@@ -16,7 +16,8 @@
 Route::group(['namespace' => 'Auth'] , function(){
     Route::get('/',  "LoginController@show")->name('login.show');
     Route::get('/registrar' ,"RegisterController@show")->name('register.show');
-    
+    Route::post('/registrar' , "RegisterController@storage")->name('register.storage');
+        
 });
 
 
