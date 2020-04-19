@@ -10,7 +10,18 @@
 
     <title>Group Training</title>
   </head>
+
+
 <main class="tela-login" >
+  @if ($errors->any())
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li> {{ $error }} </li>
+          @endforeach
+      </ul>
+  </div>
+@endif
   <section class="row z-depth-3 ">
     <h4 class="center-align" >Registrar-se</h4>
   <form method="POST" action="{{ route('register.storage') }}" class="row">

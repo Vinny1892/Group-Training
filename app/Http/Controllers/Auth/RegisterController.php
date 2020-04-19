@@ -76,10 +76,11 @@ class RegisterController extends Controller
     }
     public function storage(Request $request){
 
+        $validate = $this->validator($request->all())->validate();
+        if($validate->fails()){
+            return redirect()->withErrors($validate)->withInput()->route('register.show');
+        }
         $this->create($request->only(['name','email','password']));
-        echo 'aqui2';
-        
-       //$validate = validator($request->all())->validate();
     }
 
 }
