@@ -31,14 +31,13 @@ services:
     networks:
       network-database:
         ipv4_address: 172.100.0.5
-  php-apache:
+  app-grouptraining:
     build:
       dockerfile: ./docker/dockerfile.app
       context: .
     container_name: "app-Laravel"
     #command: "composer install"
     ports:
-      - 8084:443
       - 8080:80
     volumes:
       - .:/var/www/html

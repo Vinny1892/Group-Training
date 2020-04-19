@@ -34,18 +34,20 @@ ENV APP_HOME /var/www/html
 
 #copy source files and run composer
 COPY . $APP_HOME
+
 # Install lib for mondodb
 RUN  pecl install mongodb
 RUN docker-php-ext-enable mongodb
-RUN cat composer.json
+
+
 # install all PHP dependencies
-RUN composer install  
+#RUN composer install  
 
 
-RUN php artisan key:generate
+#RUN php artisan key:generate
 
 #generate jwt key
-RUN  php artisan jwt:secret
+#RUN  php artisan jwt:secret
 
 #change uid and gid of apache to docker user uid/gid
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
