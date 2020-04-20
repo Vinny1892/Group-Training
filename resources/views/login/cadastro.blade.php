@@ -14,13 +14,12 @@
 
 <main class="tela-login" >
   @if ($errors->any())
-  <div class="alert alert-danger">
-      <ul>
           @foreach ($errors->all() as $error)
-              <li> {{ $error }} </li>
+            <div class="card red lighten-5">
+            <div class="card-content  red-text"> <p>{{ $error }}</p> </div>
+            </div>
           @endforeach
-      </ul>
-  </div>
+
 @endif
   <section class="row z-depth-3 ">
     <h4 class="center-align" >Registrar-se</h4>

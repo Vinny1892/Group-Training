@@ -6,7 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
-class User extends Eloquent implements Authenticatable
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class User extends Eloquent implements Authenticatable, JWTSubject
 {
     use Notifiable;
     use AuthenticableTrait;
@@ -40,4 +42,14 @@ class User extends Eloquent implements Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
