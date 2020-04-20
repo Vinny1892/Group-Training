@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Auth'] , function(){
     //Providers Routes
     Route::get('/login/facebook','LoginController@redirectToFacebook');
     Route::get('/login/facebook/callback' , 'LoginController@handleFacebookCallback');
+    Route::get('/login/google','LoginController@redirectToGoogle');
+    Route::get('/login/google/callback' , 'LoginController@handleGoogleCallback');
+
         
 });
 

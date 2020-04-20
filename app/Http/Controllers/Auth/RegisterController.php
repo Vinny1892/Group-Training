@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers\Auth;
 
@@ -76,9 +76,9 @@ class RegisterController extends Controller
     }
     public function storage(Request $request){
 
-        $validate = $this->validator($request->all())->validate();
+        $validate = $this->validator($request->only(['name','email',]) );
         if($validate->fails()){
-            return redirect()->withErrors($validate)->withInput()->route('register.show');
+            return redirect()->route('register.show')->withErrors($validate)->withInput();
         }
         $this->create($request->only(['name','email','password']));
     }

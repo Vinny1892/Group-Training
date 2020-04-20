@@ -11,7 +11,7 @@ class User extends Eloquent implements Authenticatable
     use Notifiable;
     use AuthenticableTrait;
 
-
+    protected  $table = 'users';
     protected $connection = "mongodb";
 
     /**

@@ -48,6 +48,12 @@
             <input id="password" name="password" type="password" class="validate">
             <label class="" for="password">Senha</label>
       </div>
+          <div class="row">
+              <div class="input-field col s12 ">
+                  <i class="material-icons prefix">lock</i>
+                  <input id="password" name="password_confirmation" type="password" class="validate">
+                  <label class="" for="password">Confirme sua Senha</label>
+              </div>
 
       <div class="center-align"> 
         <input class="waves-effect waves-light btn" type="submit" value="Cadastrar">

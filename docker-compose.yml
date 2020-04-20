@@ -42,7 +42,6 @@ services:
       - 8080:80
     volumes:
       - .:/var/www/html
-      - /var/www/html/vendor
     networks:
       network-database:
         ipv4_address: 172.100.0.6
