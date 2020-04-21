@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Socialite;
 class LoginController extends Controller
 {
@@ -25,97 +26,50 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
+        $this->middleware('auth')->only(['logout',]);
         $this->middleware('guest')->except('logout');
+
     }
-
-
-
 
     public function show(){
         return view('login.login');
     }
 
-
-    /**
-     * Get a JWT token via given credentials.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if ($token = auth('web')->attempt($credentials)) {
-                return $this->respondWithToken($token,'dashboard.show');
-        }
-       return   Redirect::route('login.show')->withErrors(['message' => "Login ou Senha incorretos"]);
+    public function logout(){
+        Auth::logout();
+        return Redirect::route('login');
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function respondWithToken($token,$nameRoute)
-    {
-        return Redirect::route($nameRoute,['token' => $token])->withHeaders([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60
+    protected function validator($data){
+        return Validator::make($data , [
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
     }
 
-
-
-    /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\Guard
-     */
-
-    public function guard()
+    public function login(Request $request)
     {
-        return Auth::guard();
-    }
-
-    /**
-     * Refresh a token.
-     *
-     */
-    public function refresh()
-    {
-        return $this->respondWithToken($this->guard()->refresh());
-    }
+        $credentials = [
+            "email" => $request->email,
+            "password" => $request->password
+        ];
+        $validate = $this->validator($credentials);
+        if($validate->fails()){
+          return  Redirect::route('login')->withErrors($validate)->withInput();
+        }
 
 
-    /**
-     * Log the user out (Invalidate the token)
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
 
-    public function logout()
-    {
-        $this->guard()->logout();
-
-        return redirect()->route('login.show');
+        if ( Auth::attempt($credentials)) {
+            return Redirect::route('dashboard');
+        }
+       return   Redirect::route('login')->withErrors(['message' => "Login ou Senha incorretos"]);
     }
 
     public function redirectToFacebook()
@@ -124,9 +78,24 @@ class LoginController extends Controller
     }
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
-        echo "$user";
-        // $user->token;
+        try{
+            $user = Socialite::driver('facebook')->user();
+        }catch (\Exception $e) {
+            return Redirect::route('login');
+        }
+
+        $userDB = User::where('email' , $user->email)->first();
+        if($userDB == null){
+            $userDB = User::create([
+                'name' => $user['name'],
+                'email' => $user['email']
+            ]);
+            // Fazer redirect para tela de listar sala
+        }
+        Auth::login($userDB,true);
+        return Redirect::route('dashboard');
+
+
     }
     public function redirectToGoogle()
     {
@@ -134,18 +103,24 @@ class LoginController extends Controller
     }
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+
+        try {
+            $user = Socialite::driver('google')->user();
+        } catch (\Exception $e) {
+            return Redirect::route('login');
+        }
+
         $userDB = User::where('email' , $user->email)->first();
         if($userDB == null){
-            User::create([
+           $userDB = User::create([
                 'name' => $user['name'],
                 'email' => $user['email']
             ]);
-            echo "Funcionou";
-
             // Fazer redirect para tela de listar sala
-
         }
+        Auth::login($userDB,true);
+        return Redirect::route('dashboard');
+
 
     }
 

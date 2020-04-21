@@ -15,10 +15,10 @@
 
 Route::group(['namespace' => 'Auth'] , function(){
 
-    Route::get('/',  "LoginController@show")->name('login.show');
+    Route::get('/login',  "LoginController@show")->name('login');
     Route::post('/login' , "LoginController@login")->name('login.login');
     Route::post('/logout', 'LoginController@logout')->name('login.logout');
-    Route::get('/registrar' ,"RegisterController@show")->name('register.show');
+    Route::get('/registrar' ,"RegisterController@show")->name('register');
     Route::post('/registrar' , "RegisterController@storage")->name('register.storage');
     
     //Providers Routes
@@ -30,7 +30,7 @@ Route::group(['namespace' => 'Auth'] , function(){
 });
 
 //DsahBoard Routes
-Route::get('/dashboard/{token}' ,"DashboardController@show")->name('dashboard.show');
+Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
 
 

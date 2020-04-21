@@ -44,7 +44,7 @@
         </div>
 
         <div class="registrar center-align">
-        <p>Não tem conta? <a href="{{ route('register.show') }}">Registre-se</a></p>
+        <p>Não tem conta? <a href="{{ route('register') }}">Registre-se</a></p>
           <a href="{{ route('login.google') }}"><i class="fab fa-google color-icon-google"></i></a>
           <a href="{{ route('login.facebook') }}"><i class="fab fa-facebook color-icon-fb" ></i></a>
         </div>

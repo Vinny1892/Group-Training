@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -79,7 +80,7 @@ class RegisterController extends Controller
 
         $validate = $this->validator($request->only(['name','email','password','password_confirmation']) );
         if($validate->fails()){
-            return redirect()->route('register.show')->withErrors($validate)->withInput();
+            return  Redirect::route('register')->withErrors($validate)->withInput();
         }
         $this->create($request->only(['name','email','password']));
     }
