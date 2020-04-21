@@ -44,7 +44,9 @@
               </div>
 
       <div class="center-align">
-        <input class="waves-effect waves-light btn" type="submit" value="Cadastrar">
+          <button style="background-color: #7a297a" class=" waves-light waves-effect  btn" type="submit" >Cadastrar
+              <i class="material-icons right">send</i>
+          </button>
       </div>
   </form>
   </div>

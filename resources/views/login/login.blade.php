@@ -13,7 +13,6 @@
   <form method="post" action="{{ route('login.login') }}" class="row">
     @csrf
     <div class="row">
-
       <div class="input-field col s12" >
         <i class="material-icons prefix">person</i>
         <input id="email" name="email" type="email" class="validate"/>
@@ -30,10 +29,12 @@
     </div>
 
     <div class="center-align">
-      <input class="waves-effect waves-light btn" type="submit" value="Login" />
+      <button style="background-color: #7a297a" class="waves-effect waves-light btn" type="submit" >Login
+        <i class="material-icons right">send</i>
+      </button>
     </div>
 
-    <div class="registrar center-align">
+    <div class=" center-align">
       <p>Não tem conta? <a href="{{ route('register') }}">Registre-se</a></p>
       <a href="{{ route('login.google') }}"><i class="fab fa-google color-icon-google"></i></a>
       <a href="{{ route('login.facebook') }}"><i class="fab fa-facebook color-icon-fb" ></i></a>
