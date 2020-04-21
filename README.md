@@ -37,10 +37,9 @@ docker-compose exec  app-grouptraining php artisan key:generate
 ```
 
 ```
-docker-compose exec  app-grouptraining php artisan jwt:secret
+docker-compose exec  app-grouptraining php artisan migrate
 
 ```
-
 
 ```
 abre seu navegador localhost:8080
