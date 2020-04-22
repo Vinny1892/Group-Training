@@ -76,13 +76,14 @@ class RegisterController extends Controller
     public function show(){
         return view('login.cadastro');
     }
-    public function storage(Request $request){
-
+    public function storage(Request $request)
+    {
         $validate = $this->validator($request->only(['name','email','password','password_confirmation']) );
         if($validate->fails()){
             return  Redirect::route('register')->withErrors($validate)->withInput();
         }
         $this->create($request->only(['name','email','password']));
+        Redirect::route('login');
     }
 
 }

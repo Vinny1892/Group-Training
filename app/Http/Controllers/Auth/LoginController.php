@@ -85,6 +85,7 @@ class LoginController extends Controller
         }
 
         $userDB = User::where('email' , $user->email)->first();
+
         if($userDB == null){
             $userDB = User::create([
                 'name' => $user['name'],

@@ -39,15 +39,19 @@ COPY . $APP_HOME
 RUN  pecl install mongodb
 RUN docker-php-ext-enable mongodb
 
+#libs redis
+RUN pecl install igbinary
+RUN pecl install redis
+RUN docker-php-ext-enable igbinary
+RUN docker-php-ext-enable redis
+
+
 
 # install all PHP dependencies
 #RUN composer install  
 
 
 #RUN php artisan key:generate
-
-#generate jwt key
-#RUN  php artisan jwt:secret
 
 #change uid and gid of apache to docker user uid/gid
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data

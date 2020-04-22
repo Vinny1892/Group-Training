@@ -17,7 +17,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">person</i>
-          <input id="user" name="name" type="text" class="validate">
+          <input id="user" name="name" type="text"   value="{{ old('name')  }}" class="validate">
           <label for="user">Usuário</label>
         </div>
       </div>
@@ -25,7 +25,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">email</i>
-          <input id="email" name="email" type="email" class="validate">
+          <input id="email" value="{{ old('email') }}" name="email" type="email" class="validate">
           <label for="user">Email</label>
         </div>
       </div>
