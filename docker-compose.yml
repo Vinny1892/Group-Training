@@ -8,7 +8,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      network-database:
+      network-develop:
         ipv4_address: 172.100.0.4
 
   mongo-express:
@@ -29,7 +29,7 @@ services:
     depends_on:
       - mongo
     networks:
-      network-database:
+      network-develop:
         ipv4_address: 172.100.0.5
   app-grouptraining:
     build:
@@ -41,13 +41,19 @@ services:
       - 8080:80
     volumes:
       - .:/var/www/html
-      - /var/www/html/vendor
     networks:
-      network-database:
+      network-develop:
         ipv4_address: 172.100.0.6
-
+  redis:
+    image: redis
+    command: redis-server --requirepass seila123
+    ports:
+      - "6379:6379"
+    networks:
+      network-develop:
+        ipv4_address: 172.100.0.7
 networks:
-  network-database:
+  network-develop:
     driver: bridge
     ipam:
       driver: default

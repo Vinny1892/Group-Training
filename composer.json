@@ -15,7 +15,7 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
         "mongodb/mongodb": "^1.6",
-        "tymon/jwt-auth": "1.0.0-rc.5.1"
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
