@@ -28,6 +28,18 @@ cd Group-Training/
 ```
 docker-compose up
 ```
+```
+docker-compose exec  app-grouptraining composer install
+```
+
+```
+docker-compose exec  app-grouptraining php artisan key:generate
+```
+
+```
+docker-compose exec  app-grouptraining php artisan migrate
+
+```
 
 ```
 abre seu navegador localhost:8080

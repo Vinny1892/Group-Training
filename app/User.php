@@ -3,12 +3,18 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
-class User extends Authenticatable
+class User extends Eloquent implements Authenticatable
 {
     use Notifiable;
+    use AuthenticableTrait;
+
+    protected  $table = 'users';
+    protected $connection = "mongodb";
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +42,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }
