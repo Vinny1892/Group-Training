@@ -56,20 +56,12 @@ button.addEventListener ('click', async function(){
 });
 
 socket.on('PreviousMessage', function(messages){
-    console.log("testeee")
-    // let chat = document.getElementById('chat'); 
-    // for(message of messages){
-    //     if(message.author ==  user.author){
-    //         renderMessage(message,'eu');
-    //     }else{
-    //         renderMessage(message , 'outro');
-    //     }
-        //if(messages)
-        //renderMessage(message , outro/)
-        //construir tela com
-        //message é um array de objetos com todas as mensagens
+    let type
+    for(message of messages){
+        type = message.id == user._id ? "eu" : "outro"
+        renderMessage(message, type)
     }
-)
+})
 
 
 
