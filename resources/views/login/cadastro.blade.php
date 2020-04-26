@@ -1,6 +1,6 @@
 @extends('authentication.app')
 
-@section('content');
+@section('content')
 <div class="tela-login">
   @if ($errors->any())
           @foreach ($errors->all() as $error)
@@ -52,4 +52,4 @@
   </div>
   </section>
   </div>
-@endsection;
+@endsection
