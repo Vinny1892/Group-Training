@@ -74,7 +74,7 @@ class RegisterController extends Controller
     }
 
     public function show(){
-        return view('login.cadastro');
+        return view('login.cadastro', );
     }
     public function storage(Request $request)
     {

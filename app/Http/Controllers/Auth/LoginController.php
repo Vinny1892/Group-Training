@@ -38,6 +38,7 @@ class LoginController extends Controller
     }
 
     public function show(){
+        // retorna um arquivo pra view
         return view('login.login');
     }
 
@@ -63,9 +64,7 @@ class LoginController extends Controller
         if($validate->fails()){
           return  Redirect::route('login')->withErrors($validate)->withInput();
         }
-
-
-
+        //realizar a tentativa de login
         if ( Auth::attempt($credentials)) {
             return Redirect::route('dashboard');
         }
