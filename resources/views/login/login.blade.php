@@ -1,5 +1,5 @@
-@extends('authentication.app');
-@section('content');
+@extends('authentication.app')
+@section('content')
 <div class="tela-login">
 @if ($errors->any())
   @foreach ($errors->all() as $error)
