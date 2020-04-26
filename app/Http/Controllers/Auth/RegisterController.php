@@ -83,7 +83,7 @@ class RegisterController extends Controller
             return  Redirect::route('register')->withErrors($validate)->withInput();
         }
         $this->create($request->only(['name','email','password']));
-        Redirect::route('login');
+            return  Redirect::route('login');
     }
 
 }
