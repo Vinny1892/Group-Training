@@ -11,6 +11,7 @@
 <body>
     <user id=user name="" value="{{ Auth::user() }}" ></user>
     <header class="cabecalho">
+        <button class="btn-voltar">voltar</button>
         <span class="">
             <div class="foto_perfil">
                 <a href="">
@@ -19,21 +20,14 @@
             </div>
         </span>
         <span>
-            <div>FUT praça das araras</div>
-            <span class="qtd_user_on">Total de usuários online 5</span>
+            <div>{{ $nomeSala = 0 }} FUT praça das araras</div>
+            <span class="qtd_user_on">Total de usuários online: {{ $qtdOnline = 0 }} 5</span>
             <button>membros</button>
         </span>
     </header>
     <main class="corpo-chat">
         <div class="area-de-msg"  id="chat">
             <!-- insere html via JS aqui-->
-            <!-- <div class="outro" >
-                <span class="tab">
-                    <div class="nome">Mateus Ragazzi</div>
-                    <span class="msg">Fala consagrado</span>
-                </span>
-                <span class="horario">20:33</span>
-            </div> -->
         </div>
         <div class="escreve">
             <input class="msg-texto" type="textarea"  id="contentMessage">

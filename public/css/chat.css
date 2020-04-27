@@ -38,17 +38,17 @@
     padding-right: 10%;
     padding-bottom: 10px;
     overflow: auto;
-    height: 82.4vh;
-
+    height: 82.4vh; 
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     
 }
 
 
 .outro{
     background-color: #9ce0b7;
-    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
-    width: -moz-max-content;    /* Firefox/Gecko */
-    width: -webkit-max-content; /* Chrome */
     border-radius:  0px 7px 7px 0px;
 
 
@@ -57,14 +57,16 @@
 .eu{
     border-radius:  7px 0px 0px 7px;
     background-color: #aabfc7;
-    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
-    width: -moz-max-content;    /* Firefox/Gecko */
-    width: -webkit-max-content; /* Chrome */
-
+    align-self: flex-end;
     
 }
 
 .outro, .eu{
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+    height: -webkit-fill-available;
+
     padding: 2px 15px 7px 15px;
     font-size: 14.2px;
     font-family: "Segoe UI","Helvetica Neue","Helvetica","Lucida Grande",Arial,"Ubuntu","Cantarell","Fira Sans",sans-serif;
@@ -129,7 +131,8 @@
 }
 
 .foto_perfil{
-    max-width: 80px;
+    max-width: 100%;
+    display: block;
     border-radius: 100%;
 }
 
@@ -140,4 +143,9 @@
     background-color: #848484;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;/*quando a tela for pequena, os elementos ficam um encima do outro*/
+}
+
+.btn-voltar{
+    /*jogar o botao para esquerda*/
 }
