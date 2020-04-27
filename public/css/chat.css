@@ -1,4 +1,4 @@
-*{	margin:0px; padding: 0px; font-size: 100%; border:none; outline: none; box-sizing: border-box;
+*{	margin:0px; padding: 0px; font-size: 100%; /*border:none;*/ outline: none; box-sizing: border-box;
 	
     /*
         font-weight: 300;
@@ -6,9 +6,6 @@
       font-family: 'Dancing Script', cursive;*/
   }
 
-.cabecalho{
-    background-color: #848484;
-}
 
 .corpo-chat{
     background-color: #b4b4b4;
@@ -28,15 +25,13 @@
 
 
 
-.corpo-chat, .outro, .eu{
-    /*quebra linha, tira o <br>*/
+
+
+.corpo-chat{
+    background-color: #b4b4b4;
 }
 
-
-
-
 /**/
-
 .area-de-msg{
     background-color: #fff;
     padding-left: 10%;
@@ -45,14 +40,9 @@
     overflow: auto;
     height: 82.4vh;
 
-}
-.cabecalho{
-    background-color: #848484;
+    
 }
 
-.corpo-chat{
-    background-color: #b4b4b4;
-}
 
 .outro{
     background-color: #9ce0b7;
@@ -70,9 +60,8 @@
     width: intrinsic;           /* Safari/WebKit uses a non-standard name */
     width: -moz-max-content;    /* Firefox/Gecko */
     width: -webkit-max-content; /* Chrome */
-    /* position: absolute;
-    right: 0px; */
-    /* float: right; */
+
+    
 }
 
 .outro, .eu{
@@ -93,9 +82,6 @@
 }
 
 
-.corpo-chat, .outro, .eu{
-    /*quebra linha, tira o <br>*/
-}
 
 .msg{
 }
@@ -115,16 +101,14 @@
 .escreve{
     padding: 5px 0px 5px 0px;
     background-color: #0e1f2d;
-    /* float: right; */
-    width: 100%;
-}
-.centraliza{
-   /* margin: 0 auto; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*input*/
 .msg-texto{
-    width: 60%;
+    width: 70%;
     border-radius: 30px;
     border: none;
     height: 30px;
@@ -133,10 +117,11 @@
 
 /*button*/
 .enviar-msg{
-    height: 30px;
+    height: 40px;
     border: none;
-    width: 60px;
+    width: 40px;
     border-radius: 100px;
+    margin-left: 5px;
 }
 
 .qtd_user_on{
@@ -146,5 +131,13 @@
 .foto_perfil{
     max-width: 80px;
     border-radius: 100%;
-    margin: 0 auto;
+}
+
+.flexivel{
+    display: flex;
+}
+.cabecalho{
+    background-color: #848484;
+    display: flex;
+    justify-content: center;
 }

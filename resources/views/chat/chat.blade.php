@@ -9,9 +9,9 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/chat.css') }}">
 </head>
 <body>
-<user id=user name="" value="{{ Auth::user() }}" ></user>
-<header class="cabecalho">
-        <span>
+    <user id=user name="" value="{{ Auth::user() }}" ></user>
+    <header class="cabecalho">
+        <span class="">
             <div class="foto_perfil">
                 <a href="">
                     <img src="pobre_e_loco.png" alt="foto-perfil" class="foto_perfil">
@@ -36,10 +36,8 @@
             </div> -->
         </div>
         <div class="escreve">
-            <div class="centraliza">
-                <input class="msg-texto" type="textarea"  id="contentMessage">
-                <button class="enviar-msg" id="btn_send_chat">< </button>
-            </div>
+            <input class="msg-texto" type="textarea"  id="contentMessage">
+            <button class="enviar-msg" id="btn_send_chat">< </button>
         </div>
     </main>
 </body>
