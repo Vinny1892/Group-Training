@@ -10,26 +10,36 @@
 </head>
 <body>
 <user id=user name="" value="{{ Auth::user() }}" ></user>
-<header class="cabecalho"><img src="" alt="foto-perfil"></header>
-    <main class="corpo-chat">
-        <div>
-            <div>FUT praça das araras</div>
-            <span>Total de usuários online 5</span>
-            <span>MEMBROS</span>
-        </div>
-        <div class="area-de-msg" id="chat">
-         
-           <!-- 
-             <div class="eu" >
-                <span>^</span> icone de edição da msg, unica função vai ser APAGAR msg
-                https://www.flaticon.com/free-icon/settings_126472 
-              
+<header class="cabecalho">
+        <span>
+            <div class="foto_perfil">
+                <a href="">
+                    <img src="pobre_e_loco.png" alt="foto-perfil" class="foto_perfil">
+                </a>
             </div>
-            -->
+        </span>
+        <span>
+            <div>FUT praça das araras</div>
+            <span class="qtd_user_on">Total de usuários online 5</span>
+            <button>membros</button>
+        </span>
+    </header>
+    <main class="corpo-chat">
+        <div class="area-de-msg"  id="chat">
+            <!-- insere html via JS aqui-->
+            <!-- <div class="outro" >
+                <span class="tab">
+                    <div class="nome">Mateus Ragazzi</div>
+                    <span class="msg">Fala consagrado</span>
+                </span>
+                <span class="horario">20:33</span>
+            </div> -->
         </div>
-        <div>
-            <input type="textarea" id="contentMessage">
-            <button id="btn_send_chat" >enviar</button>
+        <div class="escreve">
+            <div class="centraliza">
+                <input class="msg-texto" type="textarea"  id="contentMessage">
+                <button class="enviar-msg" id="btn_send_chat">< </button>
+            </div>
         </div>
     </main>
 </body>

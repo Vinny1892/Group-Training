@@ -6,6 +6,7 @@ let user = JSON.parse(document.querySelector("#user").getAttribute('value').toSt
 
 function renderMessage(messageObject, type){
     let newMessageBox = document.createElement("div")
+    let tabulacao = document.createElement("span")
     let newMessageText = document.createElement("span")
     let newMessageTime = document.createElement("span")
     
@@ -18,13 +19,17 @@ function renderMessage(messageObject, type){
     newMessageTime.innerText = messageObject.time
 
     if(type == "outro") {
-        let newMessageAuthor = document.createElement("span")
+        let newMessageAuthor = document.createElement("div")
         newMessageAuthor.classList.add("nome")
         newMessageAuthor.innerText = messageObject.author
         newMessageBox.appendChild(newMessageAuthor)
     }
 
-    newMessageBox.appendChild(newMessageText)
+    newMessageText.classList.add("msg")
+    tabulacao.classList.add("tab")
+
+    tabulacao.appendChild(newMessageText)
+    newMessageBox.appendChild(tabulacao)
     newMessageBox.appendChild(newMessageTime)
     chat.appendChild(newMessageBox)
 }
