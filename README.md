@@ -28,6 +28,7 @@ cd Group-Training/
 ```
 docker-compose up
 ```
+
 ```
 docker-compose exec  app-grouptraining composer install
 ```
@@ -38,7 +39,6 @@ docker-compose exec  app-grouptraining php artisan key:generate
 
 ```
 docker-compose exec  app-grouptraining php artisan migrate
-
 ```
 
 ```
@@ -56,7 +56,6 @@ As seguintes pessoas contribuiram para este projeto:
 * [Gustavo Candido](https://github.com/GustavoGcdo)
 * [Lucas Sandim](https://github.com/sandiml)
 * [Mateus Ragazzi](https://github.com/mateusragazzi)
-
 
 ## Licença de uso
 

@@ -1,5 +1,14 @@
 
-socket = io('localhost:3000');
+let rooms = io('localhost:3000')
+let sala = {
+    id: 123123,
+    name: "batata",
+    type: "fut",
+    description: "nada"
+}
+rooms.emit("createRoom", sala)
+
+socket = io('localhost:3000/batata')
 let button = document.querySelector("#btn_send_chat")
 let chat = document.querySelector("#chat")
 let user = JSON.parse(document.querySelector("#user").getAttribute('value').toString())
@@ -40,6 +49,7 @@ socket.on("ReceivedMessage", function(message){
     renderMessage(message , 'outro')
 })
 
+
 button.addEventListener ('click', async function(){
     let message = document.querySelector("#contentMessage")
 
@@ -60,7 +70,7 @@ button.addEventListener ('click', async function(){
 
 });
 
-socket.on('PreviousMessage', function(messages){
+socket.on('previousMessage', function(messages){
     let type
     for(message of messages){
         type = message.id == user._id ? "eu" : "outro"
