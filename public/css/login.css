@@ -6,6 +6,10 @@
     justify-content: center;
   }
 
+  .login {
+      background-color: whitesmoke;
+  }
+
 .color-icon-fb{
     color: initial;
     font-size: 25px;

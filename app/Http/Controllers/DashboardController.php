@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
     public function show(Request $request ){
         $user = Auth::user();
-        return view('dashboard.index' ,   compact('user') );
+        return view('dashboard.index' );
 
     }
 
