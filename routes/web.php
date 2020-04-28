@@ -34,6 +34,8 @@ Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
 Route::get('/' ,"HomePageController@show")->name('homepage');
 
+Route::get('/listaSalas' ,"SalaController@show")->name('listasalas');
+
 Route::group(['namespace' => 'Chat'],function(){
     Route::get('/chat' , 'ChatController@show')->name('chat');
 });
