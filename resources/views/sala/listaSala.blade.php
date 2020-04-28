@@ -1,10 +1,6 @@
 @extends('sala.head');
 @section('content');
 
-<body>
-  <header>
-    <h1>Header</h1>
-  </header>
   <div class="container">
     <h2>Pesquisar</h2>
     <div class="row">
@@ -60,9 +56,7 @@
 
   <!-- segunda tela -->
 
-  <header>
-    <h1>Header</h1>
-  </header>
+
   <div class="container">
     <h2>Minhas salas</h2>
     <div class="row">
@@ -132,8 +126,6 @@
       </div>
     </div>
   </div>
-
-</body>
 
 @extends('sala.footer');
 @section('content');
