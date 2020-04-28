@@ -32,6 +32,7 @@ Route::group(['namespace' => 'Auth'] , function(){
 //DsahBoard Routes
 Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
+Route::get('/' ,"HomePageController@show")->name('homepage');
 
 Route::group(['namespace' => 'Chat'],function(){
     Route::get('/chat' , 'ChatController@show')->name('chat');
