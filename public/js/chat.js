@@ -1,17 +1,48 @@
 
 let rooms = io('localhost:3000')
-let sala = {
-    id: 123123,
-    name: "batata",
-    type: "fut",
-    description: "nada"
-}
-rooms.emit("createRoom", sala)
 
-socket = io('localhost:3000/batata')
+socket = io('localhost:3000/123123')
+
 let button = document.querySelector("#btn_send_chat")
 let chat = document.querySelector("#chat")
 let user = JSON.parse(document.querySelector("#user").getAttribute('value').toString())
+
+
+socket.on("ReceivedMessage", function(message){
+    //construir tela chat
+    //mensagem recebida
+    renderMessage(message , 'outro')
+})
+
+socket.on('previousMessage', function(messages){
+    let type
+    for(message of messages){
+        type = message.id == user._id ? "eu" : "outro"
+        renderMessage(message, type)
+    }
+})
+
+
+button.addEventListener ('click', async function(){
+    let message = document.querySelector("#contentMessage")
+
+    let messageObject = {
+        author: user.name,
+        id: user._id,
+        message: message.value,
+        time: new Date().toLocaleTimeString()
+    }
+
+    // caso a mensagem não esteja vazia ou cheia de espaços em branco,
+    // ele emite o evento, renderiza na tela e limpa o campo
+    if(message.value.trim() != ""){
+        socket.emit('sendMessage' , messageObject)
+        renderMessage(messageObject, "eu")
+        message.value = ""
+    }
+
+});
+
 
 function renderMessage(messageObject, type){
     let newMessageBox = document.createElement("div")
@@ -42,41 +73,6 @@ function renderMessage(messageObject, type){
     newMessageBox.appendChild(newMessageTime)
     chat.appendChild(newMessageBox)
 }
-
-socket.on("ReceivedMessage", function(message){
-    //construir tela chat
-    //mensagem recebida
-    renderMessage(message , 'outro')
-})
-
-
-button.addEventListener ('click', async function(){
-    let message = document.querySelector("#contentMessage")
-
-    let messageObject = {
-        author: user.name,
-        id: user._id,
-        message: message.value,
-        time: new Date().toLocaleTimeString()
-    }
-
-    // caso a mensagem não esteja vazia ou cheia de espaços em branco,
-    // ele emite o evento, renderiza na tela e limpa o campo
-    if(message.value.trim() != ""){
-        socket.emit('sendMessage' , messageObject)
-        renderMessage(messageObject, "eu")
-        message.value = ""
-    }
-
-});
-
-socket.on('previousMessage', function(messages){
-    let type
-    for(message of messages){
-        type = message.id == user._id ? "eu" : "outro"
-        renderMessage(message, type)
-    }
-})
 
 
 
