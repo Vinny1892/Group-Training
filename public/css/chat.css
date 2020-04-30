@@ -38,13 +38,28 @@
     padding-right: 10%;
     padding-bottom: 10px;
     overflow: auto;
-    height: 82.4vh; 
+    height: 85.9vh; 
     
     display: flex;
     flex-direction: column;
     width: 100%;
+
     
 }
+/* .area-de-msg{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    transition: background 0.3s ease-out 0.1s;
+    width: 100%;
+    z-index: 100;
+
+} */
 
 
 .outro{
@@ -115,6 +130,7 @@
     border: none;
     height: 30px;
     text-align: center;
+
 }
 
 /*button*/
