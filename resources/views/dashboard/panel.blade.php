@@ -4,4 +4,3 @@
     @csrf
     <input type="submit" value="sair">
 </form>
-

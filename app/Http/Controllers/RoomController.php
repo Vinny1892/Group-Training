@@ -1,12 +1,12 @@
 <?php 
-namespace App\Http\Controllers\Chat;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
 
-class ChatController extends Controller{
+class RoomController extends Controller{
 
 
     public function __construct(){
@@ -14,7 +14,11 @@ class ChatController extends Controller{
     }
 
     public function show(){
-        return view('chat.chat');
+        return view('room.chat');
+    }
+
+    public function minhaLista(){
+    	return view('room.listaMeusChats');
     }
 
 }

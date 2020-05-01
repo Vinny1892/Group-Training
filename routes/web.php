@@ -32,11 +32,14 @@ Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
 Route::get('/' ,"HomePageController@show")->name('homepage');
 
-Route::get('/salas' ,"SalaController@show")->name('listasalas');
 
-Route::group(['namespace' => 'Chat'],function(){
-    Route::get('/chat' , 'ChatController@show')->name('chat');
-});
+
+//Route::group(['namespace' => 'Room'],function(){
+    Route::get('/chat' , 'RoomController@show')->name('chat');
+    Route::get('/listameuschats' , "RoomController@minhaLista")->name('listameuschats');
+//});
+
+
 
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalasTable extends Migration
+class CreateModalitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateSalasTable extends Migration
      */
     public function up()
     {
-        Schema::create('salas', function (Blueprint $table) {
+        Schema::create('modalities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nome');
+            /* imagem / logo */
+            /* tag */
+            /* categoria */
+            $table->string('slug');
+            $table->text('descricao');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateSalasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salas');
+        Schema::dropIfExists('modalities');
     }
 }

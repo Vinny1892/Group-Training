@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\sala;
+use App\modality;
 use Illuminate\Http\Request;
 
-class SalaController extends Controller
+class ModalityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,22 +41,21 @@ class SalaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\sala  $sala
+     * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function show(sala $sala)
+    public function show(modality $modality)
     {
-        return view('sala.listaSala');
-        
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\sala  $sala
+     * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function edit(sala $sala)
+    public function edit(modality $modality)
     {
         //
     }
@@ -65,10 +64,10 @@ class SalaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\sala  $sala
+     * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, sala $sala)
+    public function update(Request $request, modality $modality)
     {
         //
     }
@@ -76,10 +75,10 @@ class SalaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\sala  $sala
+     * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function destroy(sala $sala)
+    public function destroy(modality $modality)
     {
         //
     }

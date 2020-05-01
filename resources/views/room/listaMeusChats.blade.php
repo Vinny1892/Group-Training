@@ -1,4 +1,4 @@
-@extends('sala.head');
+@extends('room.main');
 @section('content');
 
   <div class="container">
@@ -127,6 +127,4 @@
     </div>
   </div>
 
-@extends('sala.footer');
-@section('content');
 
