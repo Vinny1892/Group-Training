@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::group(['namespace' => 'Auth'] , function(){
 
     Route::get('/login',  "LoginController@show")->name('login');
@@ -32,6 +30,14 @@ Route::group(['namespace' => 'Auth'] , function(){
 //DsahBoard Routes
 Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
+Route::get('/' ,"HomePageController@show")->name('homepage');
+
+
+
+//Route::group(['namespace' => 'Room'],function(){
+    Route::get('/chat' , 'RoomController@show')->name('chat');
+    Route::get('/listameuschats' , "RoomController@minhaLista")->name('listameuschats');
+//});
 
 
 
