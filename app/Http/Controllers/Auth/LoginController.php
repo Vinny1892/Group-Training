@@ -88,7 +88,8 @@ class LoginController extends Controller
         if($userDB == null){
             $userDB = User::create([
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'normal' => 'normal'
             ]);
             // Fazer redirect para tela de listar sala
         }
@@ -114,7 +115,8 @@ class LoginController extends Controller
         if($userDB == null){
            $userDB = User::create([
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'role' =>  'normal'
             ]);
             // Fazer redirect para tela de listar sala
         }
