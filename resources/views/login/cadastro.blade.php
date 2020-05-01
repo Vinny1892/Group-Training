@@ -10,7 +10,7 @@
           @endforeach
 
 @endif
-  <div class="row z-depth-3 ">
+  <div class="row z-depth-3  login">
     <h4 class="center-align" >Registrar-se</h4>
   <form method="POST" action="{{ route('register.storage') }}" class="row">
       {{ csrf_field() }}
@@ -47,9 +47,28 @@
           <button style="background-color: #7a297a" class=" waves-light waves-effect  btn" type="submit" >Cadastrar
               <i class="material-icons right">send</i>
           </button>
+          <div> <div id='parent'>seleciona a cor</div> </div>
+
       </div>
   </form>
   </div>
   </section>
   </div>
+  <script src="https://unpkg.com/vanilla-picker@2"></script>
+<script>
+   let colorBack = localStorage.getItem('color');
+ 
+   let login = document.querySelector('.tela-login');
+   let parent = document.querySelector('#parent');
+   if(colorBack != null){
+        login.style.background = colorBack;
+
+   } 
+   let picker = new Picker(parent);
+   picker.onChange = function(color) {
+        localStorage.setItem('color' , color.rgbaString);
+        login.style.background = color.rgbaString;
+    };
+
+</script>
 @endsection

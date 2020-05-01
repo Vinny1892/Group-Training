@@ -27,6 +27,10 @@ Route::group(['namespace' => 'Auth'] , function(){
 
 });
 
+Route::get('/teste' ,function(){
+    response('Funcionou teste');
+})->middleware('role.admin');
+
 //DsahBoard Routes
 Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
