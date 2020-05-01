@@ -22,7 +22,7 @@ class DashboardController extends Controller
 
     public function login()
     {
-        echo 'seila';
+        echo 'function login() arquivo: DashboardController';
     }
     //
 }
