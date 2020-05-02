@@ -20,9 +20,6 @@ class DashboardController extends Controller
 
     }
 
-    public function login()
-    {
-        echo 'seila';
-    }
+}
     //
 }

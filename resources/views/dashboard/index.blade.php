@@ -1,14 +1,4 @@
-<!--
-=========================================================
-Material Dashboard - v2.1.2
-=========================================================
 
-Product Page: https://www.creative-tim.com/product/material-dashboard
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +8,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="icon" type="image/png" href="{{asset('assetsDashboard/img/favicon.png')}}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard by Creative Tim
+    Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -26,20 +16,18 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{asset('assetsDashboard/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{asset('assetsDashboard/demo/demo.css')}}" rel="stylesheet" />
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{{asset('assetsDashboard/img/sidebar-1.jpg')}}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+      <div class="logo"><a href="#" class="simple-text logo-normal">
+          Vinicius Espindola
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -128,7 +116,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Log out</a>
+                <a class="dropdown-item" href="{{ route('login.logout')}}" id="btnLogout">Log out</a>
                 </div>
               </li>
             </ul>
@@ -611,22 +599,22 @@ The above copyright notice and this permission notice shall be included in all c
         <li class="header-title">Images</li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="{{asset('assetsDashboard/img/sidebar-1.jpg')}}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="{{asset('assetsDashboard/img/sidebar-2.jpg')}}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="{{ asset('assetsDashboard/img/sidebar-3.jpg')}}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="{{asset('assetsDashboard/img/sidebar-4.jpg')}}" alt="">
           </a>
         </li>
         <li class="button-container">
@@ -658,12 +646,12 @@ The above copyright notice and this permission notice shall be included in all c
   </div>
   <!--   Core JS Files   -->
   <script src="{{ asset('assetsDashboard/js/core/jquery.min.js') }}"></script>
-  <script src="{{asset('js/core/popper.min.js')}}"></script>
+  <script src="{{asset('assetsDashboard/js/core/popper.min.js')}}"></script>
   <script src="{{asset('assetsDashboard/js/core/bootstrap-material-design.min.js')}}"></script>
   <script src="{{asset('assetsDashboard/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
   <!-- Plugin for the momentJs  -->
-  <script src="{{asset('assetsDashboard/js/plugins/moment.min.js"></script>
-  <!')}}--  Plugin for Sweet Alert -->
+  <script src="{{asset('assetsDashboard/js/plugins/moment.min.js')}}"></script>
+  <!--  Plugin for Sweet Alert -->
   <script src="{{asset('assetsDashboard/js/plugins/sweetalert2.js')}}"></script>
   <!-- Forms Validations Plugin -->
   <script src="{{asset('assetsDashboard/js/plugins/jquery.validate.min.js')}}"></script>
@@ -699,9 +687,12 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="{{asset('assetsDashboard/js/material-dashboard.js?v=2.1.2')}}" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{asset('assetsDashboard/demo/demo.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" ></script>
   <script>
     $(document).ready(function() {
       $().ready(function() {
+
+
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -868,6 +859,8 @@ The above copyright notice and this permission notice shall be included in all c
 
         });
       });
+
+
     });
   </script>
   <script>
@@ -877,6 +870,8 @@ The above copyright notice and this permission notice shall be included in all c
 
     });
   </script>
+
+
 </body>
 
 </html>
