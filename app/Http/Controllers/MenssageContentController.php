@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\tag;
+use App\MenssageContent;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class MenssageContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,14 +22,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $data)
+    public function create()
     {
-        return Tag::create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            /*'slug' => $data['slug'], acredito que o metodo no metodo do MODEL*/
-            'role'=> 'normal'
-        ]);
+        //
     }
 
     /**
@@ -46,10 +41,10 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\tag  $tag
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function show(tag $tag)
+    public function show(MenssageContent $menssageContent)
     {
         //
     }
@@ -57,10 +52,10 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\tag  $tag
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function edit(tag $tag)
+    public function edit(MenssageContent $menssageContent)
     {
         //
     }
@@ -69,10 +64,10 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\tag  $tag
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tag $tag)
+    public function update(Request $request, MenssageContent $menssageContent)
     {
         //
     }
@@ -80,10 +75,10 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\tag  $tag
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tag $tag)
+    public function destroy(MenssageContent $menssageContent)
     {
         //
     }
