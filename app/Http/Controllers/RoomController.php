@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Room;
 
 
 
@@ -21,15 +22,13 @@ class RoomController extends Controller{
     	return view('room.listaMeusChats');
     }
 
-
+    /**
+    *   @param $request array associativo
+    */
     public function insert(Request $request)
     {
         $room = new Room();
-        $room->phonecompany = $request->get('phonecompany');
-        $room->model = $request->get('model');
-        $room->price = $request->get('price');        
-        $room->save();
-        return ('Phone has been successfully added');
+        $romm->create($request);
     }
 
 }
