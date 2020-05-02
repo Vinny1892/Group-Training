@@ -13,31 +13,21 @@ class CreateRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            /* imagem / logo */
-            /* tag */
-            /* categoria */
-            /* modalidade */
-            /* $table->boolean('public'); */
-            $table->string('slug');
-            $table->text('descricao');
-            $table->timestamps();
+        Schema::create('rooms', function (Blueprint $collection) {
+            $collection->bigIncrements('id');
+            $collection->string('title');
+            $collection->string('slug');
+            $collection->text('description');
+            $collection->string('image');
+            $collection->boolean('public'); /* verificar como armazena boolean*/
+            $collection->$array('id_rooms');/* verificar como armazena array*/
+            $collection->$array('id_categories');/* verificar como armazena array*/
+            $collection->$array('id_users');/* verificar como armazena array*/
+            $collection->$array('id_tags');/* verificar como armazena array*/
+            $collection->timestamps();
         });
     }
-
-    /*
-        array de id dos user[];
-    */
-    /*
-        salvar o objeto msg
-        let messageObject = {
-        author: user.name,
-        id: user._id,
-        message: message.value,
-        time: new Date().toLocaleTimeString()
-    }
-    */
+    
 
     /**
      * Reverse the migrations.

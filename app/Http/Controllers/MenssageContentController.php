@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\categoria;
+use App\MenssageContent;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
+class MenssageContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\categoria  $categoria
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function show(categoria $categoria)
+    public function show(MenssageContent $menssageContent)
     {
         //
     }
@@ -52,10 +52,10 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\categoria  $categoria
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function edit(categoria $categoria)
+    public function edit(MenssageContent $menssageContent)
     {
         //
     }
@@ -64,10 +64,10 @@ class CategoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\categoria  $categoria
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, categoria $categoria)
+    public function update(Request $request, MenssageContent $menssageContent)
     {
         //
     }
@@ -75,10 +75,10 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\categoria  $categoria
+     * @param  \App\MenssageContent  $menssageContent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categoria $categoria)
+    public function destroy(MenssageContent $menssageContent)
     {
         //
     }

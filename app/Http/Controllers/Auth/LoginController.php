@@ -38,6 +38,7 @@ class LoginController extends Controller
     }
 
     public function show(){
+        // retorna um arquivo pra view
         return view('login.login');
     }
 
@@ -63,9 +64,7 @@ class LoginController extends Controller
         if($validate->fails()){
           return  Redirect::route('login')->withErrors($validate)->withInput();
         }
-
-
-
+        //realizar a tentativa de login
         if ( Auth::attempt($credentials)) {
             return Redirect::route('dashboard');
         }
@@ -89,7 +88,8 @@ class LoginController extends Controller
         if($userDB == null){
             $userDB = User::create([
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'normal' => 'normal'
             ]);
             // Fazer redirect para tela de listar sala
         }
@@ -115,7 +115,8 @@ class LoginController extends Controller
         if($userDB == null){
            $userDB = User::create([
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'role' =>  'normal'
             ]);
             // Fazer redirect para tela de listar sala
         }

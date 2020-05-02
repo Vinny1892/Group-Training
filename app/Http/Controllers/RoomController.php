@@ -21,4 +21,15 @@ class RoomController extends Controller{
     	return view('room.listaMeusChats');
     }
 
+
+    public function insert(Request $request)
+    {
+        $room = new Room();
+        $room->phonecompany = $request->get('phonecompany');
+        $room->model = $request->get('model');
+        $room->price = $request->get('price');        
+        $room->save();
+        return ('Phone has been successfully added');
+    }
+
 }

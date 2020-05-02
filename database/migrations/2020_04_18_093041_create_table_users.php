@@ -17,7 +17,7 @@ class CreateTableUsers extends Migration
             $collection->unique('email');
             $collection->string('password')->nullable();
             $collection->string('name');
-            $collection->rememberToken();
+            $collection->string('role');
             $collection->timestamps();
         });
     }

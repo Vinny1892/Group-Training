@@ -1,5 +1,5 @@
-@extends('authentication.app');
-@section('content');
+@extends('authentication.app')
+@section('content')
 <div class="tela-login">
 @if ($errors->any())
   @foreach ($errors->all() as $error)
@@ -8,7 +8,7 @@
     </div>
   @endforeach
 @endif
-<section class="row z-depth-3 ">
+<section class="row z-depth-3 login ">
   <h4 class="center-align" >Login</h4>
   <form method="post" action="{{ route('login.login') }}" class="row">
     @csrf
@@ -40,8 +40,27 @@
       <a href="{{ route('login.google') }}"><i class="fab fa-google color-icon-google"></i></a>
       <a href="{{ route('login.facebook') }}"><i class="fab fa-facebook color-icon-fb" ></i></a>
     </div>
+    <div> <div id='parent'>seleciona a cor</div> </div>
 
   </form>
 </section>
 </div>
+<script src="https://unpkg.com/vanilla-picker@2"></script>
+<script>
+   let colorBack = localStorage.getItem('color');
+ 
+   let login = document.querySelector('.tela-login');
+   let parent = document.querySelector('#parent');
+   if(colorBack != null){
+        login.style.background = colorBack;
+
+   } 
+   let picker = new Picker(parent);
+   picker.onChange = function(color) {
+        localStorage.setItem('color' , color.rgbaString);
+        login.style.background = color.rgbaString;
+    };
+
+</script>
+
 @endsection

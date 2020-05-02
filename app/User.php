@@ -16,13 +16,22 @@ class User extends Eloquent implements Authenticatable
     protected  $table = 'users';
     protected $connection = "mongodb";
 
+    public function  isAdmin(){
+        if($this->role === 'admin'){
+            return true;
+        }
+        return false;
+    }
+
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role'
     ];
 
     /**
@@ -42,5 +51,7 @@ class User extends Eloquent implements Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
 
 }

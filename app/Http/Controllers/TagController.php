@@ -22,9 +22,14 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(array $data)
     {
-        //
+        return Tag::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            /*'slug' => $data['slug'], acredito que o metodo no metodo do MODEL*/
+            'role'=> 'normal'
+        ]);
     }
 
     /**

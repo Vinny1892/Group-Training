@@ -70,11 +70,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role'=> 'normal'
         ]);
     }
 
     public function show(){
-        return view('login.cadastro');
+        return view('login.cadastro', );
     }
     public function storage(Request $request)
     {
@@ -83,7 +84,7 @@ class RegisterController extends Controller
             return  Redirect::route('register')->withErrors($validate)->withInput();
         }
         $this->create($request->only(['name','email','password']));
-        Redirect::route('login');
+            return  Redirect::route('login');
     }
 
 }
