@@ -1,0 +1,167 @@
+*{	margin:0px; padding: 0px; font-size: 100%; /*border:none;*/ outline: none; box-sizing: border-box;
+	
+    /*
+        font-weight: 300;
+        font-family: 'Alegreya', serif;
+      font-family: 'Dancing Script', cursive;*/
+  }
+
+
+.corpo-chat{
+    background-color: #b4b4b4;
+}
+
+.outro{
+    background-color: aquamarine;
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+}
+
+
+.nome{
+    color: maroon;
+}
+
+
+
+
+
+.corpo-chat{
+    background-color: #b4b4b4;
+}
+
+/**/
+.area-de-msg{
+    background-color: #fff;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10px;
+    overflow: auto;
+    height: 85.9vh; 
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    
+}
+/* .area-de-msg{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    transition: background 0.3s ease-out 0.1s;
+    width: 100%;
+    z-index: 100;
+
+} */
+
+
+.outro{
+    background-color: #9ce0b7;
+    border-radius:  0px 7px 7px 0px;
+
+
+}
+
+.eu{
+    border-radius:  7px 0px 0px 7px;
+    background-color: #aabfc7;
+    align-self: flex-end;
+    
+}
+
+.outro, .eu{
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+    height: -webkit-fill-available;
+
+    padding: 2px 15px 7px 15px;
+    font-size: 14.2px;
+    font-family: "Segoe UI","Helvetica Neue","Helvetica","Lucida Grande",Arial,"Ubuntu","Cantarell","Fira Sans",sans-serif;
+    margin: 2px;
+}
+
+.nome{
+    color: maroon;
+    font-size: 13px;
+}
+
+.horario{
+    line-height: 0px;
+    font-size: 10px;
+}
+
+
+
+.msg{
+}
+
+.tab{
+    padding-right: 40px;
+
+}
+
+.container {
+    display: flex; /* or inline-flex */
+  }
+
+
+
+/* div do input*/
+.escreve{
+    padding: 5px 0px 5px 0px;
+    background-color: #0e1f2d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*input*/
+.msg-texto{
+    width: 70%;
+    border-radius: 30px;
+    border: none;
+    height: 30px;
+    text-align: center;
+
+}
+
+/*button*/
+.enviar-msg{
+    height: 40px;
+    border: none;
+    width: 40px;
+    border-radius: 100px;
+    margin-left: 5px;
+}
+
+.qtd_user_on{
+    font-size: 13px;
+}
+
+.foto_perfil{
+    max-width: 100%;
+    display: block;
+    border-radius: 100%;
+}
+
+.flexivel{
+    display: flex;
+}
+.cabecalho{
+    background-color: #848484;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;/*quando a tela for pequena, os elementos ficam um encima do outro*/
+}
+
+.btn-voltar{
+    /*jogar o botao para esquerda*/
+}

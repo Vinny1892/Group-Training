@@ -1,0 +1,112 @@
+:root {
+    --primary-color: #2F6690;
+    --secondary-color: rgb(198, 231, 241);
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .row {
+    margin-bottom: 25px;
+  }
+  
+  .card {
+    border-radius: 15px;
+    border: 1px solid #c4c4c4;
+    margin-bottom: 25px;
+  }
+  
+  .card .card-header, 
+  .card .card-front {
+    height: 150px;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+  }
+  
+  .card .card-title {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+  }
+  
+  .card .card-footer {
+    border-top: 1px solid #c4c4c4;
+    background-color: var(--secondary-color);
+    text-align: center;
+    color: black;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+  
+  .card-title, .card-footer, .card-body .card-text {
+    padding: 5px;
+  }
+  
+  .card-body .card-action {
+    margin: 15px 0;
+    text-align: center;
+  }
+  
+  .card-action .btn-primary::before {
+    display: contents;
+    font-family: FontAwesome;
+    float: left;
+    content: "\f090";
+    font-weight: 300;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color) !important;
+  }
+  
+  .btn-secondary {
+    background-color: var(--secondary-color);
+  }
+  
+  /* Buscar salas */
+  
+  .card.card-flip {
+    background-color: transparent;
+    width: 100%;
+    height: 170px;
+    perspective: 1000px;
+  }
+  
+  .card-inner {
+    position: relative;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .card:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front, .card-back {
+    border-radius: 15px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .card-back {
+    background-color: var(--primary-color);
+    color: white;
+    transform: rotateY(180deg);
+  }

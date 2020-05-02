@@ -38,7 +38,7 @@ services:
     container_name: "app-Laravel"
     #command: "composer install"
     ports:
-      - 8080:80
+      - 8085:80
     volumes:
       - .:/var/www/html
     networks:
