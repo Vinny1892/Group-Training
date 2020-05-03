@@ -20,21 +20,5 @@ class Category extends Model
 
 
 
-	/**
-	*   
-	*	@return retorna o objeto com os dados salvos no BD
-	*/
-	public function store(Request $request){
-	    return Categoria::create(
-	        [
-		        "category" => [
-		            "title" => "$request->title",
-		            "id_modality"=> "$request->modality",
-		            "description"=> "$request->description",
-		            "id_rooms"=> "$request->id_rooms",
-		        	/*slug*/
-		    	]
-	        ]
-		);
-	}
+	
 }

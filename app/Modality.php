@@ -19,21 +19,5 @@ class Modality extends Eloquent
 
 
 
-	/**
-	*   
-	*	@return retorna o objeto com os dados salvos no BD
-	*/
-	public function store(Request $request){
-	    return Categoria::create(
-	        [
-	            "title" => "$request->title",
-	            "description"=> "$request->description",
-	            "id_rooms"=> "$request->id_rooms",
-	            "id_tags"=> "$request->id_tags",
-	            "id_categories"=> "$request->id_categories",
-	            "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
-	        	/*slug*/
-	        ]
-		);
-	}
+	
 }

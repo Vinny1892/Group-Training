@@ -33,9 +33,18 @@ class ModalityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        return Modality::create(
+            [
+                "title" => "$request->title",
+                "description"=> "$request->description",
+                "id_rooms"=> "$request->id_rooms",
+                "id_tags"=> "$request->id_tags",
+                "id_categories"=> "$request->id_categories",
+                "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
+                /*slug*/
+            ]
+        );
     }
 
     /**

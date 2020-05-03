@@ -38,9 +38,16 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        return Categoria::create(
+            [
+                "title" => "$request->title",
+                "id_modality"=> "$request->id_modality",
+                "description"=> "$request->description",
+                "id_rooms"=> "$request->id_rooms",
+                /*slug*/
+            ]
+        );
     }
 
     /**
