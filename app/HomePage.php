@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 
 
+
 class HomePage extends Eloquent
 {
     //essa classe vai ser usada posteiormente para manipular o conteudo da pagina principal

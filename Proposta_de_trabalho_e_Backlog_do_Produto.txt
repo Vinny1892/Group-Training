@@ -9,5 +9,7 @@ REQUISITOS
 R1: CRUD de usuários;
 R2: CRUD de salas de bate papo;
 R3: Pesquisa com filtro por salas;
-R4: Listar modalidades/esportes;
+R4: CRUD modalidades/esportes;
 R5: Listar salas de uma determinada modalidade;
+R6: CRUD tag
+R7: CRUD fazer ligações de modalidades e salas por tag e categoria

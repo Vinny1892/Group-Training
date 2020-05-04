@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 
 
-class room extends Eloquent
+class Room extends Eloquent
 {
 
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'room' ;
-    protected $fillable = ['img', 'title', 'modality', 'description','public', 'key', 'place', 'standard_time', 'date'];
+    protected $fillable = ['image', 'title', 'modality', 'description','public', 'key', 'place', 'standard_time', 'date', 'user_id', 'tags', "id_categories"];
 
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
@@ -19,4 +19,6 @@ class room extends Eloquent
     	$this->attributes['title'] = $value;
     	$this->attributes['slug'] = Str::slug($value);//cria slug automaticamente
     }
+
+    
 }

@@ -10,5 +10,7 @@ class MenssageContent extends Eloquent
 {
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'menssageContent' ;
-     protected $fillable = [];
+     protected $fillable = ['id_room','content', 'schedule', 'date'];
+
+
 }

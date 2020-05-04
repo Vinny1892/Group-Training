@@ -33,9 +33,17 @@ class MenssageContentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        return MenssageContent::create(
+            [
+                "id_room"=>"id_room",
+                "msg"=>[
+                    "content"=> "$request->content",
+                    "schedule"=> "$request->schedule",
+                    "date"=> "$request->date"
+                ]
+            ]
+        );
     }
 
     /**

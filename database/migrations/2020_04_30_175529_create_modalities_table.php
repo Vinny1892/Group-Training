@@ -15,12 +15,13 @@ class CreateModalitiesTable extends Migration
     {
         Schema::create('modalities', function (Blueprint $collection) {
             $collection->bigIncrements('id');
-            $collection->string('title');
             $collection->string('slug');
+            $collection->string('title');
             $collection->text('description');
+            $collection->string('id_rooms');
+            $collection->string('id_tags');
+            $collection->string('id_categories');
             $collection->string('image');
-            $collection->$array('id_room');/* verificar como armazena array*/
-            $collection->$array('id_tags');/* verificar como armazena array*/
             $collection->timestamps();
         });
     }
