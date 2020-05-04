@@ -18,6 +18,11 @@ class CreateTableUsers extends Migration
             $collection->string('password')->nullable();
             $collection->string('name');
             $collection->string('role');
+            $collection->boolean('personal');
+            $collection->date('dateBirth');
+            $collection->string('sexo');
+            $collection->string('level');
+            $collection->string('objective');
             $collection->timestamps();
         });
     }

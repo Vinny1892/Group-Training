@@ -17,6 +17,7 @@ class CreateRoomsTable extends Migration
      * standard_time: horario padrao do evento
      * id_categories: array de id de categorias
      * modality: modalidade, tipo do esporte, volei, futesal ...
+     * locationType: tipo do local: quadra, praça publica, rua, trilha...
      * tags
      * user_id
      * image
@@ -48,7 +49,8 @@ class CreateRoomsTable extends Migration
             $collection->string('place');
             $collection->string('standard_time');
             $collection->string('modality');
-            $collection->string('date');
+            $collection->string('locationType');
+            $collection->date('date');
             $collection->string('image');
             $collection->string('id_tags');
             $collection->string('id_categories');

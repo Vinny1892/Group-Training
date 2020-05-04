@@ -32,16 +32,12 @@ Route::get('/teste' ,function(){
 })->middleware('role.admin');
 
 //DsahBoard Routes
-Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
 
-Route::get('/' ,"HomePageController@show")->name('homepage');
-
-
-
-//Route::group(['namespace' => 'Room'],function(){
-    Route::get('/chat' , 'RoomController@show')->name('chat');
-    Route::get('/listameuschats' , "RoomController@minhaLista")->name('listameuschats');
-//});
+Route::get('/' ,"HomePageController@show")->name('homePage');
+Route::get('/modalidades' ,"ModalityController@show")->name('modalidades');
+Route::get('/painel' ,"DashboardController@show")->name('painel');
+Route::get('/chat' , 'RoomController@show')->name('chat');
+Route::get('/salas' , "RoomController@allRoom")->name('salas');
 
 
 

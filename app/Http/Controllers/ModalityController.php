@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\modality;
+use App\Modality;
 use Illuminate\Http\Request;
+
+class Category
+{
+    public $url;
+    public $name;
+    public $activeUsers;
+}
 
 class ModalityController extends Controller
 {
@@ -53,9 +60,27 @@ class ModalityController extends Controller
      * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function show(modality $modality)
+    public function show(Modality $modality)
     {
-        //
+         
+        $futebol = new Category();
+        $futebol->url = 'https://www.folhape.com.br/obj/0/346222,475,80,0,0,475,365,0,0,0,0.jpg';
+        $futebol->name = 'Futebol';
+        $futebol->activeUsers = 18;
+        
+        $volei = new Category();
+        $volei->url = 'https://www.cbnmaringa.com.br/uploads_lg/45566b71e4f4e4a9375e8382db9ac037.png';
+        $volei->name = 'Volei';
+        $volei->activeUsers = 12;
+        
+        $basquete = new Category();
+        $basquete->url = 'https://www.maranhaoesportes.com/wp-content/uploads/2019/10/Betsul_Os-brasileiros-da-NBA_liga-de-basquete-americana-tem-quatro-brasileiros-em-a%C3%A7%C3%A3o-800x445.jpg';
+        $basquete->name = 'Basquete';
+        $basquete->activeUsers = 12;
+        
+        $categories = array($futebol, $volei, $basquete);
+
+        return view('modality.modalities', ['categories' => $categories]);
     }
 
     /**
