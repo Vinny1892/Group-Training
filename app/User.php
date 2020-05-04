@@ -31,8 +31,15 @@ class User extends Eloquent implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role'
+        'name', 'email', 'password','role', 'personal', 'dateBirth', 'sexo', 'level', 'objective'
     ];
+
+    /*futuralmente, podemos ter novas ideias*/
+    opcoes_do_user[
+        'personal'=>[true, false],
+        'level'=>['iniciante', 'intermediário', 'avançado', 'profissional'],
+    ];
+
 
     /**
      * The attributes that should be hidden for arrays.

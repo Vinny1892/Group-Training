@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\HomePage;
+use ArrayObject;
 use Illuminate\Http\Request;
+
+
 
 class HomePageController extends Controller
 {
@@ -46,9 +49,9 @@ class HomePageController extends Controller
      */
     public function show(HomePage $homePage)
     {
-        return view('homePage');
-    }
-
+        return view('home.homePage');
+    
+}
     /**
      * Show the form for editing the specified resource.
      *
