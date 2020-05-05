@@ -51,7 +51,7 @@ class RoomController extends Controller{
                             "schedule"=> "$request->custom_schedules->schedule"
                         ]
                     ]
-                ]
+                        ],
                 "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
             ]
 
