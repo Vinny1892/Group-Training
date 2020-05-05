@@ -9,7 +9,6 @@ use App\Room;
 
 class RoomController extends Controller{
 
-
     public function __construct(){
         $this->middleware('auth');
     }
@@ -18,10 +17,10 @@ class RoomController extends Controller{
         return view('room.chat');
     }
 
-    public function minhaLista(){
-    	return view('room.listaMeusChats');
+/*todas as salas de uma determinada modalidade*/
+    public function allRoom(){
+    	return view('room.rooms');
     }
-
 
     public function store(Request $request)
     {
@@ -51,8 +50,13 @@ class RoomController extends Controller{
                             "schedule"=> "$request->custom_schedules->schedule"
                         ]
                     ]
+<<<<<<< HEAD
                         ],
                 "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
+=======
+                ],
+                "image"=> "img/room/777.png"
+>>>>>>> 030bf5d90dacc14f4daa1f0adce1b21122706a7f
             ]
 
         );
