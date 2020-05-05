@@ -16,12 +16,10 @@ class CreateCategoriasTable extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');//string é criado como VAR 255
-            $table->string('slug');
-            $table->text('descricao');
             /* possivel nova funcao futura, heranca entre categoria */
             $table->timestamps();
         });
-    }
+}
 
     /**
      * Reverse the migrations.
