@@ -1,5 +1,5 @@
-@extends('room.main');
-@section('content');
+@extends('room.main')
+@section('content')
 
   <div class="container">
     
@@ -77,4 +77,4 @@
   </div>
 
 
-@endsection;
+@endsection

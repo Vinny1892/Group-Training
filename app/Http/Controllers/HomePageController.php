@@ -49,9 +49,10 @@ class HomePageController extends Controller
      */
     public function show(HomePage $homePage)
     {
-        return view('home.homePage');
-    
-}
+        $patrocinadores = ['nike', 'adidas', 'fair_play_quadra_sintetica', 'club_bom_D_+'];
+
+        return view('home.homePage', compact('patrocinadores'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

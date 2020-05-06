@@ -19,7 +19,13 @@ class RoomController extends Controller{
 
 /*todas as salas de uma determinada modalidade*/
     public function allRoom(){
-    	return view('room.rooms');
+        return view('room.rooms');
+    }
+    /**
+     * lista todas as minhas salas
+    */
+    public function myRoom(){
+        return view('room.myRooms');
     }
 
     public function store(Request $request)
@@ -50,13 +56,8 @@ class RoomController extends Controller{
                             "schedule"=> "$request->custom_schedules->schedule"
                         ]
                     ]
-<<<<<<< HEAD
-                        ],
-                "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
-=======
                 ],
-                "image"=> "img/room/777.png"
->>>>>>> 030bf5d90dacc14f4daa1f0adce1b21122706a7f
+                "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
             ]
 
         );

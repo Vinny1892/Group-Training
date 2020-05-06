@@ -35,10 +35,10 @@ class User extends Eloquent implements Authenticatable
     ];
 
     /*futuralmente, podemos ter novas ideias*/
-    opcoes_do_user[
-        'personal'=>[true, false],
-        'level'=>['iniciante', 'intermediário', 'avançado', 'profissional'],
-    ];
+    // $opcoes_do_user = [
+    //     'personal'=>[true, false],
+    //     'level'=>['iniciante', 'intermediário', 'avançado', 'profissional']
+    // ];
 
 
     /**

@@ -1,3 +1,5 @@
+@extends('room.main')
+@section('content')
 <h2>Pesquisar</h2>
     <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -49,3 +51,4 @@
       </div>
     </div>
   </div>
+@endsection

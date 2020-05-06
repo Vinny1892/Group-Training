@@ -16,21 +16,9 @@
 
 
     <main>
-        @yield('content')
+        @yield('modalities')
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        // initialize components
-        $(".dropdown-trigger").dropdown({
-            coverTrigger: false,
-            constrainWidth: false
-        });
-
-        $('select').formSelect();
-    </script>
 </body>
 
 </html>

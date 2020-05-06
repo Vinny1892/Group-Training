@@ -1800,7 +1800,7 @@ header .navbar-fixed-top {
 
 .navbar .navbar-brand {
     height: 70px;
-    padding: 22.5px 15px;
+    /*padding: 22.5px 15px;*/
     color: #fff
 }
 
@@ -5446,17 +5446,16 @@ header.home .navbar--primary .navbar-loggedout .navbar-btn {
     text-align: center;
     background-color: #0a001f;
     margin-top: 62px;
-    background-image: url({{ URL::asset('img/logo.png')
+    background-image: url(img/logo.png);
 }
 
 
-}
-futsal. cfdlfymm,
-);
+futsal. cfdlfymm{
 background-repeat: no-repeat;
 background-size: cover;
 background-position: center
 }
+
 .main-image .container {
     max-width: 800px
 }
@@ -5468,9 +5467,7 @@ background-position: center
     margin-top: 60px;
     margin-bottom: 40px
 }
-.main-image-asia {
-    background-image: url(https://wkncdn.com/newx/assets/build/img/home/asia/home-main-image.5e012e82a.jpg)
-}
+
 @media (min-width:992px) {
     .main-image {
         height: 500px;

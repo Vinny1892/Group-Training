@@ -12,10 +12,9 @@
 */
 
 Route::group(['namespace' => 'Auth'] , function(){
-
     Route::get('/login',  "LoginController@show")->name('login');
     Route::post('/login' , "LoginController@login")->name('login.login');
-    Route::post('/logout', 'LoginController@logout')->name('login.logout');
+    Route::get('/logout', 'LoginController@logout')->name('login.logout');
     Route::get('/registrar/' ,"RegisterController@show")->name('register');
     Route::post('/registrar' , "RegisterController@storage")->name('register.storage');
 
@@ -24,7 +23,6 @@ Route::group(['namespace' => 'Auth'] , function(){
     Route::get('/login/facebook/callback' , 'LoginController@handleFacebookCallback');
     Route::get('/login/google','LoginController@redirectToGoogle')->name("login.google");
     Route::get('/login/google/callback' , 'LoginController@handleGoogleCallback');
-
 });
 
 Route::get('/teste' ,function(){
@@ -32,16 +30,28 @@ Route::get('/teste' ,function(){
 })->middleware('role.admin');
 
 //DsahBoard Routes
-
-Route::get('/' ,"HomePageController@show")->name('homePage');
+Route::get('/' ,"HomePageController@show")->name('home');
 Route::get('/modalidades' ,"ModalityController@show")->name('modalidades');
 Route::get('/painel' ,"DashboardController@show")->name('painel');
 Route::get('/chat' , 'RoomController@show')->name('chat');
 Route::get('/salas' , "RoomController@allRoom")->name('salas');
+Route::get('/mysalas' , "RoomController@myRoom")->name('mysalas');
 
-
-
-
+////Exemplo de rota com parâmetro opcional.
+//Route::get('welcome/{name?}', function ($name = 'visitante') {
+//    return "Seja bem vindo $name!";
+//});
+//Route::get('welcome/{name}', function ($name) {
+//    //
+//})->where('name', '[A-Za-z]+');
+//// o Eloquent disponibiliza uma serie de métodos além do all(),
+////https://laravel.com/docs/5.4/eloquent
+//Route::get('posts', function () {
+//    // Corresponde a "SELECT * FROM post"
+//    return Post::all();
+//});
+//
+//
 
 
 
