@@ -10,8 +10,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a
-                            class="navbar-brand"
+                    <a      class="navbar-brand"
                             href="{{ route('home') }}"
                             title="Inicio"
                             tabIndex="-1">
@@ -20,11 +19,6 @@
                                 alt="logo"
                                 class="hidden-xs hidden-sm hidden-md"
                                 width="130"/>
-                        <img
-                                src="https://wkncdn.com/newx/assets/build/img/logos-v3/m_logo.3f37cf71a.png"
-                                alt="Workana - Acesse os melhores talentos da América Latina"
-                                class="visible-xs-inline visible-sm-inline visible-md-inline"
-                                height="35"/>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse navbar-inverse-collapse navbar-loggedout js-header-menu">

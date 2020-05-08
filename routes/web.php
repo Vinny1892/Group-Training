@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/**
+index – Lista os dados da tabela
+show – Mostra um item específico
+create – Retorna a View para criar um item da tabela
+store – Salva o novo item na tabela
+edit – Retorna a View para edição do dado
+update – Salva a atualização do dado
+destroy – Remove o dado
+*/
 
 Route::group(['namespace' => 'Auth'] , function(){
     Route::get('/login',  "LoginController@show")->name('login');
@@ -17,7 +26,6 @@ Route::group(['namespace' => 'Auth'] , function(){
     Route::get('/logout', 'LoginController@logout')->name('login.logout');
     Route::get('/registrar/' ,"RegisterController@show")->name('register');
     Route::post('/registrar' , "RegisterController@storage")->name('register.storage');
-
     //Providers Routes
     Route::get('/login/facebook','LoginController@redirectToFacebook')->name("login.facebook");
     Route::get('/login/facebook/callback' , 'LoginController@handleFacebookCallback');
@@ -29,13 +37,36 @@ Route::get('/teste' ,function(){
     response('Funcionou teste');
 })->middleware('role.admin');
 
-//DsahBoard Routes
-Route::get('/' ,"HomePageController@show")->name('home');
-Route::get('/modalidades' ,"ModalityController@show")->name('modalidades');
+//DashBoard - painel de gerenciamento
 Route::get('/painel' ,"DashboardController@show")->name('painel');
+
+
+//MODALIDADE
+//Route::get('/modalidade/{modality}' , "ModalityController@show")->name('modalidade');
+Route::get('/modalidades' ,"ModalityController@index")->name('modalidades');
+Route::get('/editarmodalidade/{modality}' , "ModalityController@edit")->name('editarmodalidade');
+Route::get('/atualizarmodalidade/{modality}' , "ModalityController@update")->name('atualizarmodalidade');
+Route::get('/excluirmodalidade/{modality}' , "ModalityController@destroy")->name('excluirmodalidade');
+Route::get('/criamodalidade' , "ModalityController@create")->name('criamodalidade');
+
+//SALAS
 Route::get('/chat' , 'RoomController@show')->name('chat');
 Route::get('/salas' , "RoomController@allRoom")->name('salas');
 Route::get('/mysalas' , "RoomController@myRoom")->name('mysalas');
+Route::get('/tags' , "RoomController@index")->name('tags');
+Route::get('/sala/{tag}' , "RoomController@tags")->name('salatags');
+
+
+//TAG
+Route::get('/tags' , "TagController@index")->name('tags');
+
+//HOME PAGE
+Route::get('/' ,"HomePageController@show")->name('home');
+
+
+//CATEGORIA
+
+
 
 ////Exemplo de rota com parâmetro opcional.
 //Route::get('welcome/{name?}', function ($name = 'visitante') {

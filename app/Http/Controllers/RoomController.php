@@ -17,7 +17,7 @@ class RoomController extends Controller{
         return view('room.chat');
     }
 
-/*todas as salas de uma determinada modalidade*/
+    /*todas as salas de uma determinada modalidade*/
     public function allRoom(){
         return view('room.rooms');
     }
@@ -59,8 +59,25 @@ class RoomController extends Controller{
                 ],
                 "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
             ]
-
         );
+    }
+
+    /**
+    * metodo para retornar todas as tags dessa sala
+    * @return talvez retornar as model as tags, ou só os nomes
+    */
+    public function tags(Room $room){
+        
+        //return;
+    }
+
+    /**
+    * metodo para retornar todas as categories dessa sala
+    * @return talvez retornar as model as categories, ou só os nomes
+    */
+    public function categories(Room $room){
+        
+        //return;
     }
 
 }

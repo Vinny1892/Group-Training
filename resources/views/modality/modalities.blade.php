@@ -23,7 +23,7 @@
         <div class="main-content">
             <h2 class="title-search-rooms">Pesquisar salas</h2>
 
-            <h3 class="title-categories">Categorias</h3>
+            <h3 class="title-categories">Modalidades</h3>
             <div class="search-categories">
                 <div class="search-input">
                     <input type="text" placeholder="Pesquise por nome">
@@ -45,14 +45,14 @@
             </div>
 
             <div class="grid-categories">
-                @foreach ($categories as $category)
+                @foreach ($modalities as $modality)
                     <div class="category">
                         <div class="image-category" style="background-image: url('{{$category->url}}')">
                             <img src="" alt="">
                         </div>
                         <div class="description">
-                            <span class="category-name">{{$category->name}}</span>
-                            <span class="category-active-users">{{$category->activeUsers}} usuarios ativos</span>
+                            <span class="category-name">{{$modality->title}}</span>
+                           <!-- <span class="category-active-users">{{$modality->activeUsers}} usuarios ativos</span> -->
                         </div>
                     </div>
                 @endforeach

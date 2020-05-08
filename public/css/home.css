@@ -1798,9 +1798,9 @@ header .navbar-fixed-top {
     z-index: 1050
 }
 
-.navbar .navbar-brand {
+.navbar {
     height: 70px;
-    /*padding: 22.5px 15px;*/
+    padding: 22.5px 15px;
     color: #fff
 }
 
