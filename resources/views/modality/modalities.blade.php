@@ -5,7 +5,7 @@
             <li><a href="#!">Conta</a></li>
             <li><a href="#!">Nova sala</a></li>
             <li><a href="#!">Minhas salas</a></li>
-            <li class="divider"></li>
+            <li class="divider">zzzzzzzz</li>
             <li><a href="#!">Sair</a></li>
         </ul>
 
@@ -14,8 +14,7 @@
                 <a href="#" class="brand-logo">Group Training</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{{ route('login') }}">Entrar</a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="user-dropdown">Usuário<i
-                                    class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="user-dropdown">Usuário</a></li>
                 </ul>
             </div>
         </nav>
