@@ -11,7 +11,9 @@ RUN apt install -y libonig-dev \
     libxml2-dev \
     libmcrypt-dev \
     libzip-dev \
-    libpq-dev
+    libpq-dev   \
+     libmongoc-dev
+
 
 
 
