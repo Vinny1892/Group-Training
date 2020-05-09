@@ -2,6 +2,8 @@ vendor
 docker-compose.yml
 docker/dockerfile.app
 docker/Dockerfile.mongo
-node_modules
-.env
+docker/Dockerfile.apichat
+src/chatAPI/node_modules
+src/.env
 .idea/
+.phpunit.result.cache
