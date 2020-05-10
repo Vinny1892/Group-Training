@@ -46,7 +46,7 @@
             <div class="grid-categories">
                 @foreach ($modalities as $modality)
                     <div class="category">
-                        <div class="image-category" style="background-image: url('{{$category->url}}')">
+                        <div class="image-category" style="background-image: url('{{$modality->url}}')">
                             <img src="" alt="">
                         </div>
                         <div class="description">

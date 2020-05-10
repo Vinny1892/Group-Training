@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Modality;
+use App\Category;
+use App\Tag;
+use App\Room;
 use Illuminate\Http\Request;
 
 // class Category
@@ -22,29 +25,9 @@ class ModalityController extends Controller
      */
     public function index()
     {
-        // $futebol = new Category();
-        // $futebol->url = 'https://www.folhape.com.br/obj/0/346222,475,80,0,0,475,365,0,0,0,0.jpg';
-        // $futebol->name = 'Futebol';
-        // $futebol->activeUsers = 18;
-        
-        // $volei = new Category();
-        // $volei->url = 'https://www.cbnmaringa.com.br/uploads_lg/45566b71e4f4e4a9375e8382db9ac037.png';
-        // $volei->name = 'Volei';
-        // $volei->activeUsers = 12;
-        
-        // $basquete = new Category();
-        // $basquete->url = 'https://www.maranhaoesportes.com/wp-content/uploads/2019/10/Betsul_Os-brasileiros-da-NBA_liga-de-basquete-americana-tem-quatro-brasileiros-em-a%C3%A7%C3%A3o-800x445.jpg';
-        // $basquete->name = 'Basquete';
-        // $basquete->activeUsers = 12;
-        
-        // $categories = array($futebol, $volei, $basquete);
-
-        // return view('modality.modalities', ['categories' => $categories]);
-
-
         $modalities = Modality::all();
-        return view('modality.modalities',compact('modalities'))->with('i', (request()->input('page', 1) - 1) * 5);
-
+        return view('modality.modalities',compact('modalities'))->with('i', (request()->input('page', 1) - 1) * 5
+        );
     }
 
     /**
@@ -53,9 +36,11 @@ class ModalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('dashboard.panel');
+    public function create($modality = 0)
+    {/*preciso da parametro?*/
+        $allCategories = Category::all();
+        $allTags = Tag::all();
+        return view('modality.formCreate', compact('allCategories', 'allTags'));
     }
 
     /**
@@ -66,18 +51,18 @@ class ModalityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        //var_dump($request);
         Modality::create(
             [
-                "title" => "$request->title",
-                "description"=> "$request->description",
-                "id_rooms"=> "$request->id_rooms",
-                "id_tags"=> "$request->id_tags",
-                "id_categories"=> "$request->id_categories",
-                "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
-                /*slug*/
+                "title" => $request->title,
+                "description"=> $request->description,
+                "id_rooms"=> $request->id_rooms,
+                "id_tags"=> $request->id_tags,
+                "id_categories"=> $request->id_categories,
+                "image"=> $request->pathImage
             ]
         );
-        return redirect()->route('dashboard.panel')->with('success','Modalidade criada com sucesso.');;
+        return redirect()->route('painel')->with('success','Modalidade criada com sucesso.');;
     }
 
     /**
@@ -100,9 +85,23 @@ class ModalityController extends Controller
      * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function edit(modality $modalities)
+    public function edit(Modality $modality)
     {
-        return view('modality.modalities',compact('modalities'));
+        //$allCategories = Category::all();
+        $allCategories = [new Category(['title' => 'quadra madeira']), new Category(['title' => 'campo' ])];
+        $allCategories2 = [new Category(['title' => 'campo' ])];
+
+
+        //$allTags = Tag::all();
+        $allTags = [new Tag(['title' => 'bairro_buriti']), new Tag(['title' => 'tradição' ])];
+
+        //$allRooms = Room::all();
+        $allRooms = [new Room(['title' => 'Sala1']), new Room(['title' => 'Sala2' ])];
+
+        //$modality = Modality::firstWhere('id', $id_modality);//id ou slug?
+        $modality = new Modality(['title'=>'Futebol', 'description'=>'futebol é o esporte mais popular no Brasil', 'id_categories'=>$allCategories2, 'id_tags'=>$allTags, 'id_rooms'=>$allRooms]);
+
+        return view('modality.formEdit',compact('modality', 'allCategories', 'allTags', 'allRooms'));
     }
 
     /**
@@ -113,7 +112,7 @@ class ModalityController extends Controller
      * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, modality $modality)
+    public function update(Request $request, Modality $modality)
     {
         // $modality->update(
         //         "title" => "$request->title",
@@ -135,7 +134,7 @@ class ModalityController extends Controller
      * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function destroy(modality $modality)
+    public function destroy(Modality $modality)
     {
         $modality->delete();
 

@@ -44,10 +44,14 @@ Route::get('/painel' ,"DashboardController@show")->name('painel');
 //MODALIDADE
 //Route::get('/modalidade/{modality}' , "ModalityController@show")->name('modalidade');
 Route::get('/modalidades' ,"ModalityController@index")->name('modalidades');
-Route::get('/editarmodalidade/{modality}' , "ModalityController@edit")->name('editarmodalidade');
-Route::get('/atualizarmodalidade/{modality}' , "ModalityController@update")->name('atualizarmodalidade');
-Route::get('/excluirmodalidade/{modality}' , "ModalityController@destroy")->name('excluirmodalidade');
-Route::get('/criamodalidade' , "ModalityController@create")->name('criamodalidade');
+Route::get('/modalidade/atualizar/{modality}' , "ModalityController@update")->name('atualizarmodalidade');
+Route::get('/modalidade/excluir/{modality}' , "ModalityController@destroy")->name('excluirmodalidade');
+Route::post('/modalidade/salvar' , "ModalityController@store")->name('savemodality');
+Route::get('/modalidade/teste', function(){
+        return view("modality/teste");
+    });
+Route::post('/modalidade/editar', "ModalityController@edit")->name('editemodalidade');
+Route::get('/modalidade/criar', "ModalityController@create")->name('createmodalidade');
 
 //SALAS
 Route::get('/chat' , 'RoomController@show')->name('chat');

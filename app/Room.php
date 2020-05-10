@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
+use Illuminate\Support\Str;
 
 
 class Room extends Eloquent
@@ -11,7 +12,7 @@ class Room extends Eloquent
 
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'room' ;
-    protected $fillable = ['image', 'title', 'modality', 'description','public', 'key', 'place', 'standard_time', 'date', 'id_users', 'tags', 'id_categories', 'repeat', 'locationType'];
+    protected $fillable = ['image', 'title', 'modality', 'description','public', 'key', 'place', 'standard_time', 'date', 'id_users', 'tags', 'id_categories', 'repeat', 'locationType', 'id_user_adm'];
 
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
