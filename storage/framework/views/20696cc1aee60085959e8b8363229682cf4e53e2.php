@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Training</title>
-    <link rel="stylesheet" href="{{ asset('css/sala.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/sala.css')); ?>">
     <!-- Latest compiled and minified CSS -->
     <!-- Incluir -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -15,7 +15,7 @@
     <header>
       <h1>cabeçalho</h1>
     </header>
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
   </main>
 
 
@@ -23,3 +23,4 @@
     rodapé
 </footer>
 </html>
+<?php /**PATH /var/www/html/resources/views/room/main.blade.php ENDPATH**/ ?>
