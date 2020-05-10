@@ -38,7 +38,8 @@
     })->middleware('role.admin');
 
 //DsahBoard Routes
-    Route::get('/dashboard' ,"DashboardController@show")->name('dashboard');
+    Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('dashboard.edit');
+    Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
 
     Route::get('/' ,"HomePageController@show")->name('homepage');
 
@@ -49,8 +50,6 @@
     Route::get('/listameuschats' , "RoomController@minhaLista")->name('listameuschats');
 //});
 
-
-    Route::get('/teste2' , "CategoriaController@store");
 
 
 
