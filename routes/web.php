@@ -11,13 +11,13 @@
 |
 */
 /**
-index – Lista os dados da tabela
-show – Mostra um item específico
-create – Retorna a View para criar um item da tabela
-store – Salva o novo item na tabela
-edit – Retorna a View para edição do dado
-update – Salva a atualização do dado
-destroy – Remove o dado
+ * index – Lista os dados da tabela
+ * show – Mostra um item específico
+ * create – Retorna a View para criar um item da tabela
+ * store – Salva o novo item na tabela
+ * edit – Retorna a View para edição do dado
+ * update – Salva a atualização do dado
+ * destroy – Remove o dado
 */
 
 Route::group(['namespace' => 'Auth'] , function(){

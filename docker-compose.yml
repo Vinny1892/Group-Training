@@ -33,14 +33,12 @@ services:
         ipv4_address: 172.100.0.5
   app-grouptraining:
     build:
-      dockerfile: ./docker/dockerfile.app
       context: .
-    container_name: "app-Laravel"
-    #command: "composer install"
+      dockerfile: docker/dockerfile.app
     ports:
-      - 8085:80
+      - 9000:9000
     volumes:
-      - .:/var/www/html
+      - ./src:/var/www/html
     networks:
       network-develop:
         ipv4_address: 172.100.0.6
@@ -52,6 +50,31 @@ services:
     networks:
       network-develop:
         ipv4_address: 172.100.0.7
+  nginx:
+    build: 
+      context: .
+      dockerfile: docker/dockerfile.ngnix
+    volumes:
+      - ./nginx/php:/etc/nginx/conf.d
+      - ./src:/var/www/html
+    ports:
+      - 8080:443
+      - 80:80
+    networks:
+      network-develop:
+        ipv4_address: 172.100.0.10
+  apichat:
+    build: 
+      context: .
+      dockerfile: docker/dockerfile.apichat
+    volumes:
+      - ./src/chatAPI:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 3000:3000
+    networks:
+      network-develop:
+        ipv4_address: 172.100.0.8
 networks:
   network-develop:
     driver: bridge

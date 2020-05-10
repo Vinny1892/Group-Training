@@ -1,0 +1,33 @@
+.tela-login{
+    background-color: #fff;
+    height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login {
+      width: 25vw;
+      background-color: whitesmoke;
+  }
+
+.color-icon-fb{
+    color: initial;
+    font-size: 25px;
+}
+.color-icon-google{
+    color: initial;
+    font-size: 25px;
+
+}
+
+.color-icon-fb:hover{
+    color: blue;
+    font-size: 25px;
+
+}
+.color-icon-google:hover{
+    color: red;
+    font-size: 25px;
+
+}
