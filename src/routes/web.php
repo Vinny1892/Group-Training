@@ -64,6 +64,22 @@ Route::get('/sala/{tag}' , "RoomController@tags")->name('salatags');
 //TAG
 Route::get('/tags' , "TagController@index")->name('tags');
 
+Route::get('/teste' ,function(){
+    response('Funcionou teste');
+})->middleware('role.admin');
+
+//DsahBoard Routes
+    Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('dashboard.edit');
+    Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
+
+
+
+
+//Route::group(['namespace' => 'Room'],function(){
+    Route::get('/chat' , 'RoomController@show')->name('chat');
+    Route::get('/listameuschats' , "RoomController@minhaLista")->name('listameuschats');
+//});
+
 //HOME PAGE
 Route::get('/' ,"HomePageController@show")->name('home');
 
