@@ -58,7 +58,7 @@ services:
       - ./nginx/php:/etc/nginx/conf.d
       - ./src:/var/www/html
     ports:
-      - 8080:443
+      - 8085:443
       - 80:80
     networks:
       network-develop:
