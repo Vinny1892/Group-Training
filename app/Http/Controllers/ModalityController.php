@@ -36,8 +36,8 @@ class ModalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($modality = 0)
-    {/*preciso da parametro?*/
+    public function create()
+    {
         $allCategories = Category::all();
         $allTags = Tag::all();
         return view('modality.formCreate', compact('allCategories', 'allTags'));

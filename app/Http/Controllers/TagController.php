@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\tag;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -14,7 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        //acho q n vai ter propriamente pra isso
     }
 
     /**
@@ -22,14 +22,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $data)
+    public function create()
     {
-        return Tag::create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            /*'slug' => $data['slug'], acredito que o metodo no metodo do MODEL*/
-            'role'=> 'normal'
-        ]);
+        //return view();//acho que nao vai ter tela propria só pra isso
     }
 
     /**
@@ -39,13 +34,13 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        return Categoria::create(
+        return Tag::create(
             [
-                "title" => "$request->title",
-                "id_modality"=> "$request->id_modality",
-                "description"=> "$request->description",
-                "id_rooms"=> "$request->id_rooms",
-                /*slug*/
+                "title" => $request->title,
+                "id_modality"=> $request->id_modality,
+                "description"=> $request->description,
+                "id_rooms"=> $request->id_rooms,
+                /*"role"=> 'normal'*/
             ]
         );
     }
@@ -56,9 +51,11 @@ class TagController extends Controller
      * @param  \App\tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(tag $tag)
+    public function show(Tag $tag)
     {
         //
+
+        return Tag::firstWhere('active', 1);
     }
 
     /**
@@ -67,7 +64,7 @@ class TagController extends Controller
      * @param  \App\tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(tag $tag)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -79,7 +76,7 @@ class TagController extends Controller
      * @param  \App\tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tag $tag)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -90,7 +87,7 @@ class TagController extends Controller
      * @param  \App\tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tag $tag)
+    public function destroy(Tag $tag)
     {
         //
     }
