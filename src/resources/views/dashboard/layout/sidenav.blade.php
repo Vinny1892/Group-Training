@@ -18,7 +18,7 @@
             </a>
           </li>
           <li class="nav-item  {{ Route::current()->getName() == 'dashboard.edit' ? "active" : '' }} ">
-            <a class="nav-link" href="{{route('dashboard.edit', ["slugName" => "vinicius-espindola"] )}}">
+            <a class="nav-link" href="{{route('dashboard.edit', ["slugName" => "$user->slug"] )}}">
               <i class="material-icons">person</i>
               <p>Minha Conta</p>
             </a>

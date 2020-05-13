@@ -37,10 +37,10 @@
 
     <div class=" center-align">
       <p>Não tem conta? <a href="{{ route('register') }}">Registre-se</a></p>
-      <a href="{{ route('login.google') }}"><i class="fab fa-google color-icon-google"></i></a>
-      <a href="{{ route('login.facebook') }}"><i class="fab fa-facebook color-icon-fb" ></i></a>
+      <a  href="{{ route('login.google') }}"><img  style="width: 2vw" src="{{ asset("icons/google.svg") }}" alt="login google"></a>
+      <a href="{{ route('login.facebook') }}"><img  style="width: 2vw"  src="{{ asset("icons/facebook.svg") }}" alt="login facebook"></a>
     </div>
-    <div> <div id='parent'>seleciona a cor</div> </div>
+    <div class="center-align" style="margin-top: 20px;" id="parent"> <img style="width: 2vw" src="{{ asset('icons/art.svg')  }}"  alt="seletor de cor"> </div>
 
   </form>
 </section>
