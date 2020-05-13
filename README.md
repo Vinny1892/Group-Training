@@ -22,7 +22,13 @@ git clone https://github.com/Vinny1892/Group-Training.git
 ```
 
 ```
-cd Group-Training/
+cd Group-Training/src
+```
+```
+mv .env.example .env
+```
+```
+cd ..
 ```
 
 ```

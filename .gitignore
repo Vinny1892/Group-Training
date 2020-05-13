@@ -1,9 +1,8 @@
-vendor
+src/vendor
 docker-compose.yml
 docker/dockerfile.app
 docker/Dockerfile.mongo
 docker/Dockerfile.apichat
 src/chatAPI/node_modules
-src/.env
 .idea/
 .phpunit.result.cache
