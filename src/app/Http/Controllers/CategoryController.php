@@ -35,7 +35,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Validator::make($data, [
+            "name" => ["required","string", "max:25"],
+            "description" => ["required" , "string" , "max:60"]
+        ]);
     }
 
     /**
