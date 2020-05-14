@@ -2,14 +2,14 @@
 
 namespace App;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 
 /*https://www.hostinger.com.br/tutoriais/tags-wordpress/#Tags-WordPress-x-Categorias*/
-class Category extends Model
+class Category extends Eloquent
 {
-    protected $fillable = ['title', 'description', "id_rooms", "id_modality"];/*id e slug gerado automaticamente*/
-	// protected $ connection = 'mongodb' ;
-    // protected $ collection = 'category' ;
+    protected $fillable = ['name', 'description', "id_rooms", "id_modality",'slug'];/*id e slug gerado automaticamente*/
+	 protected  $connection = 'mongodb';
+     protected  $table = 'categories';
 
     
 	//nao pode mudar o nome desse metodo, reservado (setNomeAttribute)

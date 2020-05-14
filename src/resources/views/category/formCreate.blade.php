@@ -15,23 +15,29 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
+        @if (session('message'))
+          <div class="alert alert-success">
+            {{ session('message') }}
+          </div>
+        @endif
         <div class="card">
           <div class="card-header card-header-success">
             <h4 class="card-title">Criar Categoria</h4>
             <p class="card-category">criar uma nova categoria</p>
           </div>
           <div class="card-body">   
-            <form>
+            <form action="{{route('category.store')}}" method="POST">
+              @csrf
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Nome</label>
-                <input type="text" value="" class="form-control"  placeholder="Nome Categoria">
+                <input type="text" name="name" class="form-control"  placeholder="Nome Categoria">
                 </div>
             </div>
                 <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Descrição</label>
-                <textarea  class="form-control" placeholder="Insira Descrição da Categoria"></textarea>
+                <textarea  class="form-control"  name="description" placeholder="Insira Descrição da Categoria"></textarea>
                 </div>
               </div>
         
@@ -60,47 +66,26 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Descrição</th>
-            <th>Country</th>
             <th>Editar</th>
             <th>Apagar</th>
+
           </thead>
           <tbody>
+          @foreach($categorys as  $key => $category)
             <tr>
-              <td>1</td>
-              <td>Dakota Rice</td>
-              <td>$36,738</td>
-              <td>Niger</td>
+              <td>{{$key}}</td>
+              <td>{{$category->name}}</td>
+              <td>{{ $category->description }}</td>
             <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
             <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>Minerva Hooper</td>
-              <td>$23,789</td>
-              <td>Curaçao</td>
-              <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-              <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Sage Rodriguez</td>
-              <td>$56,142</td>
-              <td>Netherlands</td>
-              <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-              <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Philip Chaney</td>
-              <td>$38,735</td>
-              <td>Korea, South</td>
-              <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-              <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
-            </tr>
+          @endforeach
+
           </tbody>
         </table>
       </div>
     </div>
   </div>
+</div>
 </div>
 @endsection

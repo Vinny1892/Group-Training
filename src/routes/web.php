@@ -87,6 +87,7 @@ Route::get('/' ,"HomePageController@show")->name('home');
 //CATEGORIA
 
 Route::get('/dashboard/categoria/criar' , "CategoryController@create")->name('category');
+Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
 
 
 
