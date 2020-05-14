@@ -24,7 +24,7 @@ class ModalityController extends Controller
      */
     public function create()
     {
-        //
+        return view('modality.formCreate');
     }
 
     /**

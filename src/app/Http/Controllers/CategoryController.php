@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\categoria;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.formCreate');
     }
 
     /**
