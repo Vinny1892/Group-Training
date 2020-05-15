@@ -13,13 +13,13 @@
 			@endforeach
 		</div>
 		<hr>
-		<div>
+		{{-- <div>
 			<h3>Tags</h3>
 			@foreach($tags as $tag)
 				<input type="checkbox" id="checkboxtags" value="{{$tag}}" class="form-check-input"  name="tags">
 				<label for="tag">{{$tag->title}}</label>
 			@endforeach
-		</div>
+		</div> --}}
 		<button type="submit" class="btn btn-white btn-round btn-just-icon">Salvar</button>
 	</div>
 </form>

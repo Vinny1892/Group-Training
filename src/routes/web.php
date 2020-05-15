@@ -51,7 +51,7 @@ Route::get('/modalidade/teste', function(){
         return view("modality/teste");
     });
 Route::post('/modalidade/editar', "ModalityController@edit")->name('editemodalidade');
-Route::get('/modalidade/criar', "ModalityController@create")->name('createmodalidade');
+Route::get('/modalidade/criar', "ModalityController@create")->name('create.modalidade');
 
 //SALAS
 Route::get('/chat' , 'RoomController@show')->name('chat');
@@ -85,6 +85,9 @@ Route::get('/' ,"HomePageController@show")->name('home');
 
 
 //CATEGORIA
+
+Route::get('/dashboard/categoria/criar' , "CategoryController@create")->name('category');
+Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
 
 
 

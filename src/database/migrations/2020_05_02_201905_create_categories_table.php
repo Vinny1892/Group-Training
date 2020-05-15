@@ -16,10 +16,10 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $collection) {
             $collection->bigIncrements('id');
             $collection->string('slug');
-            $collection->string('title');
+            $collection->string('name');
             $collection->text('description');
-            $collection->string('id_modality');
-            $collection->string('id_rooms');
+            $collection->json('id_modality');
+            $collection->json('id_rooms');
             $collection->timestamps();
         });
     }

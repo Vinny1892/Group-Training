@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateTableUsers extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,8 @@ class CreateTableUsers extends Migration
         Schema::create('users', function (Blueprint $collection) {
             $collection->unique('email');
             $collection->string('password')->nullable();
+            $collection->string('slug');
+            $collection->boolean('email_verified');
             $collection->string('name');
             $collection->string('role');
             $collection->boolean('personal');
@@ -23,6 +25,7 @@ class CreateTableUsers extends Migration
             $collection->string('sexo');
             $collection->string('level');
             $collection->string('objective');
+            $collection->rememberToken();
             $collection->timestamps();
         });
     }
@@ -34,6 +37,6 @@ class CreateTableUsers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('users');
     }
 }
