@@ -190,6 +190,42 @@
                         </a>
                     </div>
                     <div class="col-sm-6 col-md-4">
+                        <a href="https://www.workana.com/pt/projects/add?mainSkill=sales-marketing&tpl_subcategory=&ref=home_goals&from_home=1">
+                            <article class="box-common">
+                                <figure>
+                                    <img src="https://wkncdn.com/newx/assets/build/img/home/achieve-your-goals/marketing.6f080109c.jpg"
+                                         alt="Marketing e vendas">
+                                    <div class="hover-block">
+                                        <div class="btn btn-success btn-lg">Crie um anúncio</div>
+                                    </div>
+                                </figure>
+                                <figcaption>
+                                    <h4>Marketing e vendas</h4>
+                                    <p>Freelancers que irão ajudá-lo a vender nas redes sociais, anunciar mais barato e
+                                        vender mais.</p>
+                                </figcaption>
+                            </article>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <a href="https://www.workana.com/pt/projects/add?mainSkill=sales-marketing&tpl_subcategory=&ref=home_goals&from_home=1">
+                            <article class="box-common">
+                                <figure>
+                                    <img src="https://wkncdn.com/newx/assets/build/img/home/achieve-your-goals/marketing.6f080109c.jpg"
+                                         alt="Marketing e vendas">
+                                    <div class="hover-block">
+                                        <div class="btn btn-success btn-lg">Crie um anúncio</div>
+                                    </div>
+                                </figure>
+                                <figcaption>
+                                    <h4>Marketing e vendas</h4>
+                                    <p>Freelancers que irão ajudá-lo a vender nas redes sociais, anunciar mais barato e
+                                        vender mais.</p>
+                                </figcaption>
+                            </article>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
                         <a href="https://www.workana.com/pt/projects/add?ref=home_goals&from_home=1">
                             <article class="box-common">
                                 <figure>

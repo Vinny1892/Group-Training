@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\categoria;
+use App\Category;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
