@@ -3,7 +3,8 @@
 	
 	@include('modality.form')
 
-	@include('modality.allModalities')
+	@include('modality.listModalities')
+
 
 
 @endsection

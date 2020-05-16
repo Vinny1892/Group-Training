@@ -42,7 +42,7 @@ Route::get('/painel' ,"DashboardController@show")->name('painel');
 
 
 //MODALIDADE
-//Route::get('/modalidade/{modality}' , "ModalityController@show")->name('modalidade');
+Route::get('/modalidade' , "ModalityController@show")->name('modalidade');
 Route::get('/modalidade/atualizar/{modality}' , "ModalityController@update")->name('atualizarmodalidade');
 Route::get('/modalidade/excluir/{modality}' , "ModalityController@destroy")->name('excluirmodalidade');
 Route::post('/modalidade/salvar' , "ModalityController@store")->name('savemodality');

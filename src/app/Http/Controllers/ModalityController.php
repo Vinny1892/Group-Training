@@ -89,7 +89,8 @@ class ModalityController extends Controller
      */
     public function show(modality $modality)
     {
-        //
+        $modalities = Modality::all();
+        return view('modality.modalities', compact('modalities'));
     }
 
     /**
@@ -138,6 +139,6 @@ class ModalityController extends Controller
     public function destroy(modality $modality)
     {
         $modality->delete();
-        return redirect()->route('modality.modalities')->with('success','Modalidade deletada com sucesso');
+        return redirect()->route('modalidade')->with('success','Modalidade deletada com sucesso');
     }
 }

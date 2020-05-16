@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\HomePage;
 use Illuminate\Http\Request;
+use App\Modality;
 
 class HomePageController extends Controller
 {
@@ -47,8 +48,8 @@ class HomePageController extends Controller
     public function show(HomePage $homePage)
     {
         $patrocinadores = ['nike', 'adidas', 'fair_play_quadra_sintetica', 'club_bom_D_+'];
-
-        return view('home.homePage', compact('patrocinadores'));
+        $modalities = Modality::all();
+        return view('home.homePage', compact('patrocinadores', 'modalities'));
     }
 
     /**

@@ -1,45 +1,49 @@
+<main class="container">
+	<div class="main-content">
+		<h5 class="title-categories">Modalidades</h5>
+		<div class="search-categories">
+		    <div class="search-input">
+		        <input type="text" placeholder="Pesquise por nome">
+		    </div>
+		    <div class="order">
+		        <span class="title-order">Ordenar por:</span>
+		        <div>
+		            <div class="input-field">
+		                <select>
+		                    <option value="" disabled selected>Selecione</option>
+		                    <option value="1">Nome</option>
+		                    <option value="2">Usuários ativos</option>
+		                    <option value="2">Categoria</option>
+		                    <option value="2">TAG</option>
+		                    <option value="2">TAG</option>
+		                    <option value="2">Mais usadas</option>
+		                </select>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>	
 
-	<div>
-        <h5>Modalidades</h5>
-         
-        <?php if (sizeof($modalities) > 1): ?>
-            <!-- Listagem Modalidades -->
-            <div class="col-lg-6 col-md-12">
-                <div class="card">
-                  <div class="card-header card-header-primary">
-                    <h4 class="card-title">Modalidades</h4>
-                    <p class="card-category">Modalidades Cadastradas </p>
-                  </div>
-                        <div class="card-body table-responsive">
-                            <table class="table table-hover">
-                                <thead class="text-primary">
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Editar</th>
-                                <th>Apagar</th>
-
-                                </thead>
-                                <tbody>
-                                    @foreach($modalities as  $key => $modality)
-                                        <tr>
-                                            <td>{{$key}}</td>
-                                            <td>{{$modality->name}}</td>
-                                            <td>{{ $modality->description }}</td>
-                                            <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-                                            <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-      </div>
-        <?php else: ?>
-            <?php echo "nenhuma modalidade ainda"; ?>       
-        <?php endif; ?>       
-		
-	</div>
+	<section class="goals js-ua-desktop">
+		@foreach ($modalities as $modality)
+			<div class="col-sm-6 col-md-4">
+		        <a href="#">
+		            <article class="box-common">
+		                <figure>
+		                    <div class="image-category" style="background-image: url('{{$modality->url}}')">
+	                			<img src="" alt="">
+	           				</div>
+		                    <div class="hover-block">
+		                        <div class="btn btn-success btn-lg">Criar um design</div>
+		                    </div>
+		                </figure>
+		                <figcaption>
+		                    <h4>{{$modality->name}}</h4>
+		                    <p>{{$modality->description}} .</p>
+		                </figcaption>
+		            </article>
+		        </a>
+		    </div>
+	    @endforeach
+	</section>
+</main>
