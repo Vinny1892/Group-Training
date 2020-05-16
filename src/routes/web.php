@@ -43,7 +43,6 @@ Route::get('/painel' ,"DashboardController@show")->name('painel');
 
 //MODALIDADE
 //Route::get('/modalidade/{modality}' , "ModalityController@show")->name('modalidade');
-Route::get('/modalidades' ,"ModalityController@index")->name('modalidades');
 Route::get('/modalidade/atualizar/{modality}' , "ModalityController@update")->name('atualizarmodalidade');
 Route::get('/modalidade/excluir/{modality}' , "ModalityController@destroy")->name('excluirmodalidade');
 Route::post('/modalidade/salvar' , "ModalityController@store")->name('savemodality');
@@ -51,10 +50,14 @@ Route::get('/modalidade/teste', function(){
         return view("modality/teste");
     });
 Route::post('/modalidade/editar', "ModalityController@edit")->name('editemodalidade');
-Route::get('/modalidade/criar', "ModalityController@create")->name('createmodalidade');
+Route::get('/modalidade/criar', "ModalityController@create")->name('create.modalidade');
+//
+Route::get('/painel/modalidade' ,"ModalityController@index")->name('modalidade');
+//
+
 
 //SALAS
-Route::get('/chat' , 'RoomController@show')->name('chat');
+Route::get('/chat/{slug}' , 'RoomController@show')->name('chat');
 Route::get('/salas' , "RoomController@allRoom")->name('salas');
 Route::get('/mysalas' , "RoomController@myRoom")->name('mysalas');
 Route::get('/tags' , "RoomController@index")->name('tags');
@@ -68,7 +71,7 @@ Route::get('/teste' ,function(){
     response('Funcionou teste');
 })->middleware('role.admin');
 
-//DsahBoard Routes
+//DashBoard Routes
     Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('dashboard.edit');
     Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
 
@@ -85,6 +88,8 @@ Route::get('/' ,"HomePageController@show")->name('home');
 
 
 //CATEGORIA
+Route::get('/dashboard/categoria/criar' , "CategoryController@create")->name('category');
+Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
 
 
 

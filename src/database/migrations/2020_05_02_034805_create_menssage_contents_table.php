@@ -15,7 +15,7 @@ class CreateMenssageContentsTable extends Migration
     {
         Schema::create('menssage_contents', function (Blueprint $collection) {
             $collection->bigIncrements('id');
-            $collection->$integer('id_rooms');/* verificar como armazena int*/
+            $collection->unsignedInteger('id_rooms');/* verificar como armazena int*/
             $collection->text('description');
             $collection->timestamps();
         });

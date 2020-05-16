@@ -47,7 +47,7 @@
           <button style="background-color: #7a297a" class=" waves-light waves-effect  btn" type="submit" >Cadastrar
               <i class="material-icons right">send</i>
           </button>
-          <div> <div id='parent'>seleciona a cor</div> </div>
+          <div class="center-align" style="margin-top: 20px;" id="parent"> <img style="width: 2vw" src="{{ asset('icons/art.svg')  }}"  alt="seletor de cor"> </div>
 
       </div>
   </form>

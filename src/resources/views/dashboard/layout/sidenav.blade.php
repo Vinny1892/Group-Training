@@ -7,7 +7,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo"><a href="#" class="simple-text logo-normal">
-          {{$user->name}}
+          {{Auth::user()->name}}
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -18,13 +18,13 @@
             </a>
           </li>
           <li class="nav-item  {{ Route::current()->getName() == 'dashboard.edit' ? "active" : '' }} ">
-            <a class="nav-link" href="{{route('dashboard.edit', ["slugName" => "vinicius-espindola"] )}}">
+            <a class="nav-link" href="{{route('dashboard.edit', ["slugName" => Auth::user()->slug] )}}">
               <i class="material-icons">person</i>
               <p>Minha Conta</p>
             </a>
           </li>
           <li class="nav-item {{ Route::current()->getName() == 'seila123' ? "active" : '' }}">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link" href="{{ route('modalidade') }}">
           <i class="material-icons">Modalidade</i>
           <p>Modalidade</p>
         </a>
@@ -41,8 +41,8 @@
   <p>Sala</p>
 </a>
 </li>
-      <li class="nav-item {{ Route::current()->getName() == 'dashboard' ? "active" : '' }}">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+      <li class="nav-item {{ Route::current()->getName() == 'category' ? "active" : '' }}">
+        <a class="nav-link" href="{{ route('category') }}">
       <i class="material-icons">category</i>
       <p>Categoria</p>
     </a>

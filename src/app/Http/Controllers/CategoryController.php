@@ -4,38 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Mockery\Exception;
 
-class CategoriaController extends Controller
+class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource and    Display a listing of the resource.
+    .
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public   function create()
     {
-        //
+        $categorys = Category::all();
+        return view('category.formCreate' , \compact('categorys'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+       $validator = Validator::make($request->only(['name','description']), [
+            "name" => ["required","string", "max:25"],
+            "description" => ["required" , "string" , "max:60"]
+        ]);
+       if ($validator->fails() )  return  Redirect::route('category')->withErrors($validator)->withInput() ;
+        try{
+        Category::create([
+            "name" => $request->name,
+            "description"=> $request->description,
+        ]);
+         return Redirect::route('category')->with("message","Categoria Criada Com Sucesso");
+        } catch (Exception $exception){
+            echo "Erro ao inserir categoria";
+        }
+
     }
 
     /**

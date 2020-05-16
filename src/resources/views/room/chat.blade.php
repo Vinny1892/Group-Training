@@ -10,6 +10,7 @@
 </head>
 <body>
     <user id=user name="" value="{{ Auth::user() }}" ></user>
+    <room id=room name="" value="{{ $room }}" ></room>
     <header class="cabecalho">
         <button class="btn-voltar">voltar</button>
         <span class="">
