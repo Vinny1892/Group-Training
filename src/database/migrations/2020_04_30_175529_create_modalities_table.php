@@ -16,7 +16,7 @@ class CreateModalitiesTable extends Migration
         Schema::create('modalities', function (Blueprint $collection) {
             $collection->bigIncrements('id');
             $collection->string('slug');
-            $collection->string('title');
+            $collection->string('name');
             $collection->text('description');
             $collection->string('id_rooms');
             $collection->string('id_tags');

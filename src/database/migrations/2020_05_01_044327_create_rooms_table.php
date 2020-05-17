@@ -10,7 +10,7 @@ class CreateRoomsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     * title: titulo, nome
+     * name: titulo, nome
      * description: descricao
      * public: sala plublica ou privada
      * key: senha da sala privada
@@ -42,7 +42,7 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $collection) {
             $collection->bigIncrements('id');
             $collection->string('slug');
-            $collection->string('title');
+            $collection->string('name');
             $collection->text('description');
             $collection->boolean('public'); /* verificar como armazena boolean*/
             $collection->string('key');/* talvez criptografar*/
@@ -51,7 +51,7 @@ class CreateRoomsTable extends Migration
             $collection->string('modality');
             $collection->string('locationType');
             $collection->date('date');
-            $collection->string('image');
+            $collection->string('pathImage');
             $collection->string('id_tags');
             $collection->string('id_categories');
             $collection->string('id_users');
