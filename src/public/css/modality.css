@@ -1,0 +1,125 @@
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #353c3f;
+    padding: 0 40px;
+}
+
+.navbar .brand-logo {
+    font-size: 1.5rem;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: #4e4e4e !important;
+}
+
+.main-content {
+    width: 100%;
+    padding: 40px;
+}
+
+.title-search-rooms {
+    margin-top: 5px;
+    font-size: 1.7em;
+}
+
+.title-categories {
+    font-size: 1.3em;
+}
+
+.search-categories {
+    margin: 10px 0 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.image-category {
+    width: 190px;
+    height: 220px;
+    background-position: center;
+    background-size: cover;
+}
+
+.search-categories .search-input {
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-categories .order {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order .title-order {
+    margin-right: 10px;
+}
+
+.search-input input {
+    border: 1px solid transparent !important;
+    border-radius: 3px !important;
+    background-color: #f0f0f0 !important;
+    background: #f0f0f0 !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
+}
+
+.search-input input:focus {
+    border: 1px solid #46494e !important;
+    box-shadow: none !important;
+}
+
+.grid-categories {
+    display: flex;
+}
+
+.grid-categories .category {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    display: flex;
+    max-width: 200px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.grid-categories .category:hover {
+    box-shadow: 3px 6px 7px -2px rgba(0, 0, 0, 0.35);
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.grid-categories .category img {
+    width: 100%;
+    align-self: start;
+}
+
+.category .description {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.category .description .category-name {
+    font-weight: bold;
+    margin-bottom: 3px;
+    justify-self: flex-start;
+}
+
+.notes {
+    background: rgb(255, 249, 168);
+    padding: 20px;
+    margin: 20px;
+    float: left;
+}

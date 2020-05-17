@@ -22,7 +22,6 @@ class ModalityController extends Controller
         $modalities = Modality::all();
         // return view('modality.dashboard',compact('modalities'))->with('i', (request()->input('page', 1) - 1) * 5
         // );
-
         return view('modality.dashboard',compact('modalities') );
     }
 

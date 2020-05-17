@@ -58,10 +58,13 @@ Route::get('/painel/modalidade' ,"ModalityController@index")->name('modalidade')
 
 //SALAS
 Route::get('/chat/{slug}' , 'RoomController@show')->name('chat');
-Route::get('/salas' , "RoomController@allRoom")->name('salas');
+Route::get('/salas/{slugModality}' , "RoomController@roomsOfModality")->name('salas');
 Route::get('/mysalas' , "RoomController@myRoom")->name('mysalas');
-Route::get('/tags' , "RoomController@index")->name('tags');
-Route::get('/sala/{tag}' , "RoomController@tags")->name('salatags');
+//Route::get('/tags' , "RoomController@index")->name('tags');
+Route::get('/painel/sala', "RoomController@index")->name('sala');
+Route::post('/painel/sala/salvar' , "RoomController@store")->name('saveroom');
+//Route::get('/sala/{tag}' , "RoomController@tags")->name('salatags');
+Route::get('/painel/sala/deletar/{slug}' , "RoomController@destroy")->name('deleteroom');
 
 
 //TAG
