@@ -42,6 +42,19 @@
 					<input type="password" name="key" id="key" class="form-control"  placeholder="chave">
 				</div>
 			</div>
+			<!-- nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)
+			<div class="form-row">
+				<div class="form-group col-md-6">
+                	<label for="place">Tipo do Local</label>
+                	foreach($allplaceType as $placeType)
+						<div class="form-group col-md-6">
+					  		<label for="placeType">{$placeType->name}</label>
+							<input type="checkbox" id="{$placeType->name}" name="{$placeType->name}" value="{$placeType->_id}">
+						</div>
+					endforeach
+				</div>
+			</div>
+			-->
 			<div class="form-row">
 				<div class="form-group col-md-6">
 				  <label for="place">Local</label>
@@ -56,29 +69,32 @@
 				</div>
 			</div>
 
+
+			<div>
+				insirir imagem
+			</div>
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
-			  		<label for="#">Modalidade</label>
-					<select id="cars">
+			  		<label for="modality">Modalidade</label>
+					<select id="modality" name="modality">
 						@foreach($allModalities as $modality)
-							<option value="{{$modality->id}}">{{$modality->name}}</option>
+							<option value="{{$modality}}">{{$modality->name}}</option>
 						@endforeach
 					</select>
 				</div>
 			</div>
-			<div>
-				imagem
-
-			</div>
+			
 			<div class="form-row">
-		  		<label for="tags">Categorias</label>
+		  		<label for="category">Categorias</label>
 				@foreach($allCategories as $category)
 					<div class="form-group col-md-6">
-				  		<label for="tags">{{$category->name}}</label>
-						<input type="checkbox" id="{{$category->id}}" name="{{$category->name}}">
+				  		<label for="category">{{$category->name}}</label>
+						<input type="checkbox" id="{{$category->slug}}" name="{{$category->slug}}" value="{{$category}}">
 					</div>
 				@endforeach
 			</div>
+			<!--
 [
 						"repeat"=> [
 	                        "weekly"=> "$value->weekly",
@@ -87,13 +103,14 @@
 	                        "end_date"=> "$request->date->end_date",
 	                        "number_of_repetitions"=> "$request->date->number_of_repetitions"
                     ],
+
                     "custom_schedules"=> [
                         [
                             "data"=> "$request->custom_schedules->data",
                             "schedule"=> "$request->custom_schedules->schedule"
                         ]
                     ]
-
+-->
 
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
 			<div class="clearfix"></div>

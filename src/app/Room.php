@@ -12,14 +12,21 @@ class Room extends Eloquent
 
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'room' ;
-    protected $fillable = ['description', 'public', 'pathImage', 'name', 'modality',  'key', 'place', 'standard_time', 'date', 'id_users', 'tags', 'id_categories', 'repeat', 'locationType', 'id_user_adm'];
+    protected $fillable = ['description', 'public', 'pathImage', 'name', 'key', 'place', 'standard_time', 'date', 'users_id', 'tags', 'categories', 'modality', 'repeat', 'locationType', 'id_user_adm'];
 
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
     	$this->attributes['name'] = ucfirst(strtolower($value));//ucfirst deixa a primeira letra maiuscula, strtolower deixa tudo minusculo
     	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
-        //$this->attributes['pathImage'] = $name . $this->id;
+        $this->attributes['pathImage'] = strtolower(Str::slug($value));
+    }
+
+    /**
+    * retorna todas as salas de um usuario
+    */
+    public function getAllRoomsOfUser($idUser){
+        return Room::where('id_user_adm', '=', $idUser)->get();
     }
 
 
@@ -51,25 +58,13 @@ class Room extends Eloquent
      
      * @var array
      */
-    protected $casts = [
-        'id_tags' => 'array',
-        'id_users' => 'array',
-        'id_categories' => 'array',
-        'repeat' => 'array',
-        'start_date' => 'datetime:d-m-Y',
-        'end_date' => 'datetime:d-m-Y',
-    ];
+    // protected $casts = [
+    //     'repeat' => 'array',
+    //     'start_date' => 'datetime:d-m-Y',
+    //     'end_date' => 'datetime:d-m-Y',
+    // ];
 
-    /**
-    * retorna todas as salas de um usuario
-    */
-    public function getAllRoomsOfUser(){
-        return Room::select([
-            'rooms.*',
-            'last_posted_at' => Post::selectRaw('MAX(created_at)')
-                    ->whereColumn('', '.')
-        ])->get();
-    }
+    
 
     
 

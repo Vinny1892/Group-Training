@@ -43,22 +43,23 @@ Route::get('/painel' ,"DashboardController@show")->name('painel');
 
 //MODALIDADE
 Route::get('/modalidade' , "ModalityController@show")->name('modalidade');
-Route::get('/modalidade/atualizar/{modality}' , "ModalityController@update")->name('atualizarmodalidade');
-Route::get('/modalidade/excluir/{modality}' , "ModalityController@destroy")->name('excluirmodalidade');
+Route::get('/modalidade/atualizar/{slug}' , "ModalityController@update")->name('atualizarmodalidade');
 Route::post('/modalidade/salvar' , "ModalityController@store")->name('savemodality');
 Route::get('/modalidade/teste', function(){
         return view("modality/teste");
     });
 Route::post('/modalidade/editar', "ModalityController@edit")->name('editemodalidade');
 Route::get('/modalidade/criar', "ModalityController@create")->name('create.modalidade');
+
 //
+Route::get('/painel/modalidade/excluir/{slug}' ,"ModalityController@destroy")->name('deleteModality');
 Route::get('/painel/modalidade' ,"ModalityController@index")->name('modalidade');
 //
 
 
 //SALAS
 Route::get('/chat/{slug}' , 'RoomController@show')->name('chat');
-Route::get('/salas/{slugModality}' , "RoomController@roomsOfModality")->name('salas');
+Route::get('/modalidade/salas/{slugModality}' , "RoomController@roomsOfModality")->name('salas');
 Route::get('/mysalas' , "RoomController@myRoom")->name('mysalas');
 //Route::get('/tags' , "RoomController@index")->name('tags');
 Route::get('/painel/sala', "RoomController@index")->name('sala');

@@ -19,14 +19,23 @@ class RoomController extends Controller{
 
     /* como passar o ID da sala para o nodejs carregar */
     public function show($slugRoom){
-        $room = Room::where("slug" , $slugRoom)->first;
+        $room = Room::where("slug" , $slugRoom)->first();
         return view('room.chat', compact("room"));
     }
 
      /*todas as salas de uma determinada modalidade*/
     public function roomsOfModality($slugModality){
-        $modality = Modality::where('slug','=' ,$slugModality);
-        $rooms = Room::where('id_modality', '=', $modality->id) ;
+        $modality = Modality::where('slug','=' ,$slugModality)->first();
+        //dd($modality->_id);
+
+        //$rooms = Room::where('id_modality', '=', $modality->_id);
+        //ou
+        dd($modality);
+        $rooms = [];
+        foreach ($modality->rooms_id as $room) {
+            array_push($rooms, $room);
+        }
+
         return view('room.rooms', compact('modality', 'rooms'));
     }
     /**
@@ -64,41 +73,46 @@ class RoomController extends Controller{
                 "description" => ["required" , "string" , "max:60"]
             ]
         );
-        if ($validator->fails() )
+        if ($validator->fails() ){
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
-        try{
-            Room::create(
-                [
-                    "name" => "$request->name",
-                    "description"=> "$request->description",
-                    "public"=> "$request->public",
-                    "key" => "$request->key",
-                    "place"=> "$request->place",
-                    "standard_time"=> "$request->standard_time",
-                    "id_categories"=> "$request->id_categories",
-                    "modality"=> "$request->modality",
-                    "id_tags"=> "$request->id_tags",
-                    "id_users"=> "$request->id_users",
-                    "date"=> [
-                        "repeat"=> [
-                            "weekly"=> "$request->date->weekly",
-                            "Friday"=> "$request->date->Friday",
-                            "start_date" => "$request->date->start_date",
-                            "end_date"=> "$request->date->end_date",
-                            "number_of_repetitions"=> "$request->date->number_of_repetitions"
-                        ],
-                        "custom_schedules"=> [
-                            [
-                                "data"=> "$request->custom_schedules->data",
-                                "schedule"=> "$request->custom_schedules->schedule"
+        }elseif( true ) {
+            try{
+                Room::create(
+                    [
+                        "name" => "$request->name",
+                        "description"=> "$request->description",
+                        "public"=> "$request->public",
+                        "key" => "$request->key",
+                        "place"=> "$request->place",
+                        "placeType"=> "$request->placeType",
+                        "standard_time"=> "$request->standard_time",
+                        "categories"=> "$request->categories",
+                        "modality"=> "$request->modality",
+                        "tags"=> "",
+                        "users"=> "$request->users_id",
+                        "date"=> [
+                            "repeat"=> [
+                                "weekly"=> "$request->weekly",
+                                "Friday"=> "$request->Friday",
+                                "start_date" => "$request->start_date",
+                                "end_date"=> "$request->end_date",
+                                "number_of_repetitions"=> "$request->number_of_repetitions"
+                            ],
+                            "custom_schedules"=> [
+                                [
+                                    "data"=> "$request->data",
+                                    "schedule"=> "$request->schedule"
+                                ]
                             ]
                         ]
                     ]
-                ]
-            );
-            return Redirect::route('sala')->with("message","Sala Criada Com Sucesso");
-        } catch (Exception $exception){
-            echo "Erro ao inserir sala";
+                );
+                return Redirect::route('sala')->with("message","Sala Criada Com Sucesso");
+            } catch (Exception $exception){
+                echo "Erro ao inserir sala";
+            }
+        }else{
+            return  Redirect::route('sala')->withErrors("Esse nome já esta sendo usado")->withInput() ;
         }
     }
 
@@ -125,7 +139,8 @@ class RoomController extends Controller{
         $allRooms = Room::all();
         $allModalities = Modality::all();
         $allCategories = Category::all();
-        return view('room.dashboard',compact('allRooms', 'allModalities', 'allCategories') );
+        /*$allplaceType = ::all(); nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)*/
+        return view('room.dashboard',compact('allRooms', 'allModalities', 'allCategories'/*, '$allplaceType'*/) );
     }
 
     public function destroy($slug)
@@ -134,4 +149,11 @@ class RoomController extends Controller{
         $room->delete();
         return redirect()->route('sala')->with('success','Sala deletada com sucesso');
     }
+
+
+    /* verifica se ja existe sala com este nome*/
+    private function existsRoom($name){
+        return Room::where('name', '=', '$name')->first() != null;
+    }
+
 }
