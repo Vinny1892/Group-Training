@@ -14,9 +14,9 @@ class Modality extends Eloquent
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
-    	$this->attributes['name'] = $value;
-    	$this->attributes['slug'] = Str::slug($value);//cria slug automaticamente
-    	$this->attributes['pathImage'] = Str::slug($value);//cria slug automaticamente
+    	$this->attributes['name'] = ucfirst(strtolower($value));
+    	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
+    	$this->attributes['pathImage'] = strtolower(Str::slug($value));//cria slug automaticamente
     }	
 
 

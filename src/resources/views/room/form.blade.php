@@ -85,32 +85,14 @@
 				</div>
 			</div>
 			
-			<div class="form-row">
+			<div class="form-row" id="categorias">
 		  		<label for="category">Categorias</label>
-				@foreach($allCategories as $category)
-					<div class="form-group col-md-6">
-				  		<label for="category">{{$category->name}}</label>
-						<input type="checkbox" id="{{$category->slug}}" name="{{$category->slug}}" value="{{$category}}">
-					</div>
-				@endforeach
+		  		<select id="categoriesSlug" name="categoriesSlug[]" multiple>
+					@foreach($allCategories as $category)
+						<option value="{{$category->slug}}"> {{$category->name}} </option>
+					@endforeach
+				</select>
 			</div>
-			<!--
-[
-						"repeat"=> [
-	                        "weekly"=> "$value->weekly",
-	                        "Friday"=> "$request->date->Friday",
-	                        "start_date" => "$request->date->start_date",
-	                        "end_date"=> "$request->date->end_date",
-	                        "number_of_repetitions"=> "$request->date->number_of_repetitions"
-                    ],
-
-                    "custom_schedules"=> [
-                        [
-                            "data"=> "$request->custom_schedules->data",
-                            "schedule"=> "$request->custom_schedules->schedule"
-                        ]
-                    ]
--->
 
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
 			<div class="clearfix"></div>

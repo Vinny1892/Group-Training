@@ -3,7 +3,7 @@
 
 
   <main class="container">
-      <?php dd($rooms); ?>
+      <?php //dd($rooms); ?>
     <h2>Salas da Modalidade {{ $modality->name }}</h2>
     <div class="row">
       @foreach($rooms as $room)
@@ -18,8 +18,8 @@
             <?php endif ?>
 
             <div class="card-body">
-              <h4 class="card-title">Atividade Física</h4>
-              <p class="card-text">A equipe de suporte precisa saber que a compilação final do programa deletou todas as entradas na interpolação dinâmica de strings.</p>
+              <h4 class="card-title">{{$room->name}}</h4>
+              <p class="card-text">{{$room->description}}</p>
               <div class="card-action">
                 <a href="#" class="btn btn-primary">&#9;Entrar na sala</a>
               </div>
