@@ -50,12 +50,8 @@ Route::get('/modalidade/teste', function(){
     });
 Route::post('/modalidade/editar', "ModalityController@edit")->name('editemodalidade');
 Route::get('/modalidade/criar', "ModalityController@create")->name('create.modalidade');
-
-//
 Route::get('/painel/modalidade/excluir/{slug}' ,"ModalityController@destroy")->name('deleteModality');
 Route::get('/painel/modalidade' ,"ModalityController@index")->name('modalidade');
-//
-
 
 //SALAS
 Route::get('/chat/{slug}' , 'RoomController@show')->name('chat');
@@ -66,7 +62,6 @@ Route::get('/painel/sala', "RoomController@index")->name('sala');
 Route::post('/painel/sala/salvar' , "RoomController@store")->name('saveroom');
 //Route::get('/sala/{tag}' , "RoomController@tags")->name('salatags');
 Route::get('/painel/sala/deletar/{slug}' , "RoomController@destroy")->name('deleteroom');
-
 
 //TAG
 Route::get('/tags' , "TagController@index")->name('tags');
@@ -79,23 +74,12 @@ Route::get('/teste' ,function(){
     Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('dashboard.edit');
     Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
 
-
-
-
-//Route::group(['namespace' => 'Room'],function(){
-    Route::get('/chat' , 'RoomController@show')->name('chat');
-    Route::get('/listameuschats' , "RoomController@minhaLista")->name('listameuschats');
-//});
-
 //HOME PAGE
 Route::get('/' ,"HomePageController@show")->name('home');
-
 
 //CATEGORIA
 Route::get('/dashboard/categoria/criar' , "CategoryController@create")->name('category');
 Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
-
-
 
 ////Exemplo de rota com parâmetro opcional.
 //Route::get('welcome/{name?}', function ($name = 'visitante') {

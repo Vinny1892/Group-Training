@@ -27,7 +27,7 @@
                                             <td>{{$modality->name}}</td>
                                             <td>{{ $modality->description }}</td>
                                             <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-                                            <td><a class="delete" href="{{ route('deleteModality', $modality) }}"><i class="material-icons">close</i></a></td>
+                                            <td><a class="delete" href="{{ route('deleteModality', $modality->slug) }}"><i class="material-icons">close</i></a></td>
                                         </tr>
                                     @endforeach
 

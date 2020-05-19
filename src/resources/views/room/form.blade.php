@@ -76,10 +76,10 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
-			  		<label for="modality">Modalidade</label>
-					<select id="modality" name="modality">
+			  		<label for="modalitySlug">Modalidade</label>
+					<select id="modalitySlug" name="modalitySlug">
 						@foreach($allModalities as $modality)
-							<option value="{{$modality}}">{{$modality->name}}</option>
+							<option value="{{$modality->slug}}">{{$modality->name}}</option>
 						@endforeach
 					</select>
 				</div>

@@ -75,9 +75,11 @@ class RoomController extends Controller{
         );
         if ($validator->fails() ){
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
-        }elseif( true ) {
+        }elseif( Self::existsRoom($request->name) ) {/*se name nao existe ainda*/
             try{
-                Room::create(
+                $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
+                //dd($modality->slug);
+                $room = Room::create(
                     [
                         "name" => "$request->name",
                         "description"=> "$request->description",
@@ -87,7 +89,7 @@ class RoomController extends Controller{
                         "placeType"=> "$request->placeType",
                         "standard_time"=> "$request->standard_time",
                         "categories"=> "$request->categories",
-                        "modality"=> "$request->modality",
+                        "modality"=> "$modality->slug",/*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
                         "tags"=> "",
                         "users"=> "$request->users_id",
                         "date"=> [
@@ -107,6 +109,7 @@ class RoomController extends Controller{
                         ]
                     ]
                 );
+                Modality::updateListRooms($modality, $room->_id);
                 return Redirect::route('sala')->with("message","Sala Criada Com Sucesso");
             } catch (Exception $exception){
                 echo "Erro ao inserir sala";
@@ -152,8 +155,8 @@ class RoomController extends Controller{
 
 
     /* verifica se ja existe sala com este nome*/
-    private function existsRoom($name){
-        return Room::where('name', '=', '$name')->first() != null;
+    private static function existsRoom($name){
+        return Room::where('name', '=', $name)->first() == null;
     }
 
 }
