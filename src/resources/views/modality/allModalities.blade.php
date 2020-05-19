@@ -27,7 +27,7 @@
             <div class="grid-categories">
                 @foreach ($modalities as $modality)
                     <div class="category">
-                        <a href=" {{ route('salas', $modality) }}">
+                        <a href=" {{ route('salas', $modality->slug) }}">
                             <div class="image-category" style="background-image: url('{{$modality->pathImage}}')">
                                 <img src="" alt="">
                             </div>

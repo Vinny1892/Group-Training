@@ -2,7 +2,7 @@
 	<div>
         <h5>Modalidades</h5>
          
-        <?php if (sizeof($modalities) > 1): ?>
+        <?php if (sizeof($modalities) > 0): ?>
             <!-- Listagem Modalidades -->
             <div class="col-lg-6 col-md-12">
                 <div class="card">
@@ -27,7 +27,7 @@
                                             <td>{{$modality->name}}</td>
                                             <td>{{ $modality->description }}</td>
                                             <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-                                            <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
+                                            <td><a class="delete" href="{{ route('deleteModality', $modality->slug) }}"><i class="material-icons">close</i></a></td>
                                         </tr>
                                     @endforeach
 

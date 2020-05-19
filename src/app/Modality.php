@@ -10,11 +10,23 @@ class Modality extends Eloquent
 {
 	// protected $ connection = 'mongodb' ;
     // protected $ collection = 'modality' ;
-    protected $fillable = ['name', 'description', 'id_rooms', 'id_tags', 'id_categories', 'pathImage'];
+    protected $fillable = ['name', 'description', 'rooms_id'];
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
     	$this->attributes['name'] = $value;
     	$this->attributes['slug'] = Str::slug($value);//cria slug automaticamente
+    	$this->attributes['pathImage'] = Str::slug($value);//cria slug automaticamente
     }	
+
+
+    public static function updateListRooms(Modality $modality, $room_id){
+        //$modality->rooms_id é um array   array(0) { }
+        // var_dump($modality->rooms_id);
+        // exit;
+        //dd($modality->rooms_id);
+        $rooms_id = $modality->rooms_id;
+        array_push($rooms_id, $room_id);
+        $modality->update( ['rooms_id' => $rooms_id] );
+    }
 }

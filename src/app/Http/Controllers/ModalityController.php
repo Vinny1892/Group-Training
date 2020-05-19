@@ -68,9 +68,9 @@ class ModalityController extends Controller
             [
                 "name" => $request->name,
                 "description"=> $request->description,
-                "id_rooms"=> $request->id_rooms,
-                "id_tags"=> $request->id_tags,
-                "id_categories"=> $request->id_categories,
+                "rooms_id"=> [0,0],
+                "tags"=> $request->tags,
+                "categories"=> $request->categories,
                 "image"=> $request->pathImage
             ]
         );
@@ -135,9 +135,16 @@ class ModalityController extends Controller
      * @param  \App\modality  $modality
      * @return \Illuminate\Http\Response
      */
-    public function destroy(modality $modality)
+    public function destroy($slug)
     {
+        $modality = Modality::where('slug', '=', $slug);
         $modality->delete();
         return redirect()->route('modalidade')->with('success','Modalidade deletada com sucesso');
+
     }
+
+    /*
+    * quando uma sala é criada, tem q atualizar a modalidade para que ela saiba o '_id' da nova sala que é desta modalidade
+    */
+    
 }

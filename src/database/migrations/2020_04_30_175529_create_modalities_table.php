@@ -14,14 +14,14 @@ class CreateModalitiesTable extends Migration
     public function up()
     {
         Schema::create('modalities', function (Blueprint $collection) {
-            $collection->bigIncrements('id');
-            $collection->string('slug');
-            $collection->string('name');
+            /*$collection->bigIncrements('modality_id');*/
+            $collection->string('name')->unique();
+            $collection->string('slug')->unique();
             $collection->text('description');
-            $collection->string('id_rooms');
-            $collection->string('id_tags');
-            $collection->string('id_categories');
-            $collection->string('image');
+            $collection->json('rooms_id');
+            /*$collection->json('tags_id');
+            $collection->json('categories_id');*/
+            $collection->string('pathImage');
             $collection->timestamps();
         });
     }

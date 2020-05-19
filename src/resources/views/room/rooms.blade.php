@@ -3,6 +3,7 @@
 
 
   <main class="container">
+      <?php dd($rooms); ?>
     <h2>Salas da Modalidade {{ $modality->name }}</h2>
     <div class="row">
       @foreach($rooms as $room)

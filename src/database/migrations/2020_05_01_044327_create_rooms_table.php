@@ -40,21 +40,22 @@ class CreateRoomsTable extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $collection) {
-            $collection->bigIncrements('id');
-            $collection->string('slug');
-            $collection->string('name');
+            /*$collection->bigIncrements('id');*/
+            $collection->string('name')->unique();
+            $collection->string('slug')->unique();
             $collection->text('description');
             $collection->boolean('public'); /* verificar como armazena boolean*/
             $collection->string('key');/* talvez criptografar*/
             $collection->string('place');
-            $collection->string('standard_time');
-            $collection->string('modality');
-            $collection->string('locationType');
+            $collection->string('standard_time');/*string aon deve ser o melhor jeito*/
+            $collection->string('placeType');
             $collection->date('date');
             $collection->string('pathImage');
-            $collection->string('id_tags');
-            $collection->string('id_categories');
-            $collection->string('id_users');
+            $collection->json('tags');
+            $collection->json('modality');
+            $collection->json('categories');
+            $collection->json('users_id');/*json nao deve ser o melhor jeito*/
+            $collection->string('id_user_adm');
             $collection->timestamps();
         });
     }
