@@ -68,7 +68,7 @@ class ModalityController extends Controller
             [
                 "name" => $request->name,
                 "description"=> $request->description,
-                "rooms_id"=> [0,0],
+                "rooms_id"=> [-1],
                 "tags"=> $request->tags,
                 "categories"=> $request->categories,
                 "image"=> $request->pathImage

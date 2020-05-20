@@ -23,27 +23,7 @@ class RoomController extends Controller{
         return view('room.chat', compact("room"));
     }
 
-     /*todas as salas de uma determinada modalidade*/
-    public function roomsOfModality($slugModality){
-        $modality = Modality::where('slug','=' ,$slugModality)->first();
-        //dd($modality->_id);
-
-        //$rooms = Room::where('id_modality', '=', $modality->_id);
-        //ou
-        dd($modality);
-        $rooms = [];
-        foreach ($modality->rooms_id as $room) {
-            array_push($rooms, $room);
-        }
-
-        return view('room.rooms', compact('modality', 'rooms'));
-    }
-    /**
-     * lista todas as minhas salas
-    */
-    public function myRoom(){
-        return view('room.myRooms');
-    }
+     
 
 
     // public function minhaLista(){
@@ -75,10 +55,19 @@ class RoomController extends Controller{
         );
         if ($validator->fails() ){
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
-        }elseif( Self::existsRoom($request->name) ) {/*se name nao existe ainda*/
+        }elseif( Self::existsRoom($request->name) ) {
             try{
                 $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
-                //dd($modality->slug);
+                $simplifiedCategories = [];
+                foreach ($request->categoriesSlug as $categorySlug) {
+                    $category = Category::where('slug', '=', $categorySlug)->first();
+                    $simplifiedCategory = [
+                        "name"=> $category->name,
+                        "_id"=> $category->_id,
+                        "slug"=> $category->slug
+                    ];
+                    array_push($simplifiedCategories, $simplifiedCategory);
+                }
                 $room = Room::create(
                     [
                         "name" => "$request->name",
@@ -88,8 +77,16 @@ class RoomController extends Controller{
                         "place"=> "$request->place",
                         "placeType"=> "$request->placeType",
                         "standard_time"=> "$request->standard_time",
-                        "categories"=> "$request->categories",
-                        "modality"=> "$modality->slug",/*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
+                        "categories"=>  $simplifiedCategories,
+                        /*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
+                        "modality"=> [
+                                        '_id'=> $modality->_id,
+                                        'slug'=> $modality->slug,
+                                        'name'=> $modality->name,
+                                        /*'description'=> $modality->description,*/
+                                        /*'categories'=> $modality->categories,*/
+                                        /*'tags'=> $modality->tags,*/
+                                    ],
                         "tags"=> "",
                         "users"=> "$request->users_id",
                         "date"=> [
@@ -142,7 +139,6 @@ class RoomController extends Controller{
         $allRooms = Room::all();
         $allModalities = Modality::all();
         $allCategories = Category::all();
-        /*$allplaceType = ::all(); nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)*/
         return view('room.dashboard',compact('allRooms', 'allModalities', 'allCategories'/*, '$allplaceType'*/) );
     }
 
@@ -157,6 +153,26 @@ class RoomController extends Controller{
     /* verifica se ja existe sala com este nome*/
     private static function existsRoom($name){
         return Room::where('name', '=', $name)->first() == null;
+    }
+
+    /*todas as salas de uma determinada modalidade*/
+    public function roomsOfModality($slugModality){
+        $modality = Modality::where('slug','=' ,$slugModality)->first();
+        $rooms = [];
+        foreach ($modality->rooms_id as $room_id) {
+            $room = Room::find($room_id);
+            if ($room != null) {
+                array_push($rooms, $room);
+            }
+        }
+        return view('room.rooms', compact('modality', 'rooms'));
+    }
+    
+    /**
+     * lista todas as minhas salas
+    */
+    public function myRoom(){
+        return view('room.myRooms');
     }
 
 }
