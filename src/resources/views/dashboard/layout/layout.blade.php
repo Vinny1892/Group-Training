@@ -13,6 +13,8 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
       <!-- CSS Files -->
       <link href="{{asset('assetsDashboard/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
+      <link href="{{asset("autocompletediferentao/dist/tokenize2.min.css")}}" rel="stylesheet">
+
     </head>
     
     <body class="">

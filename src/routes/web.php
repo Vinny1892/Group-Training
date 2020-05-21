@@ -79,6 +79,9 @@ Route::get('/' ,"HomePageController@show")->name('home');
 
 //CATEGORIA
 Route::get('/dashboard/categoria/criar' , "CategoryController@create")->name('category');
+Route::get('/dashboard/categoria/{slugCategory}/editar' , "CategoryController@edit")->name('category.edit');
+Route::put('dashboard/categoria/{category}/editar', "CategoryController@update")->name('category.update');
+Route::get('dashboard/categoria/${slugCategory}/delete',"CategoryController@destroy")->name('category.delete');
 Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
 
 ////Exemplo de rota com parâmetro opcional.
