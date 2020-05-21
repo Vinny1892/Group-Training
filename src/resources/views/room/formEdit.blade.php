@@ -9,11 +9,10 @@
 <div class="card">
 	<div class="card-header card-header-success">
 		<h4 class="card-title">Sala</h4>
-		<p class="card-category">criar uma nova Sala</p>
 		<p class="card-category">Editar uma nova Sala</p>
 	</div>
 	<div class="card-body">   
-		<form action="{{ route('saveroom') }}" method="POST">
+		<form action="{{ route('updateroom') }}" method="POST">
 			@csrf
 			<div class="form-row">
 				<div class="form-group col-md-6">

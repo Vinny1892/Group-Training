@@ -23,7 +23,7 @@
                                     <td>{{$room->_id}}</td>
                                     <td>{{$room->name}}</td>
                                     <td>{{ $room->description }}</td>
-                                    <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
+                                    <td ><a class="edit" href="{{ route('editroom')}}"><i class="material-icons">edit</i></a></td>
                                     <td><a class="delete" 
                                         href="{{ route('deleteroom', [ 'slug' => $room->slug ] ) }}"><i class="material-icons">close</i></a></td>
                                 </tr>

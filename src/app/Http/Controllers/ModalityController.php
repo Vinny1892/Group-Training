@@ -26,18 +26,6 @@ class ModalityController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $allCategories = Category::all();
-        //$allTags = Tag::all();
-        return view('modality.formCreate', compact('allCategories'/*, 'allTags'*/));
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -45,88 +33,47 @@ class ModalityController extends Controller
      */
     public function store(Request $request)
     {
-        // Modality::create(
-        //     [
-        //         "name" => $request->name,
-        //         "description"=> $request->description,
-        //         "id_rooms"=> $request->id_rooms,
-        //         "id_tags"=> $request->id_tags,
-        //         "id_categories"=> $request->id_categories,
-        //         "image"=> $request->pathImage
-        //     ]
-        // );
-        // return redirect()->route('painel')->with('success','Modalidade criada com sucesso.');
+        //dd($request->profile_image);
+        var_dump($request->profile_image);
+        exit;
+        $image = $request->file('profile_image');
+
+        if ($image) {
+            foreach ($image as $key => $value) {
+                # code...
+            }
+        }
 
 
         $validator = Validator::make($request->only(['name','description']), [
             "name" => ["required","string", "max:25"],
-            "description" => ["required" , "string" , "max:60"]
+            "description" => ["required" , "string" , "max:60"],
+            "pathImage" => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
        if ($validator->fails() )  return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
         try{
-        Modality::create(
-            [
-                "name" => $request->name,
-                "description"=> $request->description,
-                "rooms_id"=> [-1],
-                "tags"=> $request->tags,
-                "categories"=> $request->categories,
-                "image"=> $request->pathImage
-            ]
-        );
-         return Redirect::route('modalidade')->with("message","Modalidade Criada Com Sucesso");
+
+            if ($request->_id == null) {
+                Modality::create(
+                    [
+                        "name" => $request->name,
+                        "description"=> $request->description,
+                        "rooms_id"=> [-1],
+                    ]
+                );
+            }else{/*edit*/
+                $modality = Modality::find($request->_id);
+                $modality->update(
+                    [
+                        "name" => $request->name,
+                        "description"=> $request->description,
+                    ]
+                );
+            }
+            return Redirect::route('modalidade')->with("message","Modalidade Criada/Editada Com Sucesso");
         } catch (Exception $exception){
-            echo "Erro ao inserir modalidade";
+            echo "Erro ao inserir/Editar modalidade";
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\modality  $modality
-     * @return \Illuminate\Http\Response
-     */
-    public function show(modality $modality)
-    {
-        $modalities = Modality::all();
-        return view('modality.modalities', compact('modalities'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\modality  $modality
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(modality $modality)
-    {
-        $allCategories = Category::all();
-        //$allTags = Tag::all();
-        $allRooms = Room::all();
-        $modality = Modality::firstWhere('id', $id_modality);//id ou slug?
-        return view('modality.formEdit',compact('modality', 'allCategories'/*, 'allTags'*/, 'allRooms'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\modality  $modality
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, modality $modality)
-    {
-        // $modality->update(
-        //         "name" => "$request->name",
-        //         "description"=> "$request->description",
-        //         "id_rooms"=> "$request->id_rooms",
-        //         "id_tags"=> "$request->id_tags",
-        //         "id_categories"=> "$request->id_categories",
-        //         "image"=> "img/room/777.png",/*criar um metodo faz faz cria o caminho da imagem*/
-        //         "slug"=>"request->slug"
-        // );
-
-        // return redirect()->route('modality.modalities')->with('success','Modalidade alterada com sucesso');
     }
 
     /**
@@ -140,11 +87,5 @@ class ModalityController extends Controller
         $modality = Modality::where('slug', '=', $slug);
         $modality->delete();
         return redirect()->route('modalidade')->with('success','Modalidade deletada com sucesso');
-
     }
-
-    /*
-    * quando uma sala é criada, tem q atualizar a modalidade para que ela saiba o '_id' da nova sala que é desta modalidade
-    */
-    
 }
