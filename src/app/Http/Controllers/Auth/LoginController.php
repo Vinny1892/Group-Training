@@ -66,7 +66,7 @@ class LoginController extends Controller
         }
         //realizar a tentativa de login
         if ( Auth::attempt($credentials)) {
-            return Redirect::route('dashboard');
+            return Redirect::route('home');
         }
        return   Redirect::route('login')->withErrors(['message' => "Login ou Senha incorretos"]);
     }

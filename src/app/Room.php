@@ -5,43 +5,51 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 use Illuminate\Support\Str;
-
+use app\Helpers\SlugUnique;
 
 class Room extends Eloquent
 {
 
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'room' ;
-    protected $fillable = ['image', 'title', 'modality', 'description','public', 'key', 'place', 'standard_time', 'date', 'id_users', 'tags', 'id_categories', 'repeat', 'locationType', 'id_user_adm'];
+    protected $fillable = ['description', 'public', 'pathImage', 'name', 'key', 'place', 'standard_time', 'date', 'users_id', 'tags', 'categories', 'modality', 'repeat', 'locationType', 'id_user_adm'];
 
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
-    public function setTitleAttribute($value){
-    	$this->attributes['title'] = ucfirst(strtolower($value));//ucfirst deixa a primeira letra maiuscula, strtolower deixa tudo minusculo
+    public function setNameAttribute($value){
+    	$this->attributes['name'] = ucfirst(strtolower($value));//ucfirst deixa a primeira letra maiuscula, strtolower deixa tudo minusculo
     	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
+        $this->attributes['pathImage'] = strtolower(Str::slug($value));
+    }
+
+    /**
+    * retorna todas as salas de um usuario
+    */
+    public function getAllRoomsOfUser($idUser){
+        return Room::where('id_user_adm', '=', $idUser)->get();
     }
 
 
 
 
-    public function setDateAttribute($value){
-    	$this->attributes['data'] = [
-						"repeat"=> [
-	                        "weekly"=> "$value->weekly",
-	                        "Friday"=> "$request->date->Friday",
-	                        "start_date" => "$request->date->start_date",
-	                        "end_date"=> "$request->date->end_date",
-	                        "number_of_repetitions"=> "$request->date->number_of_repetitions"
-                    ],
-                    "custom_schedules"=> [
-                        [
-                            "data"=> "$request->custom_schedules->data",
-                            "schedule"=> "$request->custom_schedules->schedule"
-                        ]
-                    ]
-    	];
+    // public function setDateAttribute($value){
+    // 	$this->attributes['data'] = [
+				// 		"repeat"=> [
+	   //                      "weekly"=> "$value->weekly",
+	   //                      "Friday"=> "$request->date->Friday",
+	   //                      "start_date" => "$request->date->start_date",
+	   //                      "end_date"=> "$request->date->end_date",
+	   //                      "number_of_repetitions"=> "$request->date->number_of_repetitions"
+    //                 ],
+    //                 "custom_schedules"=> [
+    //                     [
+    //                         "data"=> "$request->custom_schedules->data",
+    //                         "schedule"=> "$request->custom_schedules->schedule"
+    //                     ]
+    //                 ]
+    // 	];
 
-    }
+    // }
 
     /**
      * The attributes that should be cast.
@@ -50,25 +58,13 @@ class Room extends Eloquent
      
      * @var array
      */
-    protected $casts = [
-        'id_tags' => 'array',
-        'id_users' => 'array',
-        'id_categories' => 'array',
-        'repeat' => 'array',
-        'start_date' => 'datetime:d-m-Y',
-        'end_date' => 'datetime:d-m-Y',
-    ];
+    // protected $casts = [
+    //     'repeat' => 'array',
+    //     'start_date' => 'datetime:d-m-Y',
+    //     'end_date' => 'datetime:d-m-Y',
+    // ];
 
-    /**
-    * retorna todas as salas de um usuario
-    */
-    public function getAllRoomsOfUser(){
-        return Room::select([
-            'rooms.*',
-            'last_posted_at' => Post::selectRaw('MAX(created_at)')
-                    ->whereColumn('', '.')
-        ])->get();
-    }
+    
 
     
 

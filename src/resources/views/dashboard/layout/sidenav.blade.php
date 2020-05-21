@@ -24,7 +24,7 @@
             </a>
           </li>
           <li class="nav-item {{ Route::current()->getName() == 'seila123' ? "active" : '' }}">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link" href="{{ route('modalidade') }}">
           <i class="material-icons">Modalidade</i>
           <p>Modalidade</p>
         </a>
@@ -36,7 +36,7 @@
     </a>
   </li>
   <li class="nav-item {{ Route::current()->getName() == 'seila12312' ? "active" : '' }}">
-    <a class="nav-link" href="{{ route('dashboard') }}">
+    <a class="nav-link" href="{{ route('sala') }}">
   <i class="material-icons">room</i>
   <p>Sala</p>
 </a>

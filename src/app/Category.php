@@ -13,9 +13,9 @@ class Category extends Eloquent
 
     
 	//nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
-    public function setTitleAttribute($value){
-    	$this->attributes['title'] = $value;
-    	$this->attributes['slug'] = Str::slug($value);//cria slug automaticamente
+    public function setNameAttribute($value){
+    	$this->attributes['name'] = ucfirst(strtolower($value));
+    	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
     }
 
 
