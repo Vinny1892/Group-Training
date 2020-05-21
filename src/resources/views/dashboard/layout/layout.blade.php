@@ -23,11 +23,17 @@
     <div class="main-panel">
 
       <!-- Navbar -->
-      @include('dashboard.layout.nav')
+      
+        @include('dashboard.layout.nav')
+
       <!-- End Navbar -->
-        <!-- Start content -->
-          @yield('content')
-        <!-- End Content -->
-        <!--Start Footer -->
-        @include('dashboard.layout.footer_theme')
-        <!-- End Footer -->
+
+      <!-- Start content -->
+
+        @yield('content')
+
+      <!-- End Content -->
+
+      <!--Start Footer -->
+      @include('dashboard.layout.footer_theme')
+      <!-- End Footer -->

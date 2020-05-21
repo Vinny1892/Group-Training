@@ -26,18 +26,18 @@
             <p class="card-category">criar uma nova categoria</p>
           </div>
           <div class="card-body">   
-            <form action="{{route('category.store')}}" method="POST">
+            <form action="{{route('category.store')}}" method="POST" id='formCategory'>
               @csrf
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Nome</label>
-                <input type="text" name="name" class="form-control"  placeholder="Nome Categoria">
+                <input type="text" name="name" id="inputName" class="form-control"  placeholder="Nome Categoria">
                 </div>
             </div>
                 <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Descrição</label>
-                <textarea  class="form-control"  name="description" placeholder="Insira Descrição da Categoria"></textarea>
+                <textarea  class="form-control" id="inputDescription" name="description" placeholder="Insira Descrição da Categoria"></textarea>
                 </div>
               </div>
         
@@ -61,7 +61,7 @@
         <p class="card-category">Categorias Cadastradas </p>
       </div>
       <div class="card-body table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover" id='tableCategory'>
           <thead class="text-primary">
             <th>ID</th>
             <th>Nome</th>
@@ -74,9 +74,9 @@
           @foreach($categorys as  $key => $category)
             <tr>
               <td>{{$key}}</td>
-              <td>{{$category->name}}</td>
+              <td id="" >{{$category->name}}</td>
               <td>{{ $category->description }}</td>
-            <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
+            <td ><a class="edit" href="id" ><i  class="material-icons">edit</i></a></td>
             <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
             </tr>
           @endforeach
@@ -88,4 +88,23 @@
   </div>
 </div>
 </div>
+<script>
+  let formCategory = document.getElementById('formCategory');
+  let inputName = document.getElementById('inputName');
+  let inputDescription = document.getElementById('inputDescription');
+
+  
+
+  tableCategory.addEventListener('click' , function(event){
+    if(event.target.parentNode.classList.value === 'edit'){
+      console.log('edit');
+      console.log(tableCategory.childNode)
+      event.preventDefault();
+      console
+    }
+
+    });
+  
+</script>
+
 @endsection
