@@ -23,25 +23,6 @@ class RoomController extends Controller{
         return view('room.chat', compact("room"));
     }
 
-     
-
-
-    // public function minhaLista(){
-    // 	return view('room.listaMeusChats');
-    // }
-
-
-    // public function insert(Request $request)
-    // {
-    //     $room = new Room();
-    //     $room->phonecompany = $request->get('phonecompany');
-    //     $room->model = $request->get('model');
-    //     $room->price = $request->get('price');        
-    //     $room->save();
-    //     return ('Phone has been successfully added');
-    // }
-
-
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -173,6 +154,52 @@ class RoomController extends Controller{
     */
     public function myRoom(){
         return view('room.myRooms');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $allModalities = Modality::all();
+        $allCategories = Category::all();
+        //$alltags = Tag::all();
+        return view('room.formCreate', compact('allModalities', 'allCategories'/*, 'alltags'*/));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\MenssageContent  $menssageContent
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request)
+    {
+        $allModalities = Modality::all();
+        $allCategories = Category::all();
+        //$alltags = Tag::all();
+        $modality = Modality::find($request->id);
+        return view('room.formEdit', compact('modality', 'allModalities', 'allCategories'/*, 'alltags'*/));
+    }
+
+    //acho que via post, se passar esse parametro MODEL, nao vem o objeto, e sim uma string desse objeto
+    public function update(Request $request, Room $room)
+    {
+        $room = Room::find();
+        $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
+        $room->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                "modality"=> [
+                    '_id'=> $modality->_id,
+                    'slug'=> $modality->slug,
+                    'name'=> $modality->name,
+                ],
+            ]
+        );
     }
 
 }

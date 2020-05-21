@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>Document</title>
+    <title>{{$room->slug}}</title>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/chat.css') }}">
 </head>
 <body>
@@ -16,13 +15,13 @@
         <span class="">
             <div class="foto_perfil">
                 <a href="">
-                    <img src="pobre_e_loco.png" alt="foto-perfil" class="foto_perfil">
+                    <img src="/img/{{$room->slug}}.{{$room->extensao}}" alt="foto-perfil" class="foto_perfil">
                 </a>
             </div>
         </span>
         <span>
-            <div>{{ $nomeSala = 0 }} FUT praça das araras</div>
-            <span class="qtd_user_on">Total de usuários online: {{ $qtdOnline = 0 }} 5</span>
+            <div>{{ $room->name }}</div>
+            <span class="qtd_user_on">Total de usuários online: ?@lucas faz essa merda?</span>
             <button>membros</button>
         </span>
     </header>
