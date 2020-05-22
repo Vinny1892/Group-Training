@@ -17,21 +17,27 @@ class User extends Eloquent implements Authenticatable
     protected  $table = 'users';
     protected $connection = "mongodb";
 
-    public function  isAdmin(){
-       return $this->role === 'admin';
-    }
-
-
-
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role', 'personal', 'dateBirth', 'sexo', 'level', 'objective' ,'slug'
+        'name', 'email', 'password','role', 'personal', 'dateBirth', 'sexo', 'level', 'objective'
     ];
+
+    public function  isAdmin(){
+       return $this->role === 'admin';
+    }
+
+    public function setNameAttribute($value){
+        $this->attributes['name'] = ucfirst(strtolower($value));
+        $this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
+        $this->attributes['pathImage'] = strtolower(Str::slug($value));//cria slug automaticamente
+    }   
+
+
+    
 
     /*futuralmente, podemos ter novas ideias*/
     // $opcoes_do_user = [

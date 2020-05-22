@@ -108,9 +108,10 @@
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('assetsDashboard/demo/demo.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" ></script>
-<script>
- 
 
+
+ 
+<script>
   $(document).ready(function() {
     $().ready(function() {
 
@@ -334,6 +335,14 @@
     md.initDashboardPageCharts();
 
   });
+</script>
+<script src={{ asset("autocompletediferentao/dist/tokenize2.min.js") }} ></script>
+<script>
+$(document).ready(function(){
+	$().ready(function() {
+	$('.demo').tokenize2();
+	});
+});
 </script>
 
 

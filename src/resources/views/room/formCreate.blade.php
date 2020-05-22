@@ -4,8 +4,7 @@
             {{ session('message') }}
           </div>
         @endif
-
-
+<style>select {display: }</style>
 <div class="card">
 	<div class="card-header card-header-success">
 		<h4 class="card-title">Sala</h4>
@@ -84,13 +83,19 @@
 				</div>
 			</div>
 			
-			<div class="form-row" id="categorias">
+			<div class="form-row " id="categorias">
+				<div class="form-group col-lg-12">
 		  		<label for="category">Categorias</label>
-		  		<select id="categoriesSlug" name="categoriesSlug[]" multiple>
+		  		<select  id="categoriesSlug" name="categoriesSlug[]" multiple>
 					@foreach($allCategories as $category)
+					
+					
 						<option value="{{$category->slug}}"> {{$category->name}} </option>
-					@endforeach
+					
+						@endforeach
+					
 				</select>
+			</div>
 			</div>
 
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
@@ -98,3 +103,5 @@
 		</form>
 	</div>
 </div>
+
+

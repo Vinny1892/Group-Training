@@ -33,27 +33,29 @@ class ModalityController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->profile_image);
-        var_dump($request->profile_image);
-        exit;
-        $image = $request->file('profile_image');
-
-        if ($image) {
-            foreach ($image as $key => $value) {
-                # code...
-            }
+        //var_dump($request->file('profileImage'));
+        //exit;
+        if ($files = $request->file('profileImage')) {
+           $destinationPath = 'public/image/'; // upload path
+           $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+           $files->move($destinationPath, $profileImage);
         }
+        //$image = $request->file('profile_image');
 
 
-        $validator = Validator::make($request->only(['name','description']), [
+        $validator = Validator::make($request->only(['name','description', 'profileImage']), [
             "name" => ["required","string", "max:25"],
             "description" => ["required" , "string" , "max:60"],
-            "pathImage" => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            /*"profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'*/
         ]);
-       if ($validator->fails() )  return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
+        if ($validator->fails()){
+            return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
+        }
         try{
 
             if ($request->_id == null) {
+                
+
                 Modality::create(
                     [
                         "name" => $request->name,
