@@ -34,23 +34,14 @@ cd ..
 ```
 docker-compose up
 ```
-
+Após o processo finalizar, abra outro terminal e execute:
 ```
 docker-compose exec  app-grouptraining composer install
-```
-
-```
 docker-compose exec  app-grouptraining php artisan key:generate
-```
-
-```
 docker-compose exec  app-grouptraining php artisan migrate
 ```
 
-```
-abre seu navegador localhost:8080
-```
-
+[Abre o projeto no seu navegador](https://localhost:8085)
 
 
 ## Contribuidores

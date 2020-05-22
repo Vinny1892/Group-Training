@@ -59,7 +59,7 @@ services:
       - ./src:/var/www/html
     ports:
       - 8085:443
-      - 80:80
+      - 90:80
     networks:
       network-develop:
         ipv4_address: 172.100.0.10
