@@ -1,7 +1,5 @@
 @extends('room.main')
 @section('content')
-
-
   <main class="container">
       <?php //dd($rooms); ?>
     <h2>Salas da Modalidade {{ $modality->name }}</h2>
@@ -33,6 +31,4 @@
       @endforeach
     </div>
   </main>
-
-
 @endsection

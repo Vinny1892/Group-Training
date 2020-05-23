@@ -21,7 +21,7 @@ class CreateModalitiesTable extends Migration
             $collection->json('rooms_id');
             /*$collection->json('tags_id');
             $collection->json('categories_id');*/
-            $collection->string('pathImage');
+            $collection->string('profileImage');
             $collection->timestamps();
         });
     }

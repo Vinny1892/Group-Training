@@ -1,6 +1,8 @@
 @extends('dashboard.layout.layout')
 @section('content')
 <style>
+    button { border-color: none}
+    .edit:link{color:initial}
     a{color: initial;}
     
     .edit:hover{
@@ -20,28 +22,41 @@
             {{ session('message') }}
           </div>
         @endif
+        @if ($errors->any())
+          @foreach ($errors->all() as $error)
+            
+              <div class="alert alert-danger"> <p>{{ $error }}</p> </div>
+            
+          @endforeach
+        @endif
         <div class="card">
           <div class="card-header card-header-success">
-            <h4 class="card-title">Criar Categoria</h4>
-            <p class="card-category">criar uma nova categoria</p>
+            <h4 class="card-title">{{$cardTitle}}</h4>
+          <p class="card-category">{{ $cardDescription }}</p>
           </div>
-          <div class="card-body">   
-            <form action="{{route('category.store')}}" method="POST">
+          <div class="card-body"> 
+            @if(isset($category))  
+            <form action="{{route('category.update', ['category'=> $category->_id])}}" method="POST" id='formCategory'>
+             @method("PUT"); 
+            @else
+            <form action="{{route('category.store')}}" method="POST" id='formCategory'>
+
+            @endif
               @csrf
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Nome</label>
-                <input type="text" name="name" class="form-control"  placeholder="Nome Categoria">
+                <input type="text" name="name"  class="form-control" value="{{$category ? $category->name : old('name') }}" placeholder="Nome Categoria">
                 </div>
             </div>
                 <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Descrição</label>
-                <textarea  class="form-control"  name="description" placeholder="Insira Descrição da Categoria"></textarea>
+                <textarea  class="form-control"  name="description" placeholder="Insira Descrição da Categoria">{{$category ? $category->description : old('description') }}</textarea>
                 </div>
               </div>
         
-              <button type="submit" class="btn btn-success pull-right">Salvar Categoria</button>
+          <button type="submit" class="btn btn-success pull-right">{{ $category ? "Editar Categoria" : "Salvar Categoria"}}</button>
               <div class="clearfix"></div>
             </form>
           </div>
@@ -61,7 +76,7 @@
         <p class="card-category">Categorias Cadastradas </p>
       </div>
       <div class="card-body table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover" id='tableCategory'>
           <thead class="text-primary">
             <th>ID</th>
             <th>Nome</th>
@@ -75,9 +90,9 @@
             <tr>
               <td>{{$key}}</td>
               <td>{{$category->name}}</td>
-              <td>{{ $category->description }}</td>
-            <td ><a class="edit" href="{{ route('dashboard')}}"><i class="material-icons">edit</i></a></td>
-            <td><a class="delete" href="{{ route('dashboard') }}"><i class="material-icons">close</i></a></td>
+              <td>{{$category->description }}</td>
+            <td ><a href="{{ route('category.edit', ["slugCategory" => $category->slug]) }}" class="edit" href="id" ><i  class="material-icons">edit</i></a></td>
+            <td ><a href="{{route('category.delete', ["slugCategory" => $category->slug]) }}" class="delete" ><i class="material-icons">close</i></a></td>
             </tr>
           @endforeach
 
@@ -88,4 +103,9 @@
   </div>
 </div>
 </div>
+<script>
+
+  
+</script>
+
 @endsection

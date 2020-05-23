@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $collection) {
             $collection->bigIncrements('id');
             $collection->string('slug');
-            $collection->string('name');
+            $collection->unique('name');
             $collection->text('description');
             $collection->json('id_modality');
             $collection->json('id_rooms');

@@ -16,7 +16,7 @@ class Modality extends Eloquent
     public function setNameAttribute($value){
     	$this->attributes['name'] = ucfirst(strtolower($value));
     	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
-    	$this->attributes['pathImage'] = strtolower(Str::slug($value));//cria slug automaticamente
+    	$this->attributes['profileImage'] = strtolower(Str::slug($value));//cria slug automaticamente
     }	
 
 

@@ -12,14 +12,14 @@ class Room extends Eloquent
 
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'room' ;
-    protected $fillable = ['description', 'public', 'pathImage', 'name', 'key', 'place', 'standard_time', 'date', 'users_id', 'tags', 'categories', 'modality', 'repeat', 'locationType', 'id_user_adm'];
+    protected $fillable = ['description', 'public', 'name', 'key', 'place', 'standard_time', 'date', 'users_id', 'tags', 'categories', 'modality', 'repeat', 'locationType', 'id_user_adm'];
 
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
     	$this->attributes['name'] = ucfirst(strtolower($value));//ucfirst deixa a primeira letra maiuscula, strtolower deixa tudo minusculo
     	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
-        $this->attributes['pathImage'] = strtolower(Str::slug($value));
+        $this->attributes['profileImage'] = strtolower(Str::slug($value));
     }
 
     /**

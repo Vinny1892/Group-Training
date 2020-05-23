@@ -13,6 +13,8 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
       <!-- CSS Files -->
       <link href="{{asset('assetsDashboard/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
+      <link href="{{asset("autocompletediferentao/dist/tokenize2.min.css")}}" rel="stylesheet">
+
     </head>
     
     <body class="">
@@ -23,11 +25,17 @@
     <div class="main-panel">
 
       <!-- Navbar -->
-      @include('dashboard.layout.nav')
+      
+        @include('dashboard.layout.nav')
+
       <!-- End Navbar -->
-        <!-- Start content -->
-          @yield('content')
-        <!-- End Content -->
-        <!--Start Footer -->
-        @include('dashboard.layout.footer_theme')
-        <!-- End Footer -->
+
+      <!-- Start content -->
+
+        @yield('content')
+
+      <!-- End Content -->
+
+      <!--Start Footer -->
+      @include('dashboard.layout.footer_theme')
+      <!-- End Footer -->

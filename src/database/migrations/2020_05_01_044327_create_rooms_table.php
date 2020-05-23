@@ -50,7 +50,7 @@ class CreateRoomsTable extends Migration
             $collection->string('standard_time');/*string aon deve ser o melhor jeito*/
             $collection->string('placeType');
             $collection->date('date');
-            $collection->string('pathImage');
+            $collection->string('profileImage');
             $collection->json('tags');
             $collection->json('modality');
             $collection->json('categories');

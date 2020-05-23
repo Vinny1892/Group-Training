@@ -8,8 +8,8 @@ COPY src/chatAPI  .
 RUN ls -l
 
 
-RUN npm install
+#RUN npm install
 
-EXPOSE 3000
+#EXPOSE 3000
 
-CMD [ "npm", "start" ]
+#CMD [ "npm", "start" ]

@@ -21,8 +21,11 @@ class CategoryController extends Controller
      */
     public   function create()
     {
+        $cardTitle = "Criar Categoria";
+        $cardDescription = "criar uma nova categoria";
+        $category = null;
         $categorys = Category::all();
-        return view('category.formCreate' , \compact('categorys'));
+        return view('category.form' , \compact('categorys','category','cardTitle','cardDescription'));
     }
 
     /**
@@ -34,7 +37,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
        $validator = Validator::make($request->only(['name','description']), [
-            "name" => ["required","string", "max:25"],
+            "name" => ["required","string", "max:25", "unique:categories,name"],
             "description" => ["required" , "string" , "max:60"]
         ]);
        if ($validator->fails() )  return  Redirect::route('category')->withErrors($validator)->withInput() ;
@@ -49,49 +52,55 @@ class CategoryController extends Controller
         }
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function show(categoria $categoria)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(categoria $categoria)
+    public function edit($slugCategory)
     {
-        //
+        $categorys = Category::all();
+        $category = Category::where('slug' , $slugCategory)->first();
+        $cardTitle = "Editar Categoria $category->name";
+        $cardDescription = "editando categoria $category->name";
+        return view('category.form',compact('categorys','category','cardTitle','cardDescription'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\categoria  $categoria
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, categoria $categoria)
+    public function update(Request $request,Category $category)
     {
-        //
+       
+        $validator = Validator::make($request->only(['name','description']), [
+            "name" => ["required","string", "exists:categories,name,_id,$category->_id" , "max:25"],
+            "description" => ["required" , "string" , "max:100"]
+        ]);
+       if ($validator->fails() )  return  Redirect::route('category.edit' , ['slugCategory' => $category->slug ])->withErrors($validator)->withInput() ;
+        $category->name = $request->name;
+        $category->description = $request->description;
+        if( $category->save() )  return Redirect::route('category')->with("message","Categoria Atualizada com Sucesso");
+            
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\categoria  $categoria
+     * @param  String  $slugCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categoria $categoria)
+    public function destroy($slugCategory)
     {
-        //
+        if( Category::where('slug' , $slugCategory)->delete() )  return Redirect::route('category')->with("message","Categoria Deleteada Com Sucesso");
+
+        return  view('errors.404');
+        
     }
 }
