@@ -63,7 +63,11 @@
             <i class="material-icons right">send</i>
           </button>
           <p>Já tem uma conta? <a href="{{ route('login') }}">Faça o login</a></p>
-          <!-- <div class="center-align" style="margin-top: 20px;" id="parent"> <img style="width: 2vw" src="{{ asset('icons/art.svg')  }}" alt="seletor de cor"> </div> -->
+         <div class="center-align" style="margin-top: 20px;" > 
+          <colorseletor id="parent" >
+              <img style="width: 2vw" src="{{ asset('icons/art.svg')  }}" alt="seletor de cor"> 
+          </colorseletor>
+        </div> 
         </div>
       </form>
     </section>
@@ -72,18 +76,25 @@
 
 <script src="https://unpkg.com/vanilla-picker@2"></script>
 <script>
-  let colorBack = localStorage.getItem('color')
+  let colorBack = localStorage.getItem('color');
 
-  let login = document.querySelector('.tela-login')
-  let parent = document.querySelector('#parent')
+  let login = document.querySelector('.tela-login');
+  let parent = document.querySelector('#parent');
   if (colorBack != null) {
     login.style.background = colorBack
+  }
+  function setColorBackground(color) {
+      localStorage.setItem('color', color.rgbaString);
+      login.style.background = color.rgbaString;
+    };
+    let picker = new Picker({
+      parent, 
+      color:'#0c15e3ff', 
+      popup:'top', 
+      cancelButton:true, 
+      onDone: setColorBackground,
+      editor:false,
 
-  }
-  let picker = new Picker(parent);
-  picker.onChange = function(color) {
-    localStorage.setItem('color', color.rgbaString)
-    login.style.background = color.rgbaString
-  }
+      });
 </script>
 @endsection

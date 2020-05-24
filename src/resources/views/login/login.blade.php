@@ -61,8 +61,10 @@
         <div class=" center-align">
           <p>Não tem conta? <a href="{{ route('register') }}">Registre-se</a></p>
         </div>
-        <!-- <div class="center-align" style="margin-top: 20px;" id="parent"> <img style="width: 2vw" src="{{ asset('icons/art.svg')  }}" alt="seletor de cor"> </div> -->
-      </form>
+        <div class="center-align">
+          <colorseletor  style="margin-top: 20px;" id="parent"> <img style="width: 2vw" src="{{ asset('icons/art.svg')  }}" alt="seletor de cor"> </colorseletor> 
+        </div>
+        </form>
     </section>
   </div>
   <script src="https://unpkg.com/vanilla-picker@2"></script>
@@ -73,13 +75,21 @@
     let parent = document.querySelector('#parent');
     if (colorBack != null) {
       login.style.background = colorBack;
-
     }
-    let picker = new Picker(parent);
-    picker.onChange = function(color) {
+    function setColorBackground(color) {
       localStorage.setItem('color', color.rgbaString);
       login.style.background = color.rgbaString;
     };
+    let picker = new Picker({
+      parent, 
+      color:'#0c15e3ff', 
+      popup:'top', 
+      cancelButton:true, 
+      onDone: setColorBackground,
+      editor:false,
+
+      });
+   
   </script>
 </div>
 
