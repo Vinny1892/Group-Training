@@ -37,48 +37,48 @@ Route::get('/teste' ,function(){
     response('Funcionou teste');
 })->middleware('role.admin');
 
-//DashBoard - painel de gerenciamento
+                    //DashBoard - painel de gerenciamento
 Route::get('/painel' ,"DashboardController@show")->name('painel');
 
 
-//MODALIDADE
+                    //MODALIDADE
 //Route::get('/modalidade' , "ModalityController@show")->name('modalidade');
-Route::get('/modalidade/atualizar/{slug}' , "ModalityController@update")->name('atualizarmodalidade');
-//Route::get('/modalidade/editar', "ModalityController@edit")->name('editemodalidade');
-Route::post('/modalidade/salvar' , "ModalityController@store")->name('savemodality');
+Route::get('/modalidade/{slug}/atualizar' , "ModalityController@update")->name('atualizarmodalidade');
+//Route::get('/modalidade/editar', "ModalityController@edit" )->name('editemodalidade');
+Route::post('/modalidade/salvar', "ModalityController@store")->name('savemodality');
 Route::get('/modalidade/criar', "ModalityController@create")->name('create.modalidade');
-Route::get('/painel/modalidade/excluir/{slug}' ,"ModalityController@destroy")->name('deleteModality');
+Route::get('/painel/modalidade/{slug}/excluir' ,"ModalityController@destroy")->name('deleteModality');
 Route::get('/painel/modalidade' ,"ModalityController@index")->name('modalidade');
 
-//SALAS
-Route::get('/sala/chat/{slug}' , 'RoomController@show')->name('chat');
-Route::get('/modalidade/salas/{slugModality}' , "RoomController@roomsOfModality")->name('salas');
+                    //SALAS
+Route::get('/sala/{slug}/chat', 'RoomController@show')->name('chat');
+Route::get('/modalidade/{slugModality}/salas' , "RoomController@roomsOfModality")->name('salas');
 //Route::get('/minhassalas' , "RoomController@myRoom")->name('mysalas');
 //Route::get('/tags' , "RoomController@index")->name('tags');
 Route::get('/painel/sala', "RoomController@index")->name('sala');/*lista sala na dashboard*/
 Route::get('/painel/sala/criar', "RoomController@create")->name('createroom');
-Route::post('/painel/sala/salvar' , "RoomController@store")->name('saveroom');
+Route::post('/painel/sala/salvar', "RoomController@store")->name('saveroom');
 Route::get('/painel/sala/editar', "RoomController@edit")->name('editroom');
 Route::post('/painel/sala/atualizar' , "RoomController@update")->name('updateroom');
-Route::get('/painel/sala/deletar/{slug}' , "RoomController@destroy")->name('deleteroom');
+Route::get('/painel/sala/{slug}/deletar', "RoomController@destroy")->name('deleteroom');
 
-//TAG
-Route::get('/tags' , "TagController@index")->name('tags');
+                    //TAG
+Route::get('/tags', "TagController@index")->name('tags');
 
-Route::get('/teste' ,function(){
+Route::get('/teste', function(){
     response('Funcionou teste');
 })->middleware('role.admin');
 
-//DashBoard Routes
-    Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('dashboard.edit');
-    Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
+                    //DashBoard Routes
+    Route::get("dashboard/{slugName}/edit", "DashboardController@editUser")->name('dashboard.edit');
+    Route::get('dashboard', "DashboardController@show")->name('dashboard');
 
-//HOME PAGE
-Route::get('/' ,"HomePageController@show")->name('home');
+                    //HOME PAGE
+Route::get('/', "HomePageController@show")->name('home');
 
-//CATEGORIA
-Route::get('/dashboard/categoria/criar' , "CategoryController@create")->name('category');
-Route::get('/dashboard/categoria/{slugCategory}/editar' , "CategoryController@edit")->name('category.edit');
+                    //CATEGORIA
+Route::get('/dashboard/categoria/criar', "CategoryController@create")->name('category');
+Route::get('/dashboard/categoria/{slugCategory}/editar', "CategoryController@edit")->name('category.edit');
 Route::put('dashboard/categoria/{category}/editar', "CategoryController@update")->name('category.update');
 Route::get('dashboard/categoria/${slugCategory}/delete',"CategoryController@destroy")->name('category.delete');
 Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
