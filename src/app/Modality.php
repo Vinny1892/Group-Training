@@ -10,13 +10,13 @@ class Modality extends Eloquent
 {
 	// protected $ connection = 'mongodb' ;
     // protected $ collection = 'modality' ;
-    protected $fillable = ['name', 'description', 'rooms_id'];
+    protected $fillable = ['name', 'description', 'rooms_id', 'pathImage'];
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
     	$this->attributes['name'] = ucfirst(strtolower($value));
     	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
-    	$this->attributes['profileImage'] = strtolower(Str::slug($value));//cria slug automaticamente
+    	//$this->attributes['pathImage'] = strtolower(Str::slug($value));//cria slug automaticamente
     }	
 
 

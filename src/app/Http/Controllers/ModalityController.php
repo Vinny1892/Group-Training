@@ -9,6 +9,7 @@ use App\Tag;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Room;
+use Illuminate\Support\Str;
 
 class ModalityController extends Controller
 {
@@ -25,7 +26,7 @@ class ModalityController extends Controller
         return view('modality.dashboard',compact('modalities') );
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -33,16 +34,6 @@ class ModalityController extends Controller
      */
     public function store(Request $request)
     {
-        //var_dump($request->file('profileImage'));
-        //exit;
-        if ($files = $request->file('profileImage')) {
-           $destinationPath = 'public/image/'; // upload path
-           $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-           $files->move($destinationPath, $profileImage);
-        }
-        //$image = $request->file('profile_image');
-
-
         $validator = Validator::make($request->only(['name','description', 'profileImage']), [
             "name" => ["required","string", "max:25"],
             "description" => ["required" , "string" , "max:60"],
@@ -52,15 +43,20 @@ class ModalityController extends Controller
             return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
         }
         try{
-
             if ($request->_id == null) {
                 
-
-                Modality::create(
+                if ($file = $request->file('profileImage')) {
+                    $destinationPath = 'image/modality/'; // upload path
+                    $profileImage = strtolower(Str::slug($request->name)).".".$file->getClientOriginalExtension();
+                    $file->move($destinationPath, $profileImage);
+                    //$modality->pathImage = $destinationPath.$profileImage;
+                }
+                $modality = Modality::create(
                     [
                         "name" => $request->name,
                         "description"=> $request->description,
                         "rooms_id"=> [-1],
+                        "pathImage"=> $destinationPath.$profileImage
                     ]
                 );
             }else{/*edit*/
@@ -72,6 +68,9 @@ class ModalityController extends Controller
                     ]
                 );
             }
+            //salva img
+            //$modality->saveImg($request->file('profileImage'));
+            
             return Redirect::route('modalidade')->with("message","Modalidade Criada/Editada Com Sucesso");
         } catch (Exception $exception){
             echo "Erro ao inserir/Editar modalidade";
@@ -89,5 +88,17 @@ class ModalityController extends Controller
         $modality = Modality::where('slug', '=', $slug);
         $modality->delete();
         return redirect()->route('modalidade')->with('success','Modalidade deletada com sucesso');
+    }
+
+
+    private function saveImg($file){
+        if ($file != null) {
+            $destinationPath = 'image/modality/'; // upload path
+            $profileImage = $this->slug.".".$file->getClientOriginalExtension();
+            $file->move($destinationPath, $profileImage);
+            $this->pathImage = $destinationPath.$profileImage;
+            return true;
+        }
+
     }
 }
