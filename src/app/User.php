@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Support\Str;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
