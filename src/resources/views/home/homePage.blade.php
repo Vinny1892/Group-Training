@@ -36,13 +36,15 @@
 <section class="section-empresa">
     <div class="container">
         <h4 class="text-center">Empresas parceiras</h4>
-        <ul class="list-unstyled list-inline">
+        <div class="row">
+
+
             @foreach ($patrocinadores as $patrocinador)
-            <li>
-                <img src="{{ asset('img/'.$patrocinador.'.png') }}" alt="<?= $patrocinador ?>">
-            </li>
+            <div class="col-lg-2">
+                <img src="{{ asset('image/empresas/'.$patrocinador.'.png') }}" alt="<?= $patrocinador ?>" width="100%">
+            </div>
             @endforeach
-        </ul>
+        </div>
     </div>
 </section>
 
