@@ -14,9 +14,18 @@
         <button class="btn-voltar">voltar</button>
         <span class="">
             <div class="foto_perfil">
-                <a href="">
-                    <img src="/img/{{$room->slug}}.{{$room->extensao}}" alt="foto-perfil" class="foto_perfil">
-                </a>
+                <?php if ($room->pathImage): ?>
+                    <div class="foto_perfil" style="
+                      background-image: url('/{{$room->pathImage}}');
+                    ">
+                    </div>
+                <?php else: ?>
+                  <div class="foto_perfil" 
+                        style="
+                                background: url('/image/null-img.png');
+                        ">
+                  </div>
+                <?php endif ?>
             </div>
         </span>
         <span>

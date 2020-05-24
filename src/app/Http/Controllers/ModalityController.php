@@ -43,20 +43,16 @@ class ModalityController extends Controller
             return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
         }
         try{
+            if ($request->file('profileImage')) {
+                $pathImage = Modality::saveImg($request->file('profileImage'), $request->name);
+            }
             if ($request->_id == null) {
-                
-                if ($file = $request->file('profileImage')) {
-                    $destinationPath = 'image/modality/'; // upload path
-                    $profileImage = strtolower(Str::slug($request->name)).".".$file->getClientOriginalExtension();
-                    $file->move($destinationPath, $profileImage);
-                    //$modality->pathImage = $destinationPath.$profileImage;
-                }
                 $modality = Modality::create(
                     [
                         "name" => $request->name,
                         "description"=> $request->description,
                         "rooms_id"=> [-1],
-                        "pathImage"=> $destinationPath.$profileImage
+                        "pathImage"=> $pathImage,
                     ]
                 );
             }else{/*edit*/
@@ -68,9 +64,6 @@ class ModalityController extends Controller
                     ]
                 );
             }
-            //salva img
-            //$modality->saveImg($request->file('profileImage'));
-            
             return Redirect::route('modalidade')->with("message","Modalidade Criada/Editada Com Sucesso");
         } catch (Exception $exception){
             echo "Erro ao inserir/Editar modalidade";
@@ -91,14 +84,5 @@ class ModalityController extends Controller
     }
 
 
-    private function saveImg($file){
-        if ($file != null) {
-            $destinationPath = 'image/modality/'; // upload path
-            $profileImage = $this->slug.".".$file->getClientOriginalExtension();
-            $file->move($destinationPath, $profileImage);
-            $this->pathImage = $destinationPath.$profileImage;
-            return true;
-        }
-
-    }
+    
 }

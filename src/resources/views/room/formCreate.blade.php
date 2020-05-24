@@ -11,7 +11,7 @@
 		<p class="card-category">criar uma nova Sala</p>
 	</div>
 	<div class="card-body">   
-		<form action="{{ route('saveroom') }}" method="POST">
+		<form action="{{ route('saveroom') }}" method="POST" enctype="multipart/form-data">
 			@csrf
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -85,17 +85,17 @@
 			
 			<div class="form-row " id="categorias">
 				<div class="form-group col-lg-12">
-		  		<label for="category">Categorias</label>
-		  		<select  id="categoriesSlug" name="categoriesSlug[]" multiple>
-					@foreach($allCategories as $category)
-					
-					
-						<option value="{{$category->slug}}"> {{$category->name}} </option>
-					
-						@endforeach
-					
-				</select>
+			  		<label for="category">Categorias</label>
+			  		<select  id="categoriesSlug" name="categoriesSlug[]" multiple>
+						@foreach($allCategories as $category)
+							<option value="{{$category->slug}}"> {{$category->name}} </option>
+						@endforeach						
+					</select>
+				</div>
 			</div>
+			<div class="form-row">
+				<label for="inputimage">Imagem</label>
+				<input type="file" name="profileImage">
 			</div>
 
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
