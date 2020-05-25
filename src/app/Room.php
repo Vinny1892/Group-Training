@@ -6,20 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 use Illuminate\Support\Str;
 use app\Helpers\SlugUnique;
+use Illuminate\Support\Facades\Storage;
 
 class Room extends Eloquent
 {
 
     // protected $ connection = 'mongodb' ;
     // protected $ collection = 'room' ;
-    protected $fillable = ['description', 'public', 'name', 'key', 'place', 'standard_time', 'date', 'users_id', 'tags', 'categories', 'modality', 'repeat', 'locationType', 'id_user_adm'];
+    protected $fillable = ['description', 'public', 'name', 'key', 'place', 'standard_time', 'date', 'users_id', 'tags', 'categories', 'modality', 'repeat', 'locationType', 'id_user_adm', 'pathImage'];
 
 
     //nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
     	$this->attributes['name'] = ucfirst(strtolower($value));//ucfirst deixa a primeira letra maiuscula, strtolower deixa tudo minusculo
     	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
-        $this->attributes['profileImage'] = strtolower(Str::slug($value));
+        //$this->attributes['profileImage'] = strtolower(Str::slug($value));
     }
 
     /**
@@ -65,8 +66,18 @@ class Room extends Eloquent
     // ];
 
     
+    public static function saveImg($file, $name){
+        $destinationPath = 'image/room/'; // upload path
+        $profileImage = strtolower(Str::slug($name)).".".$file->getClientOriginalExtension();
+        $file->move($destinationPath, $profileImage);
+        return $destinationPath.$profileImage;
+    }
 
-    
+    public static function deleteImg($path){
+        if ($path) {
+             $retorno = Storage::delete($path);
+        }
+    }
 
     
 }

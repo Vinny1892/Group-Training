@@ -14,7 +14,7 @@ class RoomController extends Controller{
 
 
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['roomsOfModality' , 'index']);
     }
 
     /* como passar o ID da sala para o nodejs carregar */
@@ -31,13 +31,18 @@ class RoomController extends Controller{
             ), 
             [
                 "name" => ["required","string", "max:25"],
-                "description" => ["required" , "string" , "max:60"]
+                "description" => ["required" , "string" , "max:60"],
+                /*"profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'*/
             ]
         );
         if ($validator->fails() ){
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
         }elseif( Self::existsRoom($request->name) ) {
             try{
+                $pathImage = "";
+                if ($request->file('profileImage')) {
+                    $pathImage = Room::saveImg($request->file('profileImage'), $request->name);
+                }
                 $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
                 $simplifiedCategories = [];
                 foreach ($request->categoriesSlug as $categorySlug) {
@@ -56,6 +61,7 @@ class RoomController extends Controller{
                         "public"=> "$request->public",
                         "key" => "$request->key",
                         "place"=> "$request->place",
+                        "pathImage" => $pathImage,
                         "placeType"=> "$request->placeType",
                         "standard_time"=> "$request->standard_time",
                         "categories"=>  $simplifiedCategories,
@@ -125,9 +131,11 @@ class RoomController extends Controller{
 
     public function destroy($slug)
     {
-        $room = Room::where('slug','=' ,$slug);
+        $room = Room::where('slug','=' ,$slug)->first();
+        Room::deleteImg($room->pathImage);
         $room->delete();
         return redirect()->route('sala')->with('success','Sala deletada com sucesso');
+
     }
 
 

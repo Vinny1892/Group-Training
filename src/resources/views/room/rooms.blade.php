@@ -9,10 +9,15 @@
           <a href="{{ route('chat', $room->slug) }}">
             <div class="card">
                 <?php if ($room->pathImage): ?>
-                  <div class="card-header" style="background: url($room->pathImage)">
+                  <div class="card-header" style="
+                      background-image: url('/{{$room->pathImage}}');
+                  ">
                   </div>
                 <?php else: ?>
-                  <div class="card-header" style="background: url(http://beta.popinmarket.com.br/wp-content/uploads/woocommerce-placeholder.png)">
+                  <div class="card-header" 
+                        style="
+                                background: url('/image/null-img.png');
+                        ">
                   </div>
                 <?php endif ?>
 

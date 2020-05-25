@@ -151,6 +151,8 @@
     max-width: 100%;
     display: block;
     border-radius: 100%;
+    width: 100px;
+    height: 100px;
 }
 
 .flexivel{

@@ -29,4 +29,11 @@ class Modality extends Eloquent
         array_push($rooms_id, $room_id);
         $modality->update( ['rooms_id' => $rooms_id] );
     }
+
+    public static function saveImg($file, $name){
+        $destinationPath = 'image/modality/'; // upload path
+        $profileImage = strtolower(Str::slug($name)).".".$file->getClientOriginalExtension();
+        $file->move($destinationPath, $profileImage);
+        return $destinationPath.$profileImage;
+    }
 }
