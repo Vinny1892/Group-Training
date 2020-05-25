@@ -2,7 +2,7 @@
 
     <div class="modality-page-container">
         <div class="main-content">
-            <h5 class="title-categories">Modalidades</h5>
+            <!-- <h5 class="title-categories">Modalidades</h5>
             <div class="search-categories">
                 <div class="search-input">
                     <input type="text" placeholder="Pesquise por nome">
@@ -22,8 +22,12 @@
                     </div>
 
                 </div>
+            </div> -->
+            @if(count($modalities) == 0)
+            <div class="text-center">
+                <h5>Nenhuma modalidade cadastrada!</h5>
             </div>
-
+            @else
             <div class="grid-categories">
                 @foreach ($modalities as $modality)
                     <div class="category">
@@ -40,6 +44,7 @@
                     </div>
                 @endforeach
             </div>
+            @endif
 
         </div>
     </div>
