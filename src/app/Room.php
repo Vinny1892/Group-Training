@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 use Illuminate\Support\Str;
 use app\Helpers\SlugUnique;
+use Illuminate\Support\Facades\Storage;
 
 class Room extends Eloquent
 {
@@ -70,6 +71,12 @@ class Room extends Eloquent
         $profileImage = strtolower(Str::slug($name)).".".$file->getClientOriginalExtension();
         $file->move($destinationPath, $profileImage);
         return $destinationPath.$profileImage;
+    }
+
+    public static function deleteImg($path){
+        if ($path) {
+             $retorno = Storage::delete($path);
+        }
     }
 
     

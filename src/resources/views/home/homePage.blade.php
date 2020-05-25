@@ -94,32 +94,6 @@
             </div>
         </div>
 
-        <div class="row footer__links">
-            <ul class="col-md-3 col-sm-3 col-xs-12 hidden-xs list-unstyled pull-left col-full-right">
-                <li><span>Freelancers</span></li>
-                <li>
-                    <a href="/pt/freelancers/argentina" title="Freelancers Argentina">Freelancers Argentina</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/brasil" title="Freelancers Brasil">Freelancers Brasil</a></li>
-                <li>
-                    <a href="/pt/freelancers/colombia" title="Freelancers Colômbia">Freelancers Colômbia</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/uruguai" title="Freelancers Uruguai">Freelancers Uruguai</a></li>
-                <li>
-                    <a href="/pt/freelancers/mexico" title="Freelancers México">Freelancers México</a></li>
-                <li>
-                    <a href="/pt/freelancers/venezuela" title="Freelancers Venezuela">Freelancers Venezuela</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/paraguai" title="Freelancers Paraguai">Freelancers Paraguai</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/honduras" title="Freelancers Honduras">Freelancers Honduras</a>
-                </li>
-            </ul>
-        </div>
     </div>
 </footer>
 @endsection

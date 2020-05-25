@@ -4,6 +4,13 @@
             {{ session('message') }}
           </div>
         @endif
+        @if ($errors->any())
+          @foreach ($errors->all() as $error)
+            
+              <div class="alert alert-danger"> <p>{{ $error }}</p> </div>
+            
+          @endforeach
+        @endif
 <style>select {display: }</style>
 <div class="card">
 	<div class="card-header card-header-success">

@@ -131,11 +131,11 @@ class RoomController extends Controller{
 
     public function destroy($slug)
     {
-        $room = Room::where('slug','=' ,$slug);
+        $room = Room::where('slug','=' ,$slug)->first();
+        Room::deleteImg($room->pathImage);
         $room->delete();
         return redirect()->route('sala')->with('success','Sala deletada com sucesso');
 
-        /*excluir img*/
     }
 
 

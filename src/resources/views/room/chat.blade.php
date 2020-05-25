@@ -11,7 +11,7 @@
     <user id=user name="" value="{{ Auth::user() }}" ></user>
     <room id=room name="" value="{{ $room }}" ></room>
     <header class="cabecalho">
-        <button class="btn-voltar">voltar</button>
+        <a href="{{ route('salas', $room->modality['slug']) }}" class="btn-voltar">voltar</a>
         <span class="">
             <div class="foto_perfil">
                 <?php if ($room->pathImage): ?>
@@ -30,7 +30,7 @@
         </span>
         <span>
             <div>{{ $room->name }}</div>
-            <span class="qtd_user_on">Total de usuários online: ?@lucas faz essa merda?</span>
+            <span class="qtd_user_on">Total de usuários online: ?</span>
             <button>membros</button>
         </span>
     </header>
