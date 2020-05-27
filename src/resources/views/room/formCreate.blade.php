@@ -37,7 +37,7 @@
 					<label for="#">Público</label>
 					<input type="radio" id="public" name="public" value="public">
 					<label for="public">Publico</label><br>
-					<input type="radio" id="private" name="public" value="private">
+					<input type="radio" id="public" name="public" value="private">
 					<label for="private">Privado</label><br>
 				</div>
 			</div>
@@ -47,19 +47,22 @@
 					<input type="password" name="key" id="key" class="form-control"  placeholder="chave">
 				</div>
 			</div>
-			<!-- nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)
+
+			<!-- 
+			nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)
+			-->
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
-                	<label for="place">Tipo do Local</label>
-                	foreach($allplaceType as $placeType)
-						<div class="form-group col-md-6">
-					  		<label for="placeType">{$placeType->name}</label>
-							<input type="checkbox" id="{$placeType->name}" name="{$placeType->name}" value="{$placeType->_id}">
-						</div>
-					endforeach
+					<label>Tipo do Local</label>
+					<select  id="place" name="place[]" multiple>
+						@foreach($allplaceType as $placeType)
+							<option value="{{$placeType}}"> {{$placeType}} </option>
+						@endforeach						
+					</select>
 				</div>
 			</div>
-			-->
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
 				  <label for="place">Local</label>
@@ -72,11 +75,6 @@
 			  		<label for="#">horário padrão</label>
 					<input type="time" name="standard_time" id="standard_time" class="form-control"  placeholder="horário padrão">
 				</div>
-			</div>
-
-
-			<div>
-				insirir imagem
 			</div>
 
 			<div class="form-row">

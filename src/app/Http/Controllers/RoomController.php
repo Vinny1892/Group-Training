@@ -60,7 +60,7 @@ class RoomController extends Controller{
                         "description"=> "$request->description",
                         "public"=> "$request->public",
                         "key" => "$request->key",
-                        "place"=> "$request->place",
+                        
                         "pathImage" => $pathImage,
                         "placeType"=> "$request->placeType",
                         "standard_time"=> "$request->standard_time",
@@ -78,8 +78,8 @@ class RoomController extends Controller{
                         "users"=> "$request->users_id",
                         "date"=> [
                             "repeat"=> [
+                                "place"=> "$request->place",
                                 "weekly"=> "$request->weekly",
-                                "Friday"=> "$request->Friday",
                                 "start_date" => "$request->start_date",
                                 "end_date"=> "$request->end_date",
                                 "number_of_repetitions"=> "$request->number_of_repetitions"
@@ -118,6 +118,7 @@ class RoomController extends Controller{
     */
     public function categories(Room $room){
         
+        //$categories = $room->categories['_id'];
         //return;
     }
 
@@ -173,8 +174,9 @@ class RoomController extends Controller{
     {
         $allModalities = Modality::all();
         $allCategories = Category::all();
+        $allplaceType = ['quadra', 'campo', 'digital', 'online', 'rede', 'lan', 'rua', 'club', 'fazenda', 'trilha'];
         //$alltags = Tag::all();
-        return view('room.formCreate', compact('allModalities', 'allCategories'/*, 'alltags'*/));
+        return view('room.formCreate', compact('allModalities', 'allCategories', 'allplaceType'/*, 'alltags'*/));
     }
 
     /**
@@ -209,5 +211,16 @@ class RoomController extends Controller{
             ]
         );
     }
+    
+    /*
+    * metodo responsavel por pegar um ou varios slug de categorias 
+    * e retorna todas as salas que pertencem a essa(s) categorias
+    * $slugCategory é um array
+    */
+    //  public function roomsByCategories($slugsCategories){
+    //     return Modality::where(
+    //         'categories', 'all', $slugCategory
+    //     )->get();
+    // }
 
 }
