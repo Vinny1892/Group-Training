@@ -155,7 +155,8 @@ class RoomController extends Controller{
                 array_push($rooms, $room);
             }
         }
-        return view('room.rooms', compact('modality', 'rooms'));
+        $categories = Category::all();
+        return view('room.rooms', compact('modality', 'rooms', 'categories'));
     }
     
     /**
