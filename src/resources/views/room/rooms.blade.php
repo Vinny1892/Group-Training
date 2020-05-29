@@ -43,7 +43,6 @@
                     2 usuários ativos
                   </div>
               </div>
-            <button class="btn btn-primary">&#9;Entrar na sala</button>
             </a>
           </div>
         @endforeach
@@ -116,15 +115,37 @@
 
     <script>
       function showRoomByCategory(){
-        let rooms = listRoomByCategory();
         let cardRoom = document.getElementById('cardRoom');
         cardRoom.innerHTML = '';
+        let rooms = listRoomByCategory();
         rooms.forEach(function(room){
-          cardRoom.innerHTML += "<a href="+'/sala/'+room.slug+'/chat'+">"+room.name+"</a>"
-
+          constructorCardRoom(room, cardRoom);
         });
+      }
+    </script>
 
+    <script>
+      function constructorCardRoom(room, cardRoom){
+        cardRoom.innerHTML += "<div class="+'col-lg-3 col-md-3 col-sm-12 col-xs-12'+">"+
+        "<a href="+'/sala/'+room.slug+'/chat>'+
+          '<div class="card">'+
+            hasImage(room)+
+            "<div class="+'card-body'+"> <h4 class="+'card-title'+">"+room.name+"</h4> <p class="+'card-text'+">"+room.description+"</p>"+
+                  "<div class="+'card-action'+"> </div></div>"+
+                  "<div class="+'card-footer text-muted'+">2 usuários ativos</div>"
+          +'</div>'
+          +"</a>"
+        +"</div>";
+      }
+
+      function hasImage(room){
+        if (room.pathImage) {
+          return "<div class="+'card-header'+" style="+"background-image:url(/"+room.pathImage+");"+"></div>";
+        }else{
+          return "<div class="+'card-header'+" style="+"background:url(/image/null-img.png);></div>";
+        }
       }
     </script>
   </main>
 @endsection
+
