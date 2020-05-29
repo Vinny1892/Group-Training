@@ -178,7 +178,13 @@ body {
 a:focus,
 a:hover {
     color: #253556;
-    text-decoration: underline
+}
+
+nav a:focus,
+nav a:hover {
+    color: white;
+    font-weight: bold;
+    background: rgba(234, 234, 234, 0.1) !important;
 }
 
 a:focus {
@@ -752,9 +758,6 @@ fieldset[disabled] a.btn {
 }
 
 @media (min-width:992px) {
-    .navbar {
-        border-radius: 3px
-    }
     .navbar-header {
         float: left
     }
@@ -819,7 +822,6 @@ fieldset[disabled] a.btn {
     padding: 16px 15px;
     font-size: 17px;
     line-height: 18px;
-    height: 50px
 }
 
 .navbar-brand:focus,
@@ -1670,6 +1672,7 @@ iframe[name=google_conversion_frame] {
 }
 
 .navbar {
+    background: #253456 !important;
     border: none;
     font-size: 13px
 }
@@ -1799,7 +1802,7 @@ header .navbar-fixed-top {
 }
 
 .navbar {
-    height: 70px;
+    height: 100px;
     padding: 22.5px 15px;
     color: #fff
 }
@@ -1813,9 +1816,9 @@ header .navbar-fixed-top {
 
 @media (max-width:1199px) {
     .navbar .navbar-brand {
-        height: 60px;
+        height: 100px;
         padding: 15px;
-        margin-top: 3px
+        margin: 3px auto !important;
     }
     .navbar .navbar-brand img {
         height: 100%;
@@ -5449,19 +5452,20 @@ header.home .navbar--primary .navbar-loggedout .navbar-btn {
     background-image: url(img/logo.png);
 }
 
-
-futsal .cfdlfymm{
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center
+futsal .cfdlfymm {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center
 }
 
 .main-image .container {
     max-width: 800px
 }
+
 .main-image .btn-link {
     color: #fff
 }
+
 .main-image .h1,
 .main-image h1 {
     margin-top: 60px;
@@ -5478,15 +5482,18 @@ background-position: center
         margin-top: 135px
     }
 }
+
 .press {
     text-align: center;
     background-color: #efefef;
     padding: 40px 0
 }
+
 .press h2 {
     margin-bottom: 60px;
     margin-top: 10px
 }
+
 @media (max-width:991px) {
     .press {
         padding-bottom: 30px
@@ -5498,24 +5505,29 @@ background-position: center
         margin-bottom: 15px
     }
 }
+
 .quotes {
     padding: 20px 0 40px;
     background-color: #efefef
 }
+
 .quotes .h2 {
     text-align: center;
     max-width: 550px;
     margin-right: auto;
     margin-left: auto
 }
+
 .quotes .carousel {
     height: 322px
 }
+
 .quotes .carousel-inner,
 .quotes .item,
 .quotes .slide {
     height: 100%
 }
+
 @media (min-width:1199px) {
     .access-email.register-form .col-md-6 {
         min-height: 75px
@@ -5524,34 +5536,42 @@ background-position: center
         height: 350px
     }
 }
+
 @media (min-width:991px) and (max-width:1199px) {
     .quotes .item {
         height: 280px
     }
 }
+
 @media (min-width:480px) and (max-width:991px) {
     .quotes .item {
         height: 330px
     }
 }
+
 .quotes .content {
     padding: 20px 0 20px 20px
 }
+
 .quotes article {
     margin-bottom: 10px
 }
+
 .quotes article .h2 {
     margin-top: 10px;
     margin-bottom: 20px;
     text-align: left
 }
+
 .quotes article h4 {
     margin-top: 5px;
     margin-bottom: 0
 }
+
 .quotes-asia .h2 {
     max-width: 730px
 }
+
 .quotes blockquote {
     background-image: url(https://wkncdn.com/newx/assets/build/img/home/icons/icon-quotes.045fbe26e.svg);
     background-size: 78px auto;
@@ -5561,6 +5581,7 @@ background-position: center
     line-height: 28px;
     border: 0
 }
+
 @media (min-width:992px) and (max-width:1199px) {
     .quotes blockquote {
         background-size: 30px auto;
@@ -5576,6 +5597,7 @@ background-position: center
         font-size: 14px
     }
 }
+
 @media (max-width:991px) {
     .quotes {
         text-align: center
@@ -5595,69 +5617,85 @@ background-position: center
         text-align: center
     }
 }
+
 .quotes .carousel-indicators {
     position: relative;
     margin-top: 10px;
     bottom: inherit
 }
+
 .quotes .carousel-indicators li {
     border: 0;
     background-color: #d5d5d5;
     margin: 1px 5px
 }
+
 .quotes .carousel-indicators .active {
     width: 10px;
     height: 10px;
     background-color: #2f9aee;
     margin: 1px 5px
 }
+
 @media (min-width:480px) {
     .quotes .carousel-indicators {
         bottom: inherit
     }
 }
+
 .skill-list {
     padding: 40px 0
 }
+
 .skill-list .container {
     max-width: 920px
 }
+
 .skill-list h2 {
     text-align: center;
     margin-bottom: 40px
 }
+
 .skill-list ul {
     list-style: none;
     padding-left: 0;
     position: relative;
     margin: 0
 }
+
 .skill-list ul li {
     padding: 5px 0;
     text-align: center
 }
+
 .skill-list ul li a {
     color: inherit
 }
+
 .skill-list a.more {
     margin-top: 40px;
     text-align: center;
     display: inline-block
 }
+
 .business article {
     padding: 30px 0;
     border-bottom: 1px solid #efefef
 }
+
 .business .btn {
     margin-top: 30px
 }
+
 .business h3 {
     margin: 0;
     line-height: 38px
 }
+
 .business p {
     margin-top: 30px
 }
+
 @media (min-width:768px) {
     .skill-list ul li {
         padding: 12px 0 12px 15px;
@@ -5692,10 +5730,12 @@ background-position: center
         background-image: url(https://wkncdn.com/newx/assets/build/img/home/asia/business/background-freelancer.aea5e5710.jpg)
     }
 }
+
 .enterprise-companies {
     background-color: #fff;
     padding: 50px 0 60px
 }
+
 .enterprise-companies .list-inline {
     display: flex;
     flex-flow: row nowrap;
@@ -5703,13 +5743,16 @@ background-position: center
     align-items: center;
     margin: 0
 }
+
 .enterprise-companies .list-inline li {
     padding: 0
 }
+
 .enterprise-companies .h3 {
     margin-top: 0;
     margin-bottom: 25px
 }
+
 @media (max-width:1199px) {
     .enterprise-companies img {
         max-width: 80%
@@ -5718,6 +5761,7 @@ background-position: center
         text-align: center
     }
 }
+
 @media (max-width:767px) {
     .skill-list .col-xs-6:nth-child(3) {
         clear: left

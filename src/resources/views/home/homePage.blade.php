@@ -4,35 +4,21 @@
 
     <nav class="navbar">
         <div class="nav-wrapper">
-            <a class="navbar-brand"
-            href="{{ route('home') }}"
-            title="Inicio"
-            tabIndex="-1">
-                <img    src="{{ asset('img/logo.png') }}"
-                alt="logo"
-                class="hidden-xs hidden-sm hidden-md"
-                width="130"/>
+            <a class="navbar-brand" href="{{ route('home') }}" title="Inicio" tabIndex="-1">
+                <img src="{{ asset('image/logo.png') }}" alt="logo" width="130" />
             </a>
-            <a href="#" class="brand-logo">Group Training</a>
-             <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
                 @if (!Auth::check())
-                    <li>
-                        <a href="{{route('register')}}" role="button" title="Cadastre-se"
-                           class="">Cadastre-se</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('login') }}" role="button" title="Entrar " class="">Entrar </a>
-                    </li>
+                <li>
+                    <a href="{{route('register')}}" role="button" title="Cadastre-se" class="">Cadastre-se</a>
+                </li>
+                <li>
+                    <a href="{{ route('login') }}" role="button" title="Entrar " class="">Entrar </a>
+                </li>
                 @else
-                    <li>
-                        <div>notificações</div>
-                    </li>
-                    <li>
-                        <p class="navbar-btn">
-                            <a href="{{ route('painel') }}" role="button" title="Publique um projeto"
-                               class="btn btn-success">Painel</a>
-                        </p>
-                    </li>
+                <li>
+                    <a href="{{ route('painel') }}" role="button" title="Entrar " class="">Painel</a>
+                </li>
                 @endif
             </ul>
         </div>
@@ -40,20 +26,25 @@
 
 </header>
 
-<section class="">
-    @include('modality.allModalities')
+<section class="section-modality">
+    <div class="container">
+        <h4 class="text-center">Modalidades</h4>
+        @include('modality.allModalities')
+    </div>
 </section>
 
-<section class="">
+<section class="section-empresa">
     <div class="container">
-        <p class="h3 text-center">Empresas parceiras </p>
-        <ul class="list-unstyled list-inline">
+        <h4 class="text-center">Empresas parceiras</h4>
+        <div class="row">
+
+
             @foreach ($patrocinadores as $patrocinador)
-                <li>
-                    <img src="{{ asset('img/'.$patrocinador.'.png') }}" alt="<?= $patrocinador ?>">
-                </li>
+            <div class="col-lg-2">
+                <img src="{{ asset('image/empresas/'.$patrocinador.'.png') }}" alt="<?= $patrocinador ?>" width="100%">
+            </div>
             @endforeach
-        </ul>
+        </div>
     </div>
 </section>
 
@@ -61,12 +52,7 @@
     <div class="container">
         <div class="row row-condensed footer__copy">
             <div class="col-lg-6 col-xs-12 col-sm-6 col-full-left">
-                <p>
-                    <a href="/dashboard">
-                        <img src="logo.png"
-                             alt="logo" width="122">
-                    </a>
-                </p>
+                <br>
                 &copy; 2020 | Group Training - Todos os direitos reservados
             </div>
             <div class="col-lg-6 col-xs-12 col-sm-6 text-right">
@@ -93,33 +79,5 @@
                 </div>
             </div>
         </div>
-
-        <div class="row footer__links">
-            <ul class="col-md-3 col-sm-3 col-xs-12 hidden-xs list-unstyled pull-left col-full-right">
-                <li><span>Freelancers</span></li>
-                <li>
-                    <a href="/pt/freelancers/argentina" title="Freelancers Argentina">Freelancers Argentina</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/brasil" title="Freelancers Brasil">Freelancers Brasil</a></li>
-                <li>
-                    <a href="/pt/freelancers/colombia" title="Freelancers Colômbia">Freelancers Colômbia</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/uruguai" title="Freelancers Uruguai">Freelancers Uruguai</a></li>
-                <li>
-                    <a href="/pt/freelancers/mexico" title="Freelancers México">Freelancers México</a></li>
-                <li>
-                    <a href="/pt/freelancers/venezuela" title="Freelancers Venezuela">Freelancers Venezuela</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/paraguai" title="Freelancers Paraguai">Freelancers Paraguai</a>
-                </li>
-                <li>
-                    <a href="/pt/freelancers/honduras" title="Freelancers Honduras">Freelancers Honduras</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </footer>
 @endsection

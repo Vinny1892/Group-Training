@@ -4,7 +4,7 @@
          
         <?php if (sizeof($modalities) > 0): ?>
             <!-- Listagem Modalidades -->
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-12 col-md-12">
                 <div class="card">
                   <div class="card-header card-header-primary">
                     <h4 class="card-title">Modalidades</h4>

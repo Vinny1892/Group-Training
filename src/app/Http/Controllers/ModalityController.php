@@ -9,6 +9,7 @@ use App\Tag;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Room;
+use Illuminate\Support\Str;
 
 class ModalityController extends Controller
 {
@@ -27,7 +28,7 @@ class ModalityController extends Controller
         return view('modality.dashboard',compact('modalities') );
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,16 +36,6 @@ class ModalityController extends Controller
      */
     public function store(Request $request)
     {
-        //var_dump($request->file('profileImage'));
-        //exit;
-        if ($files = $request->file('profileImage')) {
-           $destinationPath = 'public/image/'; // upload path
-           $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-           $files->move($destinationPath, $profileImage);
-        }
-        //$image = $request->file('profile_image');
-
-
         $validator = Validator::make($request->only(['name','description', 'profileImage']), [
             "name" => ["required","string", "max:25"],
             "description" => ["required" , "string" , "max:60"],
@@ -54,15 +45,16 @@ class ModalityController extends Controller
             return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
         }
         try{
-
+            if ($request->file('profileImage')) {
+                $pathImage = Modality::saveImg($request->file('profileImage'), $request->name);
+            }
             if ($request->_id == null) {
-                
-
-                Modality::create(
+                $modality = Modality::create(
                     [
                         "name" => $request->name,
                         "description"=> $request->description,
                         "rooms_id"=> [-1],
+                        "pathImage"=> $pathImage,
                     ]
                 );
             }else{/*edit*/
@@ -92,4 +84,7 @@ class ModalityController extends Controller
         $modality->delete();
         return redirect()->route('modalidade')->with('success','Modalidade deletada com sucesso');
     }
+
+
+    
 }
