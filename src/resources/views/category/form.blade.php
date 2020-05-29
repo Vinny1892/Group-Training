@@ -95,9 +95,42 @@
             <td ><a href="{{route('category.delete', ["slugCategory" => $category->slug]) }}" class="delete" ><i class="material-icons">close</i></a></td>
             </tr>
           @endforeach
-
           </tbody>
         </table>
+
+       <div class="">
+        <ul class="pagination justify-content-center">
+          <li class="page-item {{ $categorys->currentPage() == 1 ? "disabled" : "" }}">
+            <a class="page-link"  href="{{ $categorys->previousPageUrl() }}">Previous</a>
+          </li>
+          {{-- {{ $categorys->links() }} --}}
+         @for($i=1 ; $i <= $categorys->lastPage(); $i++)
+
+         
+          <li class="page-item {{ $categorys->currentPage() == $i ? "active" : "" }}">
+            <a class="page-link" href="{{ $categorys->url($i) }}"> 
+              {{  $i }} 
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {{-- <li class="page-item active">
+            <span class="page-link">
+              2
+              <span class="sr-only">(current)</span>
+            </span> 
+          </li>--}}
+          @endfor
+      
+          <li class="page-item {{ $categorys->currentPage() == $categorys->lastPage()  ? "disabled" : ""  }} ">
+            <a class="page-link" href="{{ $categorys->nextPageUrl() }}">Next</a>
+          </li>
+        </ul>
+
+      </nav>
+
+       </div>
+
+
       </div>
     </div>
   </div>

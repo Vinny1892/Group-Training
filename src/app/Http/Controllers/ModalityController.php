@@ -12,6 +12,8 @@ use App\Room;
 
 class ModalityController extends Controller
 {
+   
+
     /**
      * Display a listing of the resource.
      *

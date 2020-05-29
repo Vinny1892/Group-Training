@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Auth'] , function(){
     Route::get('/logout', 'LoginController@logout')->name('login.logout');
     Route::get('/registrar/' ,"RegisterController@show")->name('register');
     Route::post('/registrar' , "RegisterController@storage")->name('register.storage');
+    Route::put('dashboard/user/{user}/editar', "RegisterController@update")->name('user.update');
     //Providers Routes
     Route::get('/login/facebook','LoginController@redirectToFacebook')->name("login.facebook");
     Route::get('/login/facebook/callback' , 'LoginController@handleFacebookCallback');
@@ -70,7 +71,7 @@ Route::get('/teste' ,function(){
 })->middleware('role.admin');
 
 //DashBoard Routes
-    Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('dashboard.edit');
+    Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('user.edit');
     Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
 
 //HOME PAGE

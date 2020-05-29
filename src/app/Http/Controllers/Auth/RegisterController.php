@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\Helpers\SlugUnique;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Mockery\Exception;
 
 class RegisterController extends Controller
@@ -67,6 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
         try{
             $slugHelper = new  SlugUnique(User::class);
             $slug =  $slugHelper->createSlug($data['name']);
@@ -78,12 +80,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role'=> 'normal',
-            "slug" => $slug,
+            "slug" => strtolower($slug),
         ]);
     }
 
     public function show(){
-        return view('login.cadastro', );
+        return view('login.cadastro');
     }
 
 
@@ -98,72 +100,26 @@ class RegisterController extends Controller
             return  Redirect::route('login');
     }
 
-    private function validateUpdate(User $user, $data)
+   
+
+    public function update(User $user,Request $request)
     {
-        if($data['email']  === $user->email){
-
-            return Validator::make($data,[
-                'name' => ['string', 'max:255'],
-                'email' => ['string', 'email', 'max:255'],
-                'password' => [ 'nullable' ,'min:8', 'confirmed'],
-                'password_confirmation' =>  [ 'nullable' , 'min:8']
-            ]);
-        }else{
-            return Validator::make($data,[
-                'name' => ['string', 'max:255'],
-                'email' => ['string', 'email', 'max:255', 'unique:users'],
-                'password' => [ 'nullable' ,'min:8', 'confirmed'],
-                'password_confirmation' =>  [ 'nullable' , 'min:8']
-            ]);
-        }
-
-    }
-
-    private function update(User $user, $data)
-    {
-        if($user->name !== $request->name) {
-            try {
-                $slugHelper = new SlugUnique(User::class);
-            } catch (Exception $ex) {
-                echo 'erro ao criar slug';
-            }
-            $user->slug = $slugHelper->createSlug($request->name);
-            $user->name = $request->name;
-        }
+       
+        $slugHelper = new  SlugUnique(User::class);
+        
+        $validator = Validator::make($request->all(),[
+            'name' => ['string', 'max:255'],
+            'email' => [ 'email','required',"string",'max:255',"unique:users,email,_id,$user->_id"],
+            'password' => [ 'nullable' ,'min:8', 'confirmed'],
+            'password_confirmation' =>  [ 'nullable' , 'min:8'],
+        ]);
+        if ($validator->fails() )  return  Redirect::route('user.edit' , ['slugName' => $user->slug ])->withErrors($validator)->withInput();
+        $user->slug = User::createSlug($request->name);
+        $user->name = $request->name;
         $user->password = Hash::make($request->password);
         $user->email = $request->email;
-        return $user->save();
+        if( $user->save() )  return Redirect::route('user.edit',['slugName'=> $user->slug])->with("message","Usuario Atualizada com Sucesso");
     }
-
-
-
-
-    public function edit(User $user , Request $request){
-        if($request->email !== $user->email){
-            $request->validate(['email' => 'unique:user,email']);
-            $user->email = $request->email;
-        }
-        if(Hash::check($request->password , $user->password)){
-        }
-        if($request->name === $user->name)
-        {
-
-
-        }
-        $credentials = $request->only(['name','email','password','password_confirmed']);
-        $validate = $this->validateUpdate( $user , $credentials);
-        if($validate->fails()){
-            return Redirect::route('dashboard.edit', ["slugName" => $user->slug] )->withErrors($validate)->withInput();
-        }
-
-
-        if($this->update($user , $credentials)){
-            return  Redirect::route('dashboard.edit' , ["slugName" => $user->slug])->with("status" , "Usuario Atualizado")->withInput();
-        }else{
-            echo "erro ao atualizar registro";
-        }
-
-        }
 
 
 
