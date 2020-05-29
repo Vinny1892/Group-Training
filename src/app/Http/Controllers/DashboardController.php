@@ -47,8 +47,6 @@ class DashboardController extends Controller
         //network stat
         $stat['network_rx'] = round(trim(file_get_contents("/sys/class/net/eth0/statistics/rx_bytes")) / 1024/ 1024/ 1024, 2);
         $stat['network_tx'] = round(trim(file_get_contents("/sys/class/net/eth0/statistics/tx_bytes")) / 1024/ 1024/ 1024, 2);
-        dd($stat);
-
         return view('dashboard.panel' , compact('user') );
     }
 
