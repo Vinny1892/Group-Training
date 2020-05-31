@@ -1,21 +1,23 @@
 @extends('room.main')
 @section('content')
   <main class="container">
-      <?php //dd($rooms); ?>
     <h2>Salas da Modalidade {{ $modality->name }}</h2>
     <div class="row">
       <div class="filtro">
-
-          <div >
-            <!-- insere tag via js -->
-            <select id="category"></select>
-          </div>
-
-        <button  onclick="showRoomByCategory()">Buscar</button>
-        
+        <div>
+          <label>Categoria</label>
+          <select id="category"></select>
+          <!-- insere tag via js -->
+          <button  onclick="showRoomByCategory()">Buscar</button>
+        </div> 
+        <div>
+          <label>TAG</label>
+          <select id="tag"></select>
+          <!-- insere tag via js -->
+          <button  onclick="showRoomByTag()">Buscar</button>
+        </div> 
+        <button  onclick="allCategories()">Listar Todas</button>
       </div>
-
-      
       <div id="cardRoom">
         @foreach($rooms as $room)
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -50,44 +52,52 @@
     </div>
 
    <script >
-    let categories = [];
-    <?php $i = 0;?>
-    @foreach($categories as $category)
-      let category<?php echo "$i";?> = {
-        name: '{{ $category->name }}',
-        slug: '{{ $category->slug }}'
-      }
-      categories.push(category<?php echo "$i"; ?>);
-    <?php $i++;?>      
-    @endforeach
+    function allCategories(){
+      let categories = [];
+      <?php $i = 0;?>
+      @foreach($categories as $category)
+        let category<?php echo "$i";?> = {
+          name: '{{ $category->name }}',
+          slug: '{{ $category->slug }}'
+        }
+        categories.push(category<?php echo "$i"; ?>);
+      <?php $i++;?>      
+      @endforeach
+      return categories;
+    }
    </script>
 
     <script>
-      let rooms = [];
-      <?php $i = 0; ?>
-      @foreach($rooms as $room)
-        let room<?php echo "$i"; ?> = {
-          name: '{{  $room->name }}',
-          description: '{{ $room->description }}',
-          slug: '{{ $room->slug }}',
-          pathImage: '{{ $room->pathImage }}',
-          categories: [
-            @foreach($room->categories as $category)
-              {
-                name: "{{ $category['name']}}",
-                slug: "{{ $category['slug'] }}"
-              },
-            @endforeach
-          ],
-        };
-        rooms.push(room<?php echo "$i"; ?>);
-        <?php $i++; ?>
-      @endforeach
+      function allRooms(){
+        let rooms = [];
+        <?php $i = 0; ?>
+        @foreach($rooms as $room)
+          let room<?php echo "$i"; ?> = {
+            name: '{{  $room->name }}',
+            description: '{{ $room->description }}',
+            slug: '{{ $room->slug }}',
+            pathImage: '{{ $room->pathImage }}',
+            categories: [
+              @foreach($room->categories as $category)
+                {
+                  name: "{{ $category['name']}}",
+                  slug: "{{ $category['slug'] }}"
+                },
+              @endforeach
+            ],
+          };
+          rooms.push(room<?php echo "$i"; ?>);
+          <?php $i++; ?>
+        @endforeach
+        return rooms;
+      }
     </script>
 
     <script>
+      let rooms = allRooms();
+      let categories = allCategories();
       if (rooms) {
-        var opcoes = document.getElementById('category');
+        let opcoes = document.getElementById('category');
         categories.forEach(function (category) {
           opcoes.innerHTML += "<option value="+category.slug+"> "+category.name+" </option> ";
         });
@@ -97,7 +107,7 @@
     </script>
 
     <script>
-      function listRoomByCategory(){
+      function listRoomsByCategory(){
         let slugCategory = document.getElementById('category').value;
         let roomsByCategory = [];
         rooms.forEach(function(room){/*percorre as salas*/
@@ -110,14 +120,13 @@
         );
         return roomsByCategory;
       }
-
     </script>
 
     <script>
       function showRoomByCategory(){
         let cardRoom = document.getElementById('cardRoom');
         cardRoom.innerHTML = '';
-        let rooms = listRoomByCategory();
+        let rooms = listRoomsByCategory();
         rooms.forEach(function(room){
           constructorCardRoom(room, cardRoom);
         });
@@ -146,6 +155,17 @@
         }
       }
     </script>
+
+    <script>
+      function allCategories(){
+        let cardRoom = document.getElementById('cardRoom');
+        cardRoom.innerHTML = '';
+        rooms.forEach(function(room){
+          constructorCardRoom(room, cardRoom);
+        });
+      }
+    </script>
   </main>
+
 @endsection
 
