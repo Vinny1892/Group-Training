@@ -1,12 +1,10 @@
-
-let rooms = io('localhost:3000')
-
-socket = io('localhost:3000/123123')
-
 let button = document.querySelector("#btn_send_chat")
 let chat = document.querySelector("#chat")
 let user = JSON.parse(document.querySelector("#user").getAttribute('value').toString())
 let room = JSON.parse(document.querySelector("#room").getAttribute('value').toString())
+
+let rooms = io('localhost:3000')
+socket = io('localhost:3000/123123', {secure:true})
 
 
 socket.on("ReceivedMessage", function(message){
@@ -74,7 +72,3 @@ function renderMessage(messageObject, type){
     newMessageBox.appendChild(newMessageTime)
     chat.appendChild(newMessageBox)
 }
-
-
-
-// mensagem a ser enviada

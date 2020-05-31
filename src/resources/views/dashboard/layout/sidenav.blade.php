@@ -23,7 +23,7 @@
               <p>Minha Conta</p>
             </a>
           </li>
-          <li class="nav-item {{ Route::current()->getName() == 'seila123' ? "active" : '' }}">
+          <li class="nav-item {{ Route::current()->getName() == 'create.modalidade' ? "active" : '' }}">
             <a class="nav-link" href="{{ route('modalidade') }}">
           <i class="material-icons">Modalidade</i>
           <p>Modalidade</p>
