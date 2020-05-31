@@ -6,3 +6,4 @@ docker/Dockerfile.apichat
 src/chatAPI/node_modules
 .idea/
 .phpunit.result.cache
+public/image/

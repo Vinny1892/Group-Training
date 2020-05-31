@@ -103,4 +103,6 @@ class CategoryController extends Controller
         return  view('errors.404');
         
     }
+
+   
 }

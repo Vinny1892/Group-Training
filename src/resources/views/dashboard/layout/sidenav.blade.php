@@ -24,6 +24,7 @@
             </a>
           </li>
           <li class="nav-item {{ Route::current()->getName() == 'modalidade' ? "active" : '' }}">
+
             <a class="nav-link" href="{{ route('modalidade') }}">
           <i class="material-icons">Modalidade</i>
           <p>Modalidade</p>
