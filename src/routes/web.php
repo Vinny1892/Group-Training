@@ -1,12 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
+| routes are loaded by the RouteServicePdashbrovider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -82,8 +85,19 @@ Route::get('/', "HomePageController@show")->name('home');
 Route::get('/dashboard/categoria/criar', "CategoryController@create")->name('category');
 Route::get('/dashboard/categoria/{slugCategory}/editar', "CategoryController@edit")->name('category.edit');
 Route::put('dashboard/categoria/{category}/editar', "CategoryController@update")->name('category.update');
-Route::get('dashboard/categoria/${slugCategory}/delete',"CategoryController@destroy")->name('category.delete');
+Route::get('dashboard/categoria/{slugCategory}/delete',"CategoryController@destroy")->name('category.delete');
 Route::post('/dashboard/categoria', 'CategoryController@store')->name('category.store');
+
+//TAG
+
+
+Route::get('/dashboard/tag/criar', "TagController@show")->name('tag');
+Route::get('dashboard/tag/{slugTag}/editar',  "TagController@edit")->name('tag.edit');
+Route::post('/dashboard/tag/criar', "TagController@store")->name('tag.store');
+Route::put('dashbpard/tag/{tag}/editar',"TagController@update")->name('tag.update');
+Route::get('dashboard/tag/{slugTag}/delete',"TagController@destroy")->name('tag.delete');
+
+
 
 ////Exemplo de rota com parâmetro opcional.
 //Route::get('welcome/{name?}', function ($name = 'visitante') {

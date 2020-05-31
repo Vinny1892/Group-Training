@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\tag;
+use App\Tag;
 use Illuminate\Http\Request;
+use MongoDB\Exception\Exception;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+        
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,10 +25,9 @@ class TagController extends Controller
     public function create(array $data)
     {
         return Tag::create([
-            'title' => $data['title'],
+            'name' => $data['name'],
             'description' => $data['description'],
             /*'slug' => $data['slug'], acredito que o metodo no metodo do MODEL*/
-            'role'=> 'normal'
         ]);
     }
 
@@ -40,7 +39,21 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validate = Validator::make($request->only(['name','description']),[
+        'name' => ['required','string','unique:tags,name', 'min:4' , 'max:8'],
+        'description' => ['required' , "string"]
+      ]);
+
+      if($validate->fails())  return  Redirect::route('tag')->withErrors($validate)->withInput();
+      try{
+      $this->create($request->only(['name','description']));
+      return Redirect::route('tag')->with("message","Categoria Criada Com Sucesso");
+
+      }catch(Exception $ex){
+          echo "Erro ao inserir registro no banco";
+      }
+
+
     }
 
     /**
@@ -49,9 +62,13 @@ class TagController extends Controller
      * @param  \App\tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(tag $tag)
+    public function show()
     {
-        //
+        $cardTitle = "Criar tag";
+        $cardDescription = "inserir novas tags";
+        $tag = null;
+        $tags = Tag::paginate(5);
+        return view('tag.formTag', \compact('tag','tags','cardTitle','cardDescription'));
     }
 
     /**
@@ -60,8 +77,13 @@ class TagController extends Controller
      * @param  \App\tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(tag $tag)
+    public function edit( $slugTag)
     {
+        $tag = Tag::where("slug", $slugTag)->first();
+        $cardTitle = "Editar tag";
+        $cardDescription = "Editar $tag->name";
+        $tags = Tag::paginate(5);
+        return view('tag.formTag', \compact('tag','tags','cardTitle','cardDescription'));
         //
     }
 

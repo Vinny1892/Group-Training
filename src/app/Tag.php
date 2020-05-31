@@ -15,11 +15,11 @@ class Tag extends Eloquent
     
 	//nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setTitleAttribute($value){
-    	$this->attributes['title'] = $value;
+    	$this->attributes['name'] = $value;
     	$this->attributes['slug'] = Str::slug($value);//cria slug automaticamente
     }
 
-	protected $fillable = ['title', 'description', "id_rooms", "id_modality"];/*id e slug gerado automaticamente*/
+	protected $fillable = ['name', 'slug','description', "id_rooms", "id_modality"];/*id e slug gerado automaticamente*/
 
 	
 
