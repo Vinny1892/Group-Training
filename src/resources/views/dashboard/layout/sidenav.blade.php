@@ -17,8 +17,8 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item  {{ Route::current()->getName() == 'dashboard.edit' ? "active" : '' }} ">
-            <a class="nav-link" href="{{route('dashboard.edit', ["slugName" => Auth::user()->slug] )}}">
+          <li class="nav-item  {{ Route::current()->getName() == 'user.edit' ? "active" : '' }} ">
+            <a class="nav-link" href="{{ route('user.edit', ["slugName" => Auth::user()->slug] )}}">
               <i class="material-icons">person</i>
               <p>Minha Conta</p>
             </a>
@@ -47,13 +47,7 @@
       <p>Categoria</p>
     </a>
   </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
-              <i class="material-icons">content_paste</i>
-              <p>Administrador</p>
-            </a>
-            </a>
-          </li>
+  
         </ul>
       </div>
     </div>

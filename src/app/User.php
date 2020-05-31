@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Mockery\Exception;
+use App\Helpers\SlugUnique;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -23,7 +25,7 @@ class User extends Eloquent implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role', 'personal', 'dateBirth', 'sexo', 'level', 'objective'
+        'name', 'email', 'password','role', 'personal', 'dateBirth', 'sexo', 'level', 'objective','slug'
     ];
 
     public function  isAdmin(){
@@ -32,9 +34,17 @@ class User extends Eloquent implements Authenticatable
 
     public function setNameAttribute($value){
         $this->attributes['name'] = ucfirst(strtolower($value));
-        $this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
         $this->attributes['pathImage'] = strtolower(Str::slug($value));//cria slug automaticamente
-    }   
+    }  
+    
+     static public function createSlug($name){
+         try{
+            $slug =  New SlugUnique(User::class);
+          return   $slug->createSlug($name);
+         }catch(Exception $ex){
+             echo "erro ao criar slug";
+         }
+    }
 
 
     

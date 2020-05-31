@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $cardTitle = "Criar Categoria";
         $cardDescription = "criar uma nova categoria";
         $category = null;
-        $categorys = Category::all();
+        $categorys = Category::paginate(6);
         return view('category.form' , \compact('categorys','category','cardTitle','cardDescription'));
     }
 
@@ -79,7 +79,7 @@ class CategoryController extends Controller
     {
        
         $validator = Validator::make($request->only(['name','description']), [
-            "name" => ["required","string", "exists:categories,name,_id,$category->_id" , "max:25"],
+            "name" => ["required","string", "unique:categories,name,_id,$category->_id" , "max:25"],
             "description" => ["required" , "string" , "max:100"]
         ]);
        if ($validator->fails() )  return  Redirect::route('category.edit' , ['slugCategory' => $category->slug ])->withErrors($validator)->withInput() ;

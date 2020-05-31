@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 
 class ModalityController extends Controller
 {
+   
+
     /**
      * Display a listing of the resource.
      *
