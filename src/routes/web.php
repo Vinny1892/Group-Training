@@ -44,11 +44,11 @@ Route::get('/painel' ,"DashboardController@show")->name('painel');
 
                     //MODALIDADE
 //Route::get('/modalidade' , "ModalityController@show")->name('modalidade');
-Route::get('/modalidade/{slug}/atualizar' , "ModalityController@update")->name('atualizarmodalidade');
+Route::get('/modalidade/{slug}/atualizar' , "ModalityController@edit")->name('modality.edit');
 //Route::get('/modalidade/editar', "ModalityController@edit" )->name('editemodalidade');
 Route::post('/modalidade/salvar', "ModalityController@store")->name('savemodality');
 Route::get('/modalidade/criar', "ModalityController@create")->name('create.modalidade');
-Route::get('/painel/modalidade/{slug}/excluir' ,"ModalityController@destroy")->name('deleteModality');
+Route::get('/painel/modalidade/{slug}/excluir' ,"ModalityController@destroy")->name('modality.delete');
 Route::get('/painel/modalidade' ,"ModalityController@index")->name('modalidade');
 
                     //SALAS

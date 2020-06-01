@@ -23,9 +23,9 @@ class ModalityController extends Controller
     public function index()
     {
         $modalities = Modality::all();
-        // return view('modality.dashboard',compact('modalities'))->with('i', (request()->input('page', 1) - 1) * 5
-        // );
-        return view('modality.dashboard',compact('modalities') );
+        $cardTitle = 'Cria Modalidade';
+        $modality = null;
+        return view('modality.dashboard',compact('modalities', 'cardTitle', 'modality') );
     }
 
     /*
@@ -45,6 +45,7 @@ class ModalityController extends Controller
             return  Redirect::route('modalidade')->withErrors($validator)->withInput() ;
         }
         try{
+            $pathImage = "";
             if ($request->file('profileImage')) {
                 $pathImage = Modality::saveImg($request->file('profileImage'), $request->name);
             }
@@ -63,6 +64,7 @@ class ModalityController extends Controller
                     [
                         "name" => $request->name,
                         "description"=> $request->description,
+                        "pathImage"=> $pathImage,
                     ]
                 );
             }
@@ -85,6 +87,14 @@ class ModalityController extends Controller
         return redirect()->route('modalidade')->with('success','Modalidade deletada com sucesso');
     }
 
+
+    public function edit(Request $request)
+    {
+        $modality = Modality::where('slug', '=', $request->slug)->first();
+        $cardTitle = 'Editando Modalidade: '.$modality->name;
+        $modalities = Modality::all();
+        return view('modality.dashboard', compact('modality', 'modalities', 'cardTitle'/*, 'alltags'*/));
+    }
 
     
 }

@@ -15,8 +15,8 @@
 		@endif
 		<div class="card">
 			<div class="card-header card-header-success">
-				<h4 class="card-title">Modadelide</h4>
-				<p class="card-category">Criar / Editar</p>
+				<h4 class="card-title">Modalidade</h4>
+				<p class="card-category">{{$cardTitle}}</p>
 			</div>
 			<div class="card-body">
 				<form action="{{ route('savemodality') }}" method="POST" enctype="multipart/form-data">
@@ -24,13 +24,13 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="name">Nome</label>
-							<input type="text" name="name" class="form-control">
+							<input type="text" name="name" class="form-control" value="{{$modality ? $modality->name : old('name')}}">
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="description">Descrição</label>
-							<textarea class="form-control" name="description"></textarea>
+							<textarea class="form-control" name="description">{{$modality ? $modality->description : old('description')}}</textarea>
 						</div>
 					</div>
 					<div class="form-row">
@@ -40,7 +40,7 @@
 						<input type="file" name="profileImage">
 					</div>
 
-					<input type="hidden" name="_id" value="">
+					<input type="hidden" name="_id" value="{{$modality ? $modality->_id : old('_id')}}">
 					<button type="submit" class="btn btn-success pull-right">Salvar</button>
 					<div class="clearfix"></div>
 				</form>

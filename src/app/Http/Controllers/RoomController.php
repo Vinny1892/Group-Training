@@ -52,6 +52,17 @@ class RoomController extends Controller{
                     ];
                     array_push($simplifiedCategories, $simplifiedCategory);
                 }
+                // var_dump($request->date);
+                // exit;
+                $dates = [["1"],["2"]];
+                foreach (/*$request->*/$dates as $key => $date) {
+                    array_push($dates, [
+                        "place"=> $request->place,
+                        "date"=> $request->date,
+                        "start_time" => $request->start_time,
+                        "end_time"=> $request->end_time,
+                    ]);
+                }
                 $room = Room::create(
                     [
                         "name" => "$request->name",
@@ -64,30 +75,15 @@ class RoomController extends Controller{
                         "categories"=>  $simplifiedCategories,
                         /*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
                         "modality"=> [
-                                        '_id'=> $modality->_id,
-                                        'slug'=> $modality->slug,
-                                        'name'=> $modality->name,
-                                        /*'description'=> $modality->description,*/
-                                        /*'categories'=> $modality->categories,*/
-                                        /*'tags'=> $modality->tags,*/
-                                    ],
-                        "tags"=> "",
-                        "users"=> "$request->users_id",
-                        "date"=> [
-                            "repeat"=> [
-                                "place"=> "$request->place",
-                                "weekly"=> "$request->weekly",
-                                "start_date" => "$request->start_date",
-                                "end_date"=> "$request->end_date",
-                                "number_of_repetitions"=> "$request->number_of_repetitions"
+                                '_id'=> $modality->_id,
+                                'slug'=> $modality->slug,
+                                'name'=> $modality->name,
+                                /*'description'=> $modality->description,*/
                             ],
-                            "custom_schedules"=> [
-                                [
-                                    "data"=> "$request->data",
-                                    "schedule"=> "$request->schedule"
-                                ]
-                            ]
-                        ]
+                        "tags"=> [""],
+                        "users"=> [""],
+                        "id_user_adm" => $request->id_user_adm,
+                        "date"=> $dates
                     ]
                 );
                 Modality::updateListRooms($modality, $room->_id);
@@ -135,6 +131,7 @@ class RoomController extends Controller{
     {
         $room = Room::where('slug','=' ,$roomSlug)->first();
         Room::deleteImg($room->pathImage);
+        Modality::deleteRoom($room->modality['_id'], $room->_id);
         $room->delete();
         return redirect()->route('sala')->with('success','Sala deletada com sucesso');
 

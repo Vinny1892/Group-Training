@@ -38,7 +38,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="description">Descrição</label>
-					<textarea  class="form-control"  name="description" placeholder="Insira Descrição da Sala" >{{$room ? $room->description : old('name')}}</textarea>
+					<textarea  class="form-control"  name="description" placeholder="Insira Descrição da Sala" >{{$room ? $room->description : old('description')}}</textarea>
 				</div>
 			</div>
 			<div class="form-row">
@@ -56,6 +56,32 @@
 					<input type="password" name="key" id="key" class="form-control"  placeholder="chave" value="{{$room ? $room->password : ''}}">
 				</div>
 			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+			  		<label for="#">Data</label>
+					<input type="date" name="date" class="form-control" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+			  		<label for="#">horário de início</label>
+					<input type="time" name="start_time" class="form-control"  placeholder="horário de início" value="{{$room ? $room->date->event0->start_time : old('start_time')}}">
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+			  		<label for="#">horário de término</label>
+					<input type="time" name="end_time" class="form-control"  placeholder="horário de término" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+				  <label for="place">Local</label>
+				<input type="text" name="place" class="form-control"  placeholder="Local" value="{{$room ? $room->place : old('place')}}">
+				podia ser um maps ou algo assim
+				</div>
+			</div>
 			<!-- nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -69,25 +95,6 @@
 				</div>
 			</div>
 			-->
-			<div class="form-row">
-				<div class="form-group col-md-6">
-				  <label for="place">Local</label>
-				<input type="text" name="place" class="form-control"  placeholder="Local" value="{{$room ? $room->place : old('place')}}">
-				podia ser um maps ou algo assim
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">horário padrão</label>
-					<input type="time" name="standard_time" id="standard_time" class="form-control"  placeholder="horário padrão" value="{{$room ? $room->time : old('time')}}">
-				</div>
-			</div>
-
-
-			<div>
-				insirir imagem
-			</div>
-
 			<div class="form-row">
 				<div class="form-group col-md-6">
 			  		<label for="modalitySlug">Modalidade</label>
@@ -108,10 +115,12 @@
 				</select>
 			</div>
 			<div class="form-row">
-				<label for="inputimage">Imagem</label>
+				<p class="col-12">
+					<label for="inputimage">Imagem</label>
+				</p>
 				<input type="file" name="profileImage">
 			</div>
-
+			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
 			<div class="clearfix"></div>
 		</form>

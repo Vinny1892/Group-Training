@@ -80,4 +80,6 @@ class Room extends Eloquent
     }
 
     
+
+    
 }

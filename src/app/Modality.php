@@ -45,4 +45,16 @@ class Modality extends Eloquent
         $file->move($destinationPath, $profileImage);
         return $destinationPath.$profileImage;
     }
+
+    public static function deleteRoom($modality_id, $room_id){
+        $modality = Modality::find($modality_id);
+        $rooms_id = $modality->rooms_id;
+        foreach ($rooms_id as $key => $value) {
+            if ($value == $room_id) {
+                unset($rooms_id[$key]);
+                break;
+            }
+        }
+        $modality->update(["rooms_id" => $rooms_id]);
+    }
 }
