@@ -20,20 +20,41 @@ class Modality extends Eloquent
     }	
 
 
-    public static function updateListRooms(Modality $modality, $room_id){
-        //$modality->rooms_id é um array   array(0) { }
-        // var_dump($modality->rooms_id);
-        // exit;
-        //dd($modality->rooms_id);
+    public static function updateListRooms(Modality $modality, $room_id, $oldModalityID = -1){
+        /*insere idRoom nessa modalidade*/
         $rooms_id = $modality->rooms_id;
         array_push($rooms_id, $room_id);
         $modality->update( ['rooms_id' => $rooms_id] );
+        if ($oldModalityID != -1) {
+            /*remove idRoom dessa modalidade*/
+            $oldModality = Modality::find($oldModalityID);
+            $rooms2_id = $oldModality->rooms_id;
+            foreach ($rooms2_id as $key => $value) {
+                if ($value == $room_id) {
+                    unset($rooms2_id[$key]);
+                    break;
+                }
+            }
+            $oldModality->update(['rooms_id' => $rooms2_id]);
+        }
     }
 
     public static function saveImg($file, $name){
         $destinationPath = 'image/modality/'; // upload path
-        $profileImage = strtolower(Str::slug($name)).".".$file->getClientOriginalExtension();
+        $profileImage = strtolower(Str::slug($name)).time().".".$file->getClientOriginalExtension();
         $file->move($destinationPath, $profileImage);
         return $destinationPath.$profileImage;
+    }
+
+    public static function deleteRoom($modality_id, $room_id){
+        $modality = Modality::find($modality_id);
+        $rooms_id = $modality->rooms_id;
+        foreach ($rooms_id as $key => $value) {
+            if ($value == $room_id) {
+                unset($rooms_id[$key]);
+                break;
+            }
+        }
+        $modality->update(["rooms_id" => $rooms_id]);
     }
 }

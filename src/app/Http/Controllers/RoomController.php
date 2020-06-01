@@ -26,11 +26,9 @@ class RoomController extends Controller{
     public function store(Request $request)
     {
         $validator = Validator::make(
-            $request->only(
-                ['name','description']
-            ), 
+            $request->only(['name','description'/*, 'profileImage'*/]), 
             [
-                "name" => ["required","string", "max:25"],
+                "name" => ["required","string", "max:25", "unique:rooms,name"],
                 "description" => ["required" , "string" , "max:60"],
                 /*"profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'*/
             ]
@@ -54,43 +52,38 @@ class RoomController extends Controller{
                     ];
                     array_push($simplifiedCategories, $simplifiedCategory);
                 }
+                // var_dump($request->date);
+                // exit;
+                $dates = [["1"],["2"]];
+                foreach (/*$request->*/$dates as $key => $date) {
+                    array_push($dates, [
+                        "place"=> $request->place,
+                        "date"=> $request->date,
+                        "start_time" => $request->start_time,
+                        "end_time"=> $request->end_time,
+                    ]);
+                }
                 $room = Room::create(
                     [
                         "name" => "$request->name",
                         "description"=> "$request->description",
                         "public"=> "$request->public",
                         "key" => "$request->key",
-                        
                         "pathImage" => $pathImage,
                         "placeType"=> "$request->placeType",
                         "standard_time"=> "$request->standard_time",
                         "categories"=>  $simplifiedCategories,
                         /*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
                         "modality"=> [
-                                        '_id'=> $modality->_id,
-                                        'slug'=> $modality->slug,
-                                        'name'=> $modality->name,
-                                        /*'description'=> $modality->description,*/
-                                        /*'categories'=> $modality->categories,*/
-                                        /*'tags'=> $modality->tags,*/
-                                    ],
-                        "tags"=> "",
-                        "users"=> "$request->users_id",
-                        "date"=> [
-                            "repeat"=> [
-                                "place"=> "$request->place",
-                                "weekly"=> "$request->weekly",
-                                "start_date" => "$request->start_date",
-                                "end_date"=> "$request->end_date",
-                                "number_of_repetitions"=> "$request->number_of_repetitions"
+                                '_id'=> $modality->_id,
+                                'slug'=> $modality->slug,
+                                'name'=> $modality->name,
+                                /*'description'=> $modality->description,*/
                             ],
-                            "custom_schedules"=> [
-                                [
-                                    "data"=> "$request->data",
-                                    "schedule"=> "$request->schedule"
-                                ]
-                            ]
-                        ]
+                        "tags"=> [""],
+                        "users"=> [""],
+                        "id_user_adm" => $request->id_user_adm,
+                        "date"=> $dates
                     ]
                 );
                 Modality::updateListRooms($modality, $room->_id);
@@ -124,16 +117,21 @@ class RoomController extends Controller{
 
     public function index()
     {
+        $allplaceType = ['quadra', 'campo', 'digital', 'online', 'rede', 'lan', 'rua', 'club', 'fazenda', 'trilha'];
+        //$alltags = Tag::all();
+        $cardTitle = 'Criar Sala';
+        $room = null;
         $allRooms = Room::all();
         $allModalities = Modality::all();
         $allCategories = Category::all();
-        return view('room.dashboard',compact('allRooms', 'allModalities', 'allCategories'/*, '$allplaceType'*/) );
+        return view('room.dashboard',compact('allRooms', 'allModalities', 'allCategories', 'room', 'cardTitle'/*, '$allplaceType'*/) );
     }
 
-    public function destroy($slug)
+    public function destroy($roomSlug)
     {
-        $room = Room::where('slug','=' ,$slug)->first();
+        $room = Room::where('slug','=' ,$roomSlug)->first();
         Room::deleteImg($room->pathImage);
+        Modality::deleteRoom($room->modality['_id'], $room->_id);
         $room->delete();
         return redirect()->route('sala')->with('success','Sala deletada com sucesso');
 
@@ -177,7 +175,9 @@ class RoomController extends Controller{
         $allCategories = Category::all();
         $allplaceType = ['quadra', 'campo', 'digital', 'online', 'rede', 'lan', 'rua', 'club', 'fazenda', 'trilha'];
         //$alltags = Tag::all();
-        return view('room.formCreate', compact('allModalities', 'allCategories', 'allplaceType'/*, 'alltags'*/));
+        $cardTitle = 'Criar Sala';
+        $room = null;
+        return view('room.dashboard', compact('allModalities', 'allCategories', 'allplaceType', 'cardTitle', 'room'/*, 'alltags'*/));
     }
 
     /**
@@ -188,29 +188,79 @@ class RoomController extends Controller{
      */
     public function edit(Request $request)
     {
+        $room = Room::where('slug', '=', $request->slug)->first();
         $allModalities = Modality::all();
         $allCategories = Category::all();
         //$alltags = Tag::all();
-        $modality = Modality::find($request->id);
-        return view('room.formEdit', compact('modality', 'allModalities', 'allCategories'/*, 'alltags'*/));
+        $allRooms = Room::all();
+        $modality = Modality::find($room->modality['_id']);
+        $cardTitle = 'Editando Sala: '.$room->name;
+        return view('room.dashboard', compact('modality', 'allModalities', 'allCategories', 'room', 'cardTitle', 'allRooms'/*, 'alltags'*/));
     }
 
     //acho que via post, se passar esse parametro MODEL, nao vem o objeto, e sim uma string desse objeto
     public function update(Request $request, Room $room)
     {
-        $room = Room::find();
+        $validator = Validator::make($request->only(['name','description']), [
+            "name" => ["required","string", "unique:rooms,_id,$room->_id" , "max:25"],
+            "description" => ["required" , "string" , "max:100"]
+        ]);
+        if ($validator->fails()) {
+            return  Redirect::route('sala')->withErrors($validator)->withInput() ;
+        }
+        $simplifiedCategories = [];
+        foreach ($request->categoriesSlug as $categorySlug) {
+            $category = Category::where('slug', '=', $categorySlug)->first();
+            $simplifiedCategory = [
+                "name"=> $category->name,
+                "_id"=> $category->_id,
+                "slug"=> $category->slug
+            ];
+            array_push($simplifiedCategories, $simplifiedCategory);
+        }
+        $room = Room::where('slug', '=', $request->roomSlug)->first();
         $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
-        $room->update(
-            [
-                'name' => $request->name,
-                'description' => $request->description,
-                "modality"=> [
-                    '_id'=> $modality->_id,
-                    'slug'=> $modality->slug,
-                    'name'=> $modality->name,
-                ],
-            ]
-        );
+        $oldModalityID = $room->modality['_id'];
+        if(
+            $room->update(
+                [
+                    "name" => "$request->name",
+                    "description"=> "$request->description",
+                    "public"=> "$request->public",
+                    "key" => "$request->key",
+                    "placeType"=> "$request->placeType",
+                    "standard_time"=> "$request->standard_time",
+                    "categories"=>  $simplifiedCategories,
+                    "modality"=> [
+                                    '_id'=> $modality->_id,
+                                    'slug'=> $modality->slug,
+                                    'name'=> $modality->name,
+                                    /*'description'=> $modality->description,*/
+                                ],
+                    "tags"=> "",
+                    "users"=> "$request->users_id",
+                    "date"=> [
+                        "repeat"=> [
+                            "place"=> "$request->place",
+                            "weekly"=> "$request->weekly",
+                            "start_date" => "$request->start_date",
+                            "end_date"=> "$request->end_date",
+                            "number_of_repetitions"=> "$request->number_of_repetitions"
+                        ],
+                        "custom_schedules"=> [
+                            [
+                                "data"=> "$request->data",
+                                "schedule"=> "$request->schedule"
+                            ]
+                        ]
+                    ]
+                ]
+            )
+        ){
+
+            Modality::updateListRooms($modality, $room->_id, $oldModalityID);
+            return Redirect::route('sala')->with("message","Room Atualizada com Sucesso");
+        }
     }
     
     /*

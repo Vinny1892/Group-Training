@@ -14,12 +14,10 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $collection) {
-            $collection->bigIncrements('id');
-            $collection->string('title');
-            $collection->int('id_modality');
+            $collection->string('name');
             $collection->string('slug');
             $collection->text('description');
-            $collection->string('id_rooms');
+            $collection->string('rooms_id');
             $collection->timestamps();
         });
     }
