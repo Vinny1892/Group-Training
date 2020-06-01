@@ -60,7 +60,7 @@ class CategoryController extends Controller
      */
     public function edit($slugCategory)
     {
-        $categorys = Category::all();
+        $categorys = Category::paginate(6);
         $category = Category::where('slug' , $slugCategory)->first();
         $cardTitle = "Editar Categoria $category->name";
         $cardDescription = "editando categoria $category->name";

@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\tag;
+use App\Tag;
 use Illuminate\Http\Request;
+use MongoDB\Exception\Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Mockery\Exception;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        
+    }
 
 
     /**
@@ -21,11 +25,11 @@ class TagController extends Controller
      */
     public   function create()
     {
-        $cardTitle = "Criar Tag";
-        $cardDescription = "criar uma nova Tag";
-        $tag = null;
-        $tags = Tag::paginate(6);
-        return view('tag.form' , \compact('tags','tag','cardTitle','cardDescription'));
+        return Tag::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            /*'slug' => $data['slug'], acredito que o metodo no metodo do MODEL*/
+        ]);
     }
 
     /**
@@ -36,20 +40,36 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-       $validator = Validator::make($request->only(['name','description']), [
-            "name" => ["required","string", "max:25", "unique:categories,name"],
-            "description" => ["required" , "string" , "max:60"]
-        ]);
-       if ($validator->fails() )  return  Redirect::route('tag')->withErrors($validator)->withInput() ;
-        try{
-        Tag::create([
-            "name" => $request->name,
-            "description"=> $request->description,
-        ]);
-         return Redirect::route('tag')->with("message","Tag Criada Com Sucesso");
-        } catch (Exception $exception){
-            echo "Erro ao inserir Tag";
-        }
+      $validate = Validator::make($request->only(['name','description']),[
+        'name' => ['required','string','unique:tags,name', 'min:4' , 'max:8'],
+        'description' => ['required' , "string"]
+      ]);
+
+      if($validate->fails())  return  Redirect::route('tag')->withErrors($validate)->withInput();
+      try{
+      $this->create($request->only(['name','description']));
+      return Redirect::route('tag')->with("message","Categoria Criada Com Sucesso");
+
+      }catch(Exception $ex){
+          echo "Erro ao inserir registro no banco";
+      }
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\tag  $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        $cardTitle = "Criar tag";
+        $cardDescription = "inserir novas tags";
+        $tag = null;
+        $tags = Tag::paginate(5);
+        return view('tag.formTag', \compact('tag','tags','cardTitle','cardDescription'));
 
     }
     /**
@@ -58,14 +78,14 @@ class TagController extends Controller
      * @param  \App\Tag  $Tag
      * @return \Illuminate\Http\Response
      */
-    public function edit($slugtag)
+    public function edit( $slugTag)
     {
-        $tags = Tag::all();
-        $tag = Tag::where('slug' , $slugtag)->first();
-        $cardTitle = "Editar Tag $tag->name";
-        $cardDescription = "editando Tag $tag->name";
-        return view('tag.form',compact('tags','tag','cardTitle','cardDescription'));
-        
+        $tag = Tag::where("slug", $slugTag)->first();
+        $cardTitle = "Editar tag";
+        $cardDescription = "Editar $tag->name";
+        $tags = Tag::paginate(5);
+        return view('tag.formTag', \compact('tag','tags','cardTitle','cardDescription'));
+        //
     }
 
     /**

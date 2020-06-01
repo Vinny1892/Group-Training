@@ -23,19 +23,20 @@
               <p>Minha Conta</p>
             </a>
           </li>
-          <li class="nav-item {{ Route::current()->getName() == 'create.modalidade' ? "active" : '' }}">
+          <li class="nav-item {{ Route::current()->getName() == 'modalidade' ? "active" : '' }}">
+
             <a class="nav-link" href="{{ route('modalidade') }}">
           <i class="material-icons">Modalidade</i>
           <p>Modalidade</p>
         </a>
       </li>
-      <li class="nav-item {{ Route::current()->getName() == 'seila1231' ? "active" : '' }}">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+      <li class="nav-item {{ Route::current()->getName() == 'tag' ? "active" : 'seila143' }}">
+        <a class="nav-link" href="{{ route('tag') }}">
       <i class="material-icons">Tag</i>
       <p>Tag</p>
     </a>
   </li>
-  <li class="nav-item {{ Route::current()->getName() == 'seila12312' ? "active" : '' }}">
+  <li class="nav-item {{ Route::current()->getName() == 'sala' ? "active" : 'createroom' }}">
     <a class="nav-link" href="{{ route('sala') }}">
   <i class="material-icons">room</i>
   <p>Sala</p>

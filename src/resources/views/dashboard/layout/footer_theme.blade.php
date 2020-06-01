@@ -99,8 +99,7 @@
 <script src="{{asset('assetsDashboard/js/plugins/arrive.min.js')}}"></script>
 <!--  Google Maps Plugin    -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chartist JS -->
-<script src="{{asset('assetsDashboard/js/plugins/chartist.min.js')}}"></script>
+
 <!--  Notifications Plugin    -->
 <script src="{{asset('assetsDashboard/js/plugins/bootstrap-notify.js')}}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
@@ -133,10 +132,13 @@
             lightmodebtn.classList.add('active')
           }
         }
+        console.log(colorTheme);
+        
 
         if(colorTheme){
             $sidebar.attr('data-color' , colorTheme);
             Array.from(divThemeColorOption.children).forEach((el)=> {
+              console.log(el)
                 if(el.getAttribute('data-color') !== colorTheme ){
                     el.classList.remove('active');
                 }else{
@@ -196,6 +198,7 @@
         $(this).addClass('active');
 
         var new_color = $(this).data('color');
+        console.log(new_color)
         localStorage.setItem("data-color" , new_color)
 
         if ($sidebar.length != 0) {

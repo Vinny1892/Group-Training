@@ -12,7 +12,8 @@ RUN apt install -y libonig-dev \
     libmcrypt-dev \
     libzip-dev \
     libpq-dev   \
-     libmongoc-dev
+     libmongoc-dev \
+     htop
 
 
 

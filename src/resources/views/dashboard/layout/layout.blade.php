@@ -14,7 +14,7 @@
       <!-- CSS Files -->
       <link href="{{asset('assetsDashboard/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
       <link href="{{asset("autocompletediferentao/dist/tokenize2.min.css")}}" rel="stylesheet">
-
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     </head>
     
     <body class="">

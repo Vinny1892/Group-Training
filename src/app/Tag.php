@@ -13,9 +13,7 @@ class Tag extends Eloquent
     	$this->attributes['name'] = ucfirst(strtolower($value));
     	$this->attributes['slug'] = strtolower(Str::slug($value));
     }
-
 	
-
 	
 
 }
