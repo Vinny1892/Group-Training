@@ -7,15 +7,13 @@ use Jenssegers\Mongodb\Eloquent\Model  as Eloquent;
 /*https://www.hostinger.com.br/tutoriais/tags-wordpress/#Tags-WordPress-x-Categorias*/
 class Category extends Eloquent
 {
-    protected $fillable = ['name', 'description', "id_rooms", "id_modality",'slug'];/*id e slug gerado automaticamente*/
-	 protected  $connection = 'mongodb';
-     protected  $table = 'categories';
+    protected $fillable = ['name', 'description', "id_rooms", "id_modality",'slug'];
+	 // protected  $connection = 'mongodb';
+  //    protected  $table = 'categories';
 
-    
-	//nao pode mudar o nome desse metodo, reservado (setNomeAttribute)
     public function setNameAttribute($value){
     	$this->attributes['name'] = ucfirst(strtolower($value));
-    	$this->attributes['slug'] = strtolower(Str::slug($value));//cria slug automaticamente
+    	$this->attributes['slug'] = strtolower(Str::slug($value));
     }
 
 

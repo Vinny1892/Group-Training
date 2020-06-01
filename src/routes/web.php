@@ -59,12 +59,13 @@ Route::get('/modalidade/{slugModality}/salas' , "RoomController@roomsOfModality"
 Route::get('/painel/sala', "RoomController@index")->name('sala');/*lista sala na dashboard*/
 Route::get('/painel/sala/criar', "RoomController@create")->name('createroom');
 Route::post('/painel/sala/salvar', "RoomController@store")->name('saveroom');
-Route::get('/painel/sala/editar', "RoomController@edit")->name('editroom');
+Route::get('/painel/sala/{slug}/editar', "RoomController@edit")->name('editroom');
 Route::post('/painel/sala/atualizar' , "RoomController@update")->name('updateroom');
 Route::get('/painel/sala/{slug}/deletar', "RoomController@destroy")->name('deleteroom');
 
                     //TAG
-Route::get('/tags', "TagController@index")->name('tags');
+//Route::get('/tags', "TagController@index")->name('tags');
+Route::get('/painel/tag/criar', "TagController@create")->name('tag');
 
 Route::get('/teste', function(){
     response('Funcionou teste');

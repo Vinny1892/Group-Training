@@ -68,7 +68,7 @@ class Room extends Eloquent
     
     public static function saveImg($file, $name){
         $destinationPath = 'image/room/'; // upload path
-        $profileImage = strtolower(Str::slug($name)).".".$file->getClientOriginalExtension();
+        $profileImage = strtolower(Str::slug($name)).time().".".$file->getClientOriginalExtension();
         $file->move($destinationPath, $profileImage);
         return $destinationPath.$profileImage;
     }
