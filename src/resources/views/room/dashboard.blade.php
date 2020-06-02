@@ -57,31 +57,6 @@
 				</div>
 			</div>
 			
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">Data</label>
-					<input type="date" name="date" class="form-control" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">horário de início</label>
-					<input type="time" name="start_time" class="form-control"  placeholder="horário de início" value="{{$room ? $room->date->event0->start_time : old('start_time')}}">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">horário de término</label>
-					<input type="time" name="end_time" class="form-control"  placeholder="horário de término" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-				  <label for="place">Local</label>
-				<input type="text" name="place" class="form-control"  placeholder="Local" value="{{$room ? $room->place : old('place')}}">
-				podia ser um maps ou algo assim
-				</div>
-			</div>
 			<!-- nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -98,7 +73,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 			  		<label for="modalitySlug">Modalidade</label>
-					<select id="modalitySlug" name="modalitySlug">
+					<select id="modalitySlug" name="modalitySlug" required>
 						@foreach($allModalities as $modality)
 							<option value="{{$modality->slug}}">{{$modality->name}}</option>
 						@endforeach
@@ -120,10 +95,44 @@
 				</p>
 				<input type="file" name="profileImage">
 			</div>
+
+			<div class="card">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+				  		<label for="#">Data</label>
+						<input type="date" name="date0['data']" class="form-control" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+				  		<label for="#">horário de início</label>
+						<input type="time" name="start_time0" class="form-control"  placeholder="horário de início" value="{{$room ? $room->date->event0->start_time : old('start_time')}}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+				  		<label for="#">horário de término</label>
+						<input type="time" name="end_time0" class="form-control"  placeholder="horário de término" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+					  <label for="place">Local</label>
+					<input type="text" name="place0" class="form-control"  placeholder="Local" value="{{$room ? $room->place : old('place')}}">
+					podia ser um maps ou algo assim
+					</div>
+				</div>
+			</div>
+			<div id="dates">
+				<!-- insere hrml via JS -->
+			</div>
+
+
 			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
 			<div class="clearfix"></div>
 		</form>
+				<button onclick="insertCardDate()">Adicionar mais datas</button>
 	</div>
 </div>
 
@@ -162,7 +171,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -176,4 +184,44 @@
 </div>
 
 
+
+
+
+<script>
+	let contador = 0;
+	function insertCardDate() {
+		let cardDate = document.getElementById('dates');
+		contador++;
+		cardDate.innerHTML += "<div class="+'card'+">"+
+			
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+			  		"<label>Data</label>"+
+					"<input type="+'date'+" name="+'date'+contador+" class="+'form-control'+">"+
+				"</div>"+
+			"</div>"+
+
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+			  		"<label>horário de início</label>"+
+					"<input type="+'time'+" name="+'start_time'+contador+" class="+'form-control'+"  placeholder="+'horário de início>'+
+				"</div>"+
+			"</div>"+
+
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+			  		"<label>horário de término</label>"+
+					"<input type="+'time'+" name="+'end_time'+contador+" class="+'form-control'+"  placeholder="+'horário de término>'+
+				"</div>"+
+			"</div>"+		
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+				  "<label for="+'place'+">Local</label>"+
+				"<input type="+'text'+" name="+'place'+contador+" class="+'form-control'+"  placeholder="+'Local'+">"+
+				"</div>"+
+			"</div>"+
+
+		"</div>";
+	}
+</script>
 @endsection

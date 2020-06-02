@@ -102,7 +102,7 @@
           opcoes.innerHTML += "<option value="+category.slug+"> "+category.name+" </option> ";
         });
       }else{
-        alert('merda');
+        alert('merda, rooms n existe no JS');
       }
     </script>
 

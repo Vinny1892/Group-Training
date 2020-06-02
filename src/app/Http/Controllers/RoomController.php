@@ -36,33 +36,11 @@ class RoomController extends Controller{
         if ($validator->fails() ){
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
         }elseif( Self::existsRoom($request->name) ) {
-            try{
-                $pathImage = "";
-                if ($request->file('profileImage')) {
-                    $pathImage = Room::saveImg($request->file('profileImage'), $request->name);
-                }
-                $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
-                $simplifiedCategories = [];
-                foreach ($request->categoriesSlug as $categorySlug) {
-                    $category = Category::where('slug', '=', $categorySlug)->first();
-                    $simplifiedCategory = [
-                        "name"=> $category->name,
-                        "_id"=> $category->_id,
-                        "slug"=> $category->slug
-                    ];
-                    array_push($simplifiedCategories, $simplifiedCategory);
-                }
-                // var_dump($request->date);
-                // exit;
-                $dates = [["1"],["2"]];
-                foreach (/*$request->*/$dates as $key => $date) {
-                    array_push($dates, [
-                        "place"=> $request->place,
-                        "date"=> $request->date,
-                        "start_time" => $request->start_time,
-                        "end_time"=> $request->end_time,
-                    ]);
-                }
+            try{      
+                $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
+                $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
+                $dates = Self::createArrayDates($request);
+                $simplifiedModality = Self::getModality($request->modalitySlug); 
                 $room = Room::create(
                     [
                         "name" => "$request->name",
@@ -71,22 +49,16 @@ class RoomController extends Controller{
                         "key" => "$request->key",
                         "pathImage" => $pathImage,
                         "placeType"=> "$request->placeType",
-                        "standard_time"=> "$request->standard_time",
                         "categories"=>  $simplifiedCategories,
                         /*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
-                        "modality"=> [
-                                '_id'=> $modality->_id,
-                                'slug'=> $modality->slug,
-                                'name'=> $modality->name,
-                                /*'description'=> $modality->description,*/
-                            ],
+                        "modality"=> $simplifiedModality,
                         "tags"=> [""],
                         "users"=> [""],
                         "id_user_adm" => $request->id_user_adm,
                         "date"=> $dates
                     ]
                 );
-                Modality::updateListRooms($modality, $room->_id);
+                Modality::updateListRooms($simplifiedModality, $room->_id);
                 return Redirect::route('sala')->with("message","Sala Criada Com Sucesso");
             } catch (Exception $exception){
                 echo "Erro ao inserir sala";
@@ -94,6 +66,65 @@ class RoomController extends Controller{
         }else{
             return  Redirect::route('sala')->withErrors("Esse nome já esta sendo usado")->withInput() ;
         }
+    }
+    
+    private static function  createPathImage($file, $name){
+        if ($file && $name) {
+            return Room::saveImg($file, $name);
+        }
+        return "";
+    }
+
+    private static function creteArrayCategories($categoriesSlug){
+        $simplifiedCategories = [];
+        if ($categoriesSlug) {
+            foreach ($categoriesSlug as $categorySlug) {
+                $category = Category::where('slug', '=', $categorySlug)->first();
+                $simplifiedCategory = [
+                    "name"=> $category->name,
+                    "_id"=> $category->_id,
+                    "slug"=> $category->slug
+                ];
+                array_push($simplifiedCategories, $simplifiedCategory);
+            }
+            return $simplifiedCategories;
+            }
+        return [""];
+    }
+
+    private static function  createArrayDates(Request $request){
+        $i = 0;
+        $date_index = 'date'.$i;
+        $dates = [];
+        while($request->$date_index){
+            $date_index = 'date'.$i;
+            $start_time_index = 'start_time'.$i;
+            $end_time_index = 'end_time'.$i;
+            $place_index = 'place'.$i;
+            array_push($dates, 
+                [
+                    "place"=> $request->$place_index,
+                    "date"=> $request->$date_index,
+                    "start_time" => $request->$start_time_index,
+                    "end_time"=> $request->$end_time_index,
+                ]
+            );
+            $i++;
+        }
+        return $dates ? $dates : [''];
+    }
+
+    private static function  getModality($modalitySlug){
+        $modality = Modality::where('slug', '=', $modalitySlug)->first();
+        if ($modality) {
+            return [
+                '_id'=> $modality->_id,
+                'slug'=> $modality->slug,
+                'name'=> $modality->name,
+                /*'description'=> $modality->description,*/
+            ];
+        }
+        return [""];
     }
 
     /**
@@ -207,58 +238,30 @@ class RoomController extends Controller{
         ]);
         if ($validator->fails()) {
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
-        }
-        $simplifiedCategories = [];
-        foreach ($request->categoriesSlug as $categorySlug) {
-            $category = Category::where('slug', '=', $categorySlug)->first();
-            $simplifiedCategory = [
-                "name"=> $category->name,
-                "_id"=> $category->_id,
-                "slug"=> $category->slug
-            ];
-            array_push($simplifiedCategories, $simplifiedCategory);
-        }
-        $room = Room::where('slug', '=', $request->roomSlug)->first();
-        $modality = Modality::where('slug', '=', $request->modalitySlug)->first();
-        $oldModalityID = $room->modality['_id'];
-        if(
+        }elseif(Self::existsRoom($request->name)){
+            $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
+            $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
+            $dates = Self::createArrayDates($request->dates);
+            $simplifiedModality = Self::getModality($request->modalitySlug); 
+            $room = Room::where('slug', '=', $request->roomSlug)->first();//verificado?
+            $oldModalityID = $room->modality['_id'];
             $room->update(
                 [
                     "name" => "$request->name",
                     "description"=> "$request->description",
                     "public"=> "$request->public",
                     "key" => "$request->key",
+                    "pathImage" => $pathImage,
                     "placeType"=> "$request->placeType",
                     "standard_time"=> "$request->standard_time",
                     "categories"=>  $simplifiedCategories,
-                    "modality"=> [
-                                    '_id'=> $modality->_id,
-                                    'slug'=> $modality->slug,
-                                    'name'=> $modality->name,
-                                    /*'description'=> $modality->description,*/
-                                ],
+                    "modality"=> $simplifiedModality,
                     "tags"=> "",
                     "users"=> "$request->users_id",
-                    "date"=> [
-                        "repeat"=> [
-                            "place"=> "$request->place",
-                            "weekly"=> "$request->weekly",
-                            "start_date" => "$request->start_date",
-                            "end_date"=> "$request->end_date",
-                            "number_of_repetitions"=> "$request->number_of_repetitions"
-                        ],
-                        "custom_schedules"=> [
-                            [
-                                "data"=> "$request->data",
-                                "schedule"=> "$request->schedule"
-                            ]
-                        ]
-                    ]
+                    "date"=> $dates
                 ]
-            )
-        ){
-
-            Modality::updateListRooms($modality, $room->_id, $oldModalityID);
+            );
+            Modality::updateListRooms($simplifiedModality, $room->_id, $oldModalityID);
             return Redirect::route('sala')->with("message","Room Atualizada com Sucesso");
         }
     }
