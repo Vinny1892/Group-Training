@@ -50,7 +50,6 @@ class RoomController extends Controller{
                         "pathImage" => $pathImage,
                         "placeType"=> "$request->placeType",
                         "categories"=>  $simplifiedCategories,
-                        /*nao da pra passar o objeto modality, entao somente por enquanto to pessando o slug*/
                         "modality"=> $simplifiedModality,
                         "tags"=> [""],
                         "users"=> [""],
@@ -111,7 +110,14 @@ class RoomController extends Controller{
             );
             $i++;
         }
-        return $dates ? $dates : [''];
+        return $dates ? $dates : [
+                [
+                    "place"=> '',
+                    "date"=> '',
+                    "start_time" => '',
+                    "end_time"=> '',
+                ]
+            ];
     }
 
     private static function  getModality($modalitySlug){
