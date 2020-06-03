@@ -19,7 +19,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public   function create()
+    public function create()
     {
         $cardTitle = "Criar Categoria";
         $cardDescription = "criar uma nova categoria";

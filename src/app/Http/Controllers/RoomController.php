@@ -232,39 +232,50 @@ class RoomController extends Controller{
     //acho que via post, se passar esse parametro MODEL, nao vem o objeto, e sim uma string desse objeto
     public function update(Request $request, Room $room)
     {
-        $validator = Validator::make($request->only(['name','description']), [
-            "name" => ["required","string", "unique:rooms,_id,$room->_id" , "max:25"],
-            "description" => ["required" , "string" , "max:100"]
-        ]);
-        if ($validator->fails()) {
+        $validator = Validator::make(
+            $request->only(['name','description'/*, 'profileImage'*/]), 
+            [
+                "name" => ["required","string", "unique:rooms,name,_id,$room->_id" , "max:25"],
+                "description" => ["required" , "string" , "max:60"],
+                /*"profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'*/
+            ]
+        );
+        if ($validator->fails() ){
             return  Redirect::route('sala')->withErrors($validator)->withInput() ;
-        }elseif(Self::existsRoom($request->name)){
-            $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
-            $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
-            $dates = Self::createArrayDates($request->dates);
-            $simplifiedModality = Self::getModality($request->modalitySlug); 
-            $room = Room::where('slug', '=', $request->roomSlug)->first();//verificado?
-            $oldModalityID = $room->modality['_id'];
-            $room->update(
-                [
-                    "name" => "$request->name",
-                    "description"=> "$request->description",
-                    "public"=> "$request->public",
-                    "key" => "$request->key",
-                    "pathImage" => $pathImage,
-                    "placeType"=> "$request->placeType",
-                    "standard_time"=> "$request->standard_time",
-                    "categories"=>  $simplifiedCategories,
-                    "modality"=> $simplifiedModality,
-                    "tags"=> "",
-                    "users"=> "$request->users_id",
-                    "date"=> $dates
-                ]
-            );
-            Modality::updateListRooms($simplifiedModality, $room->_id, $oldModalityID);
-            return Redirect::route('sala')->with("message","Room Atualizada com Sucesso");
+        }elseif( Self::existsRoom($request->name) ) {
+            try{   
+
+                $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
+                $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
+                $dates = Self::createArrayDates($request);
+                $simplifiedModality = Self::getModality($request->modalitySlug); 
+                //$room = Room::where('slug', '=', $request->roomSlug)->first();
+                $oldModalityID = $room->modality['_id'];
+                $room->update(
+                    [
+                        "name" => "$request->name",
+                        "description"=> "$request->description",
+                        "public"=> "$request->public",
+                        "key" => "$request->key",
+                        "pathImage" => $pathImage,
+                        "placeType"=> "$request->placeType",
+                        "standard_time"=> "$request->standard_time",
+                        "categories"=>  $simplifiedCategories,
+                        "modality"=> $simplifiedModality,
+                        "tags"=> "",
+                        "users"=> "$request->users_id",
+                        "date"=> $dates
+                    ]
+                );
+                Modality::updateListRooms($simplifiedModality, $room->_id, $oldModalityID);
+            } catch (Exception $exception){
+                return  Redirect::route('sala')->withErrors("Erro ao Atualizar")->withInput() ;
+            }
+        }else{
+            return Redirect::route('sala')->with("message", "Sala Atualizada com Sucesso");
         }
     }
+    //}
     
     /*
     * metodo responsavel por pegar um ou varios slug de categorias 
