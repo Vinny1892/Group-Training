@@ -46,9 +46,17 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="#">Público</label>
-					<input type="radio" id="public" name="public" value="public">
+					<input type="radio" id="public" name="public" value="public" 
+					@if($room && $room->public == "public")
+						{{'checked'}}
+					@endif
+					>
 					<label for="public">Publico</label><br>
-					<input type="radio" id="private" name="public" value="private">
+					<input type="radio" id="private" name="public" value="private"
+					@if($room && $room->public == "private")
+						{{'checked'}}
+					@endif
+					>
 					<label for="private">Privado</label><br>
 				</div>
 			</div>
@@ -77,7 +85,17 @@
 			  		<label for="modalitySlug">Modalidade</label>
 					<select id="modalitySlug" name="modalitySlug" required>
 						@foreach($allModalities as $modality)
-							<option value="{{$modality->slug}}">{{$modality->name}}</option>
+							@if($room && $room->modality)
+								@if($room->modality['slug'] == $modality->slug)
+									<option value="{{$modality->slug}}" selected>{{$modality->name}}</option>
+									}
+								@else
+									<option value="{{$modality->slug}}">{{$modality->name}}</option>
+								@endif
+							@else
+								<option value="{{$modality->slug}}">{{$modality->name}}</option>
+							@endif
+							
 						@endforeach
 					</select>
 				</div>
@@ -86,9 +104,27 @@
 			<div class="form-row" id="categorias">
 		  		<label for="category">Categorias</label>
 		  		<select id="categoriesSlug" name="categoriesSlug[]" multiple>
-					@foreach($allCategories as $category)
-						<option value="{{$category->slug}}"> {{$category->name}} </option>
-					@endforeach
+					@if($room)
+						<?php $show = true ?>
+						@foreach($allCategories as $category )
+							@foreach($room->categories as $categorySelect)
+								@if($categorySelect)
+									@if($category->slug == $categorySelect['slug']))
+										<option value="{{$category->slug}}" selected> {{$category->name}} </option>
+										<?php $show = false ?>
+									@endif
+								@endif
+							@endforeach
+							@if($show)
+								<option value="{{$category->slug}}" > {{$category->name}} </option>
+							@endif
+							<?php $show = true ?>
+						@endforeach
+					@else
+						@foreach($allCategories as $category )
+							<option value="{{$category->slug}}" > {{$category->name}} </option>
+						@endforeach
+					@endif
 				</select>
 			</div>
 			<div class="form-row">
@@ -98,37 +134,11 @@
 				<input type="file" name="profileImage">
 			</div>
 
-			<div class="card">
-				<div class="form-row">
-					<div class="form-group col-md-6">
-				  		<label for="#">Data</label>
-						<input type="date" name="date0" class="form-control" value="{{$room ? $room->date0 : old('date0')}}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-				  		<label for="#">horário de início</label>
-						<input type="time" name="start_time0" class="form-control"  placeholder="horário de início" value="{{$room ? $room->start_time0 : old('start_time0')}}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-				  		<label for="#">horário de término</label>
-						<input type="time" name="end_time0" class="form-control"  placeholder="horário de término" value="{{$room ? $room->end_time0 : old('end_time0')}}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-					  <label for="place">Local</label>
-					<input type="text" name="place0" class="form-control"  placeholder="Local" value="{{$room ? $room->place0 : old('place0')}}">
-					podia ser um maps ou algo assim
-					</div>
-				</div>
-			</div>
-			<div id="dates">
+			
+			<div id="dates" class="">
 				<!-- insere hrml via JS -->
 			</div>
-
+			
 
 			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
@@ -197,7 +207,6 @@
 
 		let cardDate = document.getElementById('dates');
 		let vazio = 1;
-		contador++;
 		cardDate.innerHTML += "<div class="+'card'+">"+
 			
 			"<div class="+'form-row'+">"+
@@ -228,6 +237,7 @@
 			"</div>"+
 
 		"</div>";
+		contador++;
 	}
 </script>
 
@@ -235,24 +245,22 @@
     function getDates(){
 		let dates = [] ;
 		@if ($room) 
-			@foreach($room->date as $date)
+			@foreach($room->date as $date)				
 				dates.push(
 			      	{
-				      	'start_time': "{{$date['start_time']}}",
-				      	'end_time': "{{$date['end_time']}}",
 				      	'place': "{{$date['place']}}",
 			      		'date': "{{$date['date']}}",
+				      	'start_time': "{{$date['start_time']}}",
+				      	'end_time': "{{$date['end_time']}}",
 			      	},
 			  	);
 			@endforeach
-		@else
-			<?php echo "nao tem $ room" ?>
 		@endif
 		return dates;
     }
 </script>
 <script>
-	@if ($room && count($room->date) > 1)
+	@if ($room && count($room->date) > 0)
 		let dates = getDates();
 		dates.forEach(
 			function (data){
@@ -264,7 +272,12 @@
 		<?php //dd($room) ?>
 
 </script>
-
+<script>
+	let existRoom = "{{$room}}";
+	if (!existRoom) {
+		insertCardDate();
+	}
+</script>
 
 
 @endsection
