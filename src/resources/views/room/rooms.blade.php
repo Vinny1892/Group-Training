@@ -21,7 +21,7 @@
       <div id="cardRoom">
         @foreach($rooms as $room)
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <a href="{{ route('chat', $room->slug) }}">
+            <a href="{{ route('chat', $room->_id) }}">
               <div class="card">
                   <?php if ($room->pathImage): ?>
                     <div class="card-header" style="
@@ -102,7 +102,7 @@
           opcoes.innerHTML += "<option value="+category.slug+"> "+category.name+" </option> ";
         });
       }else{
-        alert('merda');
+        alert('merda, rooms n existe no JS');
       }
     </script>
 

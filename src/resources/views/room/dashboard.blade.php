@@ -15,6 +15,8 @@
 @endif
 
 
+
+
 <div class="card">
 	<div class="card-header card-header-success">
 		<h4 class="card-title">Sala</h4>
@@ -53,35 +55,10 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 			  		<label for="#">senha</label>
-					<input type="password" name="key" id="key" class="form-control"  placeholder="chave" value="{{$room ? $room->password : ''}}">
+					<input type="password" name="key" id="key" class="form-control"  placeholder="chave">
 				</div>
 			</div>
 			
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">Data</label>
-					<input type="date" name="date" class="form-control" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">horário de início</label>
-					<input type="time" name="start_time" class="form-control"  placeholder="horário de início" value="{{$room ? $room->date->event0->start_time : old('start_time')}}">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">horário de término</label>
-					<input type="time" name="end_time" class="form-control"  placeholder="horário de término" value="{{$room ? $room->date->event0->end_time : old('end_time')}}">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-				  <label for="place">Local</label>
-				<input type="text" name="place" class="form-control"  placeholder="Local" value="{{$room ? $room->place : old('place')}}">
-				podia ser um maps ou algo assim
-				</div>
-			</div>
 			<!-- nao sei aonde guardar os tipos de locais, (quadra, campo, digital, online, rede, lan, rua, club, fazenda, trilha)
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -98,7 +75,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 			  		<label for="modalitySlug">Modalidade</label>
-					<select id="modalitySlug" name="modalitySlug">
+					<select id="modalitySlug" name="modalitySlug" required>
 						@foreach($allModalities as $modality)
 							<option value="{{$modality->slug}}">{{$modality->name}}</option>
 						@endforeach
@@ -120,10 +97,44 @@
 				</p>
 				<input type="file" name="profileImage">
 			</div>
+
+			<div class="card">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+				  		<label for="#">Data</label>
+						<input type="date" name="date0" class="form-control" value="{{$room ? $room->date0 : old('date0')}}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+				  		<label for="#">horário de início</label>
+						<input type="time" name="start_time0" class="form-control"  placeholder="horário de início" value="{{$room ? $room->start_time0 : old('start_time0')}}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+				  		<label for="#">horário de término</label>
+						<input type="time" name="end_time0" class="form-control"  placeholder="horário de término" value="{{$room ? $room->end_time0 : old('end_time0')}}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+					  <label for="place">Local</label>
+					<input type="text" name="place0" class="form-control"  placeholder="Local" value="{{$room ? $room->place0 : old('place0')}}">
+					podia ser um maps ou algo assim
+					</div>
+				</div>
+			</div>
+			<div id="dates">
+				<!-- insere hrml via JS -->
+			</div>
+
+
 			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
 			<div class="clearfix"></div>
 		</form>
+				<button onclick="insertCardDate()">Adicionar mais datas</button>
 	</div>
 </div>
 
@@ -148,21 +159,20 @@
                             <th>Apagar</th>
                         </thead>
                         <tbody>
-                            @foreach($allRooms as $room)
+                            @foreach($allRooms as $sala)
                                 <tr>
-                                    <td>{{$room->_id}}</td>
-                                    <td>{{$room->name}}</td>
-                                    <td>{{$room->description}}</td>
+                                    <td>{{$sala->_id}}</td>
+                                    <td>{{$sala->name}}</td>
+                                    <td>{{$sala->description}}</td>
                                     <td >
-                                        <a class="edit" href="{{ route('editroom', ['slug' => $room->slug])}}"><i class="material-icons">edit</i></a>
+                                        <a class="edit" href="{{ route('editroom', ['slug' => $sala->slug])}}"><i class="material-icons">edit</i></a>
                                     </td>
                                     <td>
                                         <a class="delete" 
-                                        href="{{ route('deleteroom', [ 'slug' => $room->slug ] ) }}"><i class="material-icons">close</i></a>
+                                        href="{{ route('deleteroom', [ 'slug' => $sala->slug ] ) }}"><i class="material-icons">close</i></a>
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -174,6 +184,87 @@
         <?php echo "nenhuma modalidade ainda"; ?>       
     <?php endif; ?>       
 </div>
+
+
+
+
+
+
+
+<script>
+	let contador = 0;
+	function insertCardDate(date) {
+
+		let cardDate = document.getElementById('dates');
+		let vazio = 1;
+		contador++;
+		cardDate.innerHTML += "<div class="+'card'+">"+
+			
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+			  		"<label>Data</label>"+
+					"<input type="+'date'+" name="+'date'+contador+" class="+'form-control'+" value="+(date ? date.date : '')+">"+
+				"</div>"+
+			"</div>"+
+
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+			  		"<label>horário de início</label>"+
+					"<input type="+'time'+" name="+'start_time'+contador+" class="+'form-control'+"  placeholder="+'horário de início'+" value="+(date ? date.start_time : '')+">"+
+				"</div>"+
+			"</div>"+
+
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+			  		"<label>horário de término</label>"+
+					"<input type="+'time'+" name="+'end_time'+contador+" class="+'form-control'+"  placeholder="+'horário de término'+" value="+(date ? date.end_time : '')+">"+
+				"</div>"+
+			"</div>"+		
+			"<div class="+'form-row'+">"+
+				"<div class="+'form-group col-md-6'+">"+
+				  "<label for="+'place'+">Local</label>"+
+				"<input type="+'text'+" name="+'place'+contador+" class="+'form-control'+"  placeholder="+'Local'+" value="+(date ? date.place : '')+">"+
+				"</div>"+
+			"</div>"+
+
+		"</div>";
+	}
+</script>
+
+<script >
+    function getDates(){
+		let dates = [] ;
+		@if ($room) 
+			@foreach($room->date as $date)
+				dates.push(
+			      	{
+				      	'start_time': "{{$date['start_time']}}",
+				      	'end_time': "{{$date['end_time']}}",
+				      	'place': "{{$date['place']}}",
+			      		'date': "{{$date['date']}}",
+			      	},
+			  	);
+			@endforeach
+		@else
+			<?php echo "nao tem $ room" ?>
+		@endif
+		return dates;
+    }
+</script>
+<script>
+	@if ($room && count($room->date) > 1)
+		let dates = getDates();
+		dates.forEach(
+			function (data){
+				//console.log(data);
+				insertCardDate(data);
+			}
+		);
+	@endif
+		<?php //dd($room) ?>
+
+</script>
+
 
 
 @endsection
