@@ -14,14 +14,14 @@
           <label>TAG</label>
           <select id="tag"></select>
           <!-- insere tag via js -->
-          <button  onclick="showRoomByTag()">Buscar</button>
+      <button  onclick="showRoomByTag()">Buscar</button>
         </div> 
         <button  onclick="allCategories()">Listar Todas</button>
       </div>
       <div id="cardRoom">
         @foreach($rooms as $room)
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <a href="{{ route('chat', $room->_id) }}">
+            <a href="{{ route('chat', $room->slug) }}">
               <div class="card">
                   <?php if ($room->pathImage): ?>
                     <div class="card-header" style="
