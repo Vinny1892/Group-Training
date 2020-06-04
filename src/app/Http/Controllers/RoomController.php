@@ -88,7 +88,13 @@ class RoomController extends Controller{
             }
             return $simplifiedCategories;
             }
-        return [""];
+        return [
+            [
+                "name"=> '',
+                "_id"=> '',
+                "slug"=> ''
+            ]
+        ];
     }
 
     private static function  createArrayDates(Request $request){
