@@ -50,5 +50,9 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js.map"></script>
+<script>
+    let roomID = "{{ $room->_id  }}";
+</script>
 <script src="{{ asset('js/chat.js')}}"></script>
 </html>

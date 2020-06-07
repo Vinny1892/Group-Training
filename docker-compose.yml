@@ -71,7 +71,7 @@ services:
       - ./src/chatAPI:/usr/app
       - /usr/app/node_modules
     ports:
-      - 3000:3000
+      - 4000:4000
     networks:
       network-develop:
         ipv4_address: 172.100.0.8

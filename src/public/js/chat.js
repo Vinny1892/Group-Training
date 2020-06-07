@@ -1,11 +1,10 @@
+console.log(roomID);
 let button = document.querySelector("#btn_send_chat")
 let chat = document.querySelector("#chat")
 let user = JSON.parse(document.querySelector("#user").getAttribute('value').toString())
 let room = JSON.parse(document.querySelector("#room").getAttribute('value').toString())
 
-let rooms = io('localhost:3000')
-socket = io('localhost:3000/123123', {secure:true})
-
+let socket = io('http://localhost:4000/'+roomID)
 
 socket.on("ReceivedMessage", function(message){
     //construir tela chat
@@ -20,7 +19,6 @@ socket.on('previousMessage', function(messages){
         renderMessage(message, type)
     }
 })
-
 
 button.addEventListener ('click', async function(){
     let message = document.querySelector("#contentMessage")
@@ -39,9 +37,7 @@ button.addEventListener ('click', async function(){
         renderMessage(messageObject, "eu")
         message.value = ""
     }
-
 });
-
 
 function renderMessage(messageObject, type){
     let newMessageBox = document.createElement("div")
@@ -72,3 +68,4 @@ function renderMessage(messageObject, type){
     newMessageBox.appendChild(newMessageTime)
     chat.appendChild(newMessageBox)
 }
+
