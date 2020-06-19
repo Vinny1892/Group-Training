@@ -1,10 +1,13 @@
 console.log(roomID);
+console.log(domainWS);
+
 let button = document.querySelector("#btn_send_chat")
 let chat = document.querySelector("#chat")
 let user = JSON.parse(document.querySelector("#user").getAttribute('value').toString())
 let room = JSON.parse(document.querySelector("#room").getAttribute('value').toString())
+let field = document.getElementById("contentMessage");
 
-let socket = io('http://localhost:4000/'+roomID)
+let socket = io(`${domainWS}:4000/${roomID}`);
 
 socket.on("ReceivedMessage", function(message){
     //construir tela chat
@@ -20,9 +23,8 @@ socket.on('previousMessage', function(messages){
     }
 })
 
-button.addEventListener ('click', async function(){
+function sendMessage() {
     let message = document.querySelector("#contentMessage")
-
     let messageObject = {
         author: user.name,
         id: user._id,
@@ -32,12 +34,12 @@ button.addEventListener ('click', async function(){
 
     // caso a mensagem não esteja vazia ou cheia de espaços em branco,
     // ele emite o evento, renderiza na tela e limpa o campo
-    if(message.value.trim() != ""){
-        socket.emit('sendMessage' , messageObject)
+    if (message.value.trim() != "") {
+        socket.emit('sendMessage', messageObject)
         renderMessage(messageObject, "eu")
         message.value = ""
     }
-});
+}
 
 function renderMessage(messageObject, type){
     let newMessageBox = document.createElement("div")
@@ -69,3 +71,10 @@ function renderMessage(messageObject, type){
     chat.appendChild(newMessageBox)
 }
 
+button.addEventListener('click', async function () {
+    sendMessage()
+})
+
+field.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) sendMessage()
+})

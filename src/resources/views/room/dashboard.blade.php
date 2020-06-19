@@ -16,7 +16,6 @@
 
 
 
-
 <div class="card">
 	<div class="card-header card-header-success">
 		<h4 class="card-title">Sala</h4>
@@ -28,7 +27,7 @@
 		<form action="{{ route('updateroom', ['room'=> $room->_id]) }}" method="POST" enctype="multipart/form-data">
 		<input type="hidden" id="roomSlug" name="roomSlug" value="{{$room->slug}}">
 	@else
-		<form action="{{ route('saveroom') }}" method="POST" enctype="multipart/form-data">
+		<form action="{{ route('saveroom')  }}" id="formStoreRoom" method="POST" enctype="multipart/form-data">
 	@endif		
 			@csrf
 			<div class="form-row">
@@ -141,7 +140,12 @@
 			
 
 			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
+			@if(isset($room))   
 			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
+			@endif
+			<button type="button" onclick="salvarForm()" class="btn btn-success pull-right">Salvar Sala</button>
+
+			
 			<div class="clearfix"></div>
 		</form>
 				<button onclick="insertCardDate()">Adicionar mais datas</button>
@@ -195,11 +199,7 @@
     <?php endif; ?>       
 </div>
 
-
-
-
-
-
+ 
 
 <script>
 	let contador = 0;
@@ -277,6 +277,21 @@
 	if (!existRoom) {
 		insertCardDate();
 	}
+</script>
+<script>
+	function salvarForm(){
+		console.log("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTt");
+		$('#formStoreRoom').ajaxForm(function(){ 
+        success: (room) => {
+			if(room.resposta){
+				console.log('Deu certo');
+			}else{
+				console.log('Deu Merda');
+			}
+
+		}
+    }).submit();
+	}	
 </script>
 
 

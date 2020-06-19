@@ -1,58 +1,48 @@
-const fs = require('fs');
+require('dotenv').config()
 const express = require('express')
-const app = express();
-let https = require('https');
-const csp = require('helmet-csp')
-
-app.use(csp({
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
-    }
-  }))
-  let http = require('http').Server(app);
-
-
-
-// let options = {
-//     key: fs.readFileSync('server.key','utf8'),
-//     cert: fs.readFileSync('server.cert','utf8'),
-//     requestCert: false,
-//     rejectUnauthorized: false,
-// };
-
-//let server = https.createServer(options,app);
-const io = require('socket.io').listen(http);
+const app = express()
+let http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
 let rooms = []
 
 let room = {
-    id: 123123,
+    id: "5eebe0182c289d4996187d24",
     name: "batata",
     public: "teste",
     modalidade: "merda nenhuma",
     description: "sem descrip",
-    namespc: io.of(`/123123`),
+    namespc: io.of(`/5eebe0182c289d4996187d24`),
     messages: [],
 }
 
 rooms.push(room)
 
-for(room of rooms){
-    room.namespc.on('connection', socket => {
-        console.log(`Sala ${room.name} conectada!` )
-        
-        socket.emit('previousMessage' , room.messages);
+for (room of rooms) {
+    setRoomEvents(room)
+}
 
-        socket.on('sendMessage' , data => {
-            console.log(`Mensagem ${data.message} enviada para sala ${room.name}` )
+io.on("connection", socket => {
+    socket.on("roomCreated", data => {
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    })
+})
+
+function setRoomEvents(room) {
+    room.namespc.on('connection', socket => {
+
+        console.log(`Sala ${room.name} conectada!`)
+
+        socket.emit('previousMessage', room.messages);
+
+        socket.on('sendMessage', data => {
+            console.log(`Mensagem ${data.message} enviada para sala ${room.name}`)
             room.messages.push(data)
-            socket.broadcast.emit('ReceivedMessage' , data)
-        });
+            socket.broadcast.emit('ReceivedMessage', data)
+        })
     })
 }
-io.set("transports", ["xhr-polling","websocket","polling", "htmlfile"]);
-
+    
 http.listen("4000" , ()=>{
     console.log("API CHAT up on port 4000")
 })

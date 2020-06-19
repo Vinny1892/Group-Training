@@ -40,25 +40,24 @@ class RoomController extends Controller{
                 $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
                 $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
                 $dates = Self::createArrayDates($request);
-                $simplifiedModality = Self::getModality($request->modalitySlug); 
-                $room = Room::create(
-                    [
-                        "name" => "$request->name",
-                        "description"=> "$request->description",
-                        "public"=> "$request->public",
-                        "key" => "$request->key",
-                        "pathImage" => $pathImage,
-                        "placeType"=> "$request->placeType",
-                        "categories"=>  $simplifiedCategories,
-                        "modality"=> $simplifiedModality,
-                        "tags"=> [""],
-                        "users"=> [""],
-                        "id_user_adm" => $request->id_user_adm,
-                        "date"=> $dates
-                    ]
-                );
+                $simplifiedModality = Self::getModality($request->modalitySlug);
+                $credentials =  [
+                    "name" => "$request->name",
+                    "description"=> "$request->description",
+                    "public"=> "$request->public",
+                    "key" => "$request->key",
+                    "pathImage" => $pathImage,
+                    "placeType"=> "$request->placeType",
+                    "categories"=>  $simplifiedCategories,
+                    "modality"=> $simplifiedModality,
+                    "tags"=> [""],
+                    "users"=> [""],
+                    "id_user_adm" => $request->id_user_adm,
+                    "date"=> $dates
+                ];
+                $room = Room::create($credentials);
                 Modality::updateListRooms($simplifiedModality, $room->_id);
-                return Redirect::route('sala')->with("message","Sala Criada Com Sucesso");
+                return response(['message' => "Sala criada com sucesso", 'itemSaved' => $credentials]);
             } catch (Exception $exception){
                 echo "Erro ao inserir sala";
             }

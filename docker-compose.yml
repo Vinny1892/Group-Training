@@ -58,8 +58,7 @@ services:
       - ./nginx/php:/etc/nginx/conf.d
       - ./src:/var/www/html
     ports:
-      - 8085:443
-      - 90:80
+      - 8085:80
     networks:
       network-develop:
         ipv4_address: 172.100.0.10
