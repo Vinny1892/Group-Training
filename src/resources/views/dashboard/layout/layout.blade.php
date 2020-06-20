@@ -22,7 +22,7 @@
       @include('dashboard.layout.sidenav')
       <!--- end side nav -->
       
-    <div class="main-panel">
+    <div  class="main-panel">
 
       <!-- Navbar -->
       

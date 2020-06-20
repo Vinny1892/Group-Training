@@ -13,16 +13,19 @@
     
   @endforeach
 @endif
+<div  class="content">
+	<div class="container-fluid">
+	  <div class="row">
 
 
 
-<div class="card">
+<div  class="card">
 	<div class="card-header card-header-success">
 		<h4 class="card-title">Sala</h4>
 		<p class="card-category">{{$cardTitle}}</p>
 	</div>
 
-	<div class="card-body">  
+	<div id="main-panel" class="card-body">  
 	@if(isset($room))   
 		<form action="{{ route('updateroom', ['room'=> $room->_id]) }}" method="POST" enctype="multipart/form-data">
 		<input type="hidden" id="roomSlug" name="roomSlug" value="{{$room->slug}}">
@@ -198,7 +201,9 @@
         <?php echo "nenhuma modalidade ainda"; ?>       
     <?php endif; ?>       
 </div>
-
+</div>
+</div>
+</div>
  
 
 <script>
@@ -280,17 +285,38 @@
 </script>
 <script>
 	function salvarForm(){
-		console.log("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTt");
-		$('#formStoreRoom').ajaxForm(function(){ 
-        success: (room) => {
-			if(room.resposta){
-				console.log('Deu certo');
-			}else{
-				console.log('Deu Merda');
-			}
+		 Array.from(document.getElementsByClassName('message')).forEach(el => el.remove())
 
-		}
-    }).submit();
+		$('#formStoreRoom').ajaxForm({
+		dataType:'json', 
+        success: (room) => {
+			let body = document.getElementById('main-panel');
+
+			 if(room.erros){
+				Object.entries(room.erros).forEach(el => {
+					console.log(el[1]);
+					let div = document.createElement('div');
+					div.classList.add("message");
+					div.innerHTML = el[1];
+					div.classList.add('alert');
+					div.classList.add('alert-danger');
+					body.prepend(div);
+				});
+				
+			 }else{
+				let div = document.createElement('div');
+				div.classList.add("message");
+			 	div.innerHTML = "Sala Criada Com Sucesso"
+			 	div.classList.add('alert');
+			 	div.classList.add('alert-success');
+				body.prepend(div);
+				let domainWS =  '{{  env("DOMAINWS" , "localhost") }}'
+				//socket =io(domainWS:4000/);
+				//socket.emit('onCreate' , room);
+			 }
+			
+			}
+    	}).submit();
 	}	
 </script>
 

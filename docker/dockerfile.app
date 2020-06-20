@@ -1,7 +1,7 @@
 
 FROM php:7.4-fpm
 
-label Maintainer "Vinicius Espindola"
+LABEL Maintainer "Vinicius Espindola"
 
 RUN  yes | adduser vinny 
 

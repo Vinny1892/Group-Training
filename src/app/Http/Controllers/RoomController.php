@@ -1,12 +1,13 @@
 <?php 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Room;
-use App\Modality;
-use App\Category;
 use App\Tag;
+use App\Room;
+use App\Category;
+use App\Modality;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +15,7 @@ class RoomController extends Controller{
 
 
     public function __construct(){
-        $this->middleware('auth')->except(['roomsOfModality' , 'index']);
+        $this->middleware('auth')->except(['roomsOfModality' , 'index','apiIndex']);
     }
 
     /* como passar o ID da sala para o nodejs carregar */
@@ -34,7 +35,8 @@ class RoomController extends Controller{
             ]
         );
         if ($validator->fails() ){
-            return  Redirect::route('sala')->withErrors($validator)->withInput() ;
+            return response(["funcionou" => "false" , "erros" => $validator->errors()]);  
+            //Redirect::route('sala')->withErrors($validator)->withInput() ;
         }elseif( Self::existsRoom($request->name) ) {
             try{      
                 $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
@@ -57,7 +59,7 @@ class RoomController extends Controller{
                 ];
                 $room = Room::create($credentials);
                 Modality::updateListRooms($simplifiedModality, $room->_id);
-                return response(['message' => "Sala criada com sucesso", 'itemSaved' => $credentials]);
+                return response(['message' => "Sala criada com sucesso", 'itemSaved' => $credentials , "funcionou" => true]);
             } catch (Exception $exception){
                 echo "Erro ao inserir sala";
             }
@@ -155,6 +157,16 @@ class RoomController extends Controller{
         
         //$categories = $room->categories['_id'];
         //return;
+    }
+
+
+    public function apiIndex(Request $request){
+
+
+        $allRooms = Room::select("_id")->get();
+        $ip = $request->server("SERVER_ADDR");
+        Log::info("HOST " .  $ip . " Request List User");
+        return response(["rooms" => $allRooms]);
     }
 
     public function index()
