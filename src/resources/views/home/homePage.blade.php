@@ -17,7 +17,7 @@
                 </li>
                 @else
                 <li>
-                    <a href="{{ route('painel') }}" role="button" title="Entrar " class="">Painel</a>
+                    <a href="{{ route('dashboard') }}" role="button" title="Entrar " class="">Painel</a>
                 </li>
                 @endif
             </ul>

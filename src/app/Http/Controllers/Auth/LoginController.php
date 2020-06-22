@@ -113,7 +113,9 @@ class LoginController extends Controller
 
         $userDB = User::where('email' , $user->email)->first();
         if($userDB == null){
+            $slugUser = User::createSlug($user['name']);
            $userDB = User::create([
+                'slug' => $slugUser,
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'role' =>  'normal'

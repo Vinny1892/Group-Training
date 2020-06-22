@@ -41,8 +41,6 @@ Route::get('/teste' ,function(){
     response('Funcionou teste');
 })->middleware('role.admin');
 
-                    //DashBoard - painel de gerenciamento
-Route::get('/painel' ,"DashboardController@show")->name('painel');
 
 
                     //MODALIDADE
@@ -76,7 +74,8 @@ Route::get('/teste', function(){
 
 //DashBoard Routes
     Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('user.edit');
-    Route::get('dashboard' ,"DashboardController@show")->name('dashboard');
+    Route::get('painel' ,"DashboardController@show")->name('dashboard');
+    Route::get('dashboard/{slugName}/delete' , "DashboardController@deleteUser")->name('user.delete');
 
 
                     //HOME PAGE
@@ -97,6 +96,10 @@ Route::get('dashboard/tag/{slugTag}/editar',  "TagController@edit")->name('tag.e
 Route::post('/dashboard/tag/criar', "TagController@store")->name('tag.store');
 Route::put('dashbpard/tag/{tag}/editar',"TagController@update")->name('tag.update');
 Route::get('dashboard/tag/{slugTag}/delete',"TagController@destroy")->name('tag.delete');
+
+//Route Admiro
+
+Route::get('painel/{slugName}/adminisse',"DashboardController@makeAdmin")->name("adminisse");
 
 
 

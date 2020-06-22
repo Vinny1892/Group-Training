@@ -34,8 +34,8 @@
       <li class="adjustments-line">
         <a href="javascript:void(0)" class="switch-trigger active-color">
           <div class="badge-colors ml-auto mr-auto">
-            <span class="badge filter badge-dark" id="btn-darkmode" data-background-color="black"></span>
-            <span class="badge filter badge-white active" id="btn-lightmode" data-background-color="white"></span>
+            <span class="badge filter badge-dark active"  id="btn-darkmode" data-background-color="black"></span>
+            <span class="badge filter badge-white " id="btn-lightmode" data-background-color="white"></span>
           </div>
           <div class="clearfix"></div>
         </a>
@@ -97,8 +97,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <!-- Library for adding dinamically elements -->
 <script src="{{asset('assetsDashboard/js/plugins/arrive.min.js')}}"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
 <!--  Notifications Plugin    -->
 <script src="{{asset('assetsDashboard/js/plugins/bootstrap-notify.js')}}"></script>
@@ -114,14 +112,26 @@
 <script>
   $(document).ready(function() {
     $().ready(function() {
+      let $sidebar = $('.sidebar');
+
+
+     let $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+let $full_page = $('.full-page');
+
+let $sidebar_responsive = $('body > .navbar-collapse');
+
+
+let window_width = $(window).width();
+
+let fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
       let darkmodebtn= document.getElementById('btn-darkmode');
       let lightmodebtn = document.getElementById('btn-lightmode');
       let divThemeColorOption = document.getElementById('data-color');
-      $sidebar = $('.sidebar');
-      let backgroundColor = localStorage.getItem('data-background-color')
-      let colorTheme = localStorage.getItem("data-color")
+      let backgroundColor = localStorage.getItem('data-background-color');
+      let colorTheme = localStorage.getItem("data-color");
       if(backgroundColor ){
         $sidebar.attr('data-background-color', backgroundColor)
         if(backgroundColor == "black"){
@@ -137,26 +147,27 @@
         
 
         if(colorTheme){
-            $sidebar.attr('data-color' , colorTheme);
             Array.from(divThemeColorOption.children).forEach((el)=> {
-              console.log(el)
                 if(el.getAttribute('data-color') !== colorTheme ){
-                    el.classList.remove('active');
+                 el.classList.remove('active');
+                
                 }else{
                     el.classList.add('active');
+                    if ($sidebar.length != 0) {
+                  $sidebar.attr('data-color', colorTheme);
+                }
+
+                if ($full_page.length != 0) {
+                  $full_page.attr('filter-color', colorTheme);
+                }
+
+                if ($sidebar_responsive.length != 0) {
+                  $sidebar_responsive.attr('data-color', colorTheme);
+                }
                 }
             });
         }
 
-      $sidebar_img_container = $sidebar.find('.sidebar-background');
-
-      $full_page = $('.full-page');
-
-      $sidebar_responsive = $('body > .navbar-collapse');
-
-      window_width = $(window).width();
-
-      fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
       darkmodebtn.addEventListener('click' , ()=> {
@@ -198,20 +209,20 @@
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
 
-        var new_color = $(this).data('color');
-        console.log(new_color)
-        localStorage.setItem("data-color" , new_color)
+           color = $(this).data('color');
+      
+        localStorage.setItem("data-color" , color)
 
         if ($sidebar.length != 0) {
-          $sidebar.attr('data-color', new_color);
+          $sidebar.attr('data-color', color);
         }
 
         if ($full_page.length != 0) {
-          $full_page.attr('filter-color', new_color);
+          $full_page.attr('filter-color', color);
         }
 
         if ($sidebar_responsive.length != 0) {
-          $sidebar_responsive.attr('data-color', new_color);
+          $sidebar_responsive.attr('data-color', color);
         }
       });
 
@@ -233,9 +244,10 @@
         $(this).parent('li').addClass('active');
 
         var new_image = $(this).find("img").attr('src');
-
+        console.log($sidebar_img_container)
         if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
           $sidebar_img_container.fadeOut('fast', function() {
+            console.log('Teste');
             $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
             $sidebar_img_container.fadeIn('fast');
           });
@@ -340,15 +352,6 @@
 
   });
 </script>
-<script src={{ asset("autocompletediferentao/dist/tokenize2.min.js") }} ></script>
-<script>
-$(document).ready(function(){
-	$().ready(function() {
-	$('.demo').tokenize2();
-	});
-});
-</script>
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 
