@@ -94,7 +94,7 @@ class LoginController extends Controller
             // Fazer redirect para tela de listar sala
         }
         Auth::login($userDB,true);
-        return Redirect::route('dashboard');
+        return Redirect::route('home');
 
 
     }
@@ -123,7 +123,7 @@ class LoginController extends Controller
             // Fazer redirect para tela de listar sala
         }
         Auth::login($userDB,true);
-        return Redirect::route('dashboard');
+        return Redirect::route('home');
 
 
     }

@@ -16,7 +16,7 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-lg-12">
         @if (session('message'))
           <div class="alert alert-success">
             {{ session('message') }}
@@ -29,10 +29,10 @@
             
           @endforeach
         @endif
-
+        </div>
           
-<!-- Listagem Usuarios -->
-<div class="col-lg-12 col-md-12">
+  <!-- Listagem Usuarios -->
+  <div class="col-lg-6 ">
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">Usuarios</h4>
@@ -101,7 +101,6 @@
           </li>
         </ul>
 
-      </nav>
 
        </div>
 
@@ -109,8 +108,79 @@
       </div>
     </div>
   </div>
+  <div class="col-lg-4">
+    <div class="card">
+  <div class="card-header card-header-primary">
+    <h4 class="card-title">Tabela Geral do Sistema</h4>
+    <p >Dados gerais do sistema </p>
+  </div>
+  <div class="card-body table-responsive">
+    <table class="table table-hover" >
+      <thead class="text-primary">
+        <th>Usuarios</th>
+        <th>Categorias</th>
+        <th>Modalidade</th>
+        <th>Salas</th>
+        
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{$usersTotal}}</td>
+          <td>{{$categorysTotal}}</td>
+          <td>{{$modalityTotal }}</td>
+        <td>{{ $roomsTotal}}</td>
+        </tr>
+      </tbody>
+    </thead>
+    </table>
+
+
+   </div>
+
+
+  </div>
+  </div>
+  </div>
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+          <h4 class="card-title">Salas</h4>
+          <p class="card-category">Salas Cadastradas </p>
+      </div>
+      <div class="card-body table-responsive">
+          <table class="table table-hover">
+              <thead class="text-primary">
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>Editar</th>
+                  <th>Apagar</th>
+              </thead>
+              <tbody>
+                  @foreach($allRooms as $sala)
+                      <tr>
+                          <td>{{$sala->_id}}</td>
+                          <td>{{$sala->name}}</td>
+                          <td>{{$sala->description}}</td>
+                          <td >
+                              <a class="edit" href="{{ route('editroom', ['slug' => $sala->slug])}}"><i class="material-icons">edit</i></a>
+                          </td>
+                          <td>
+                              <a class="delete" 
+                              href="{{ route('deleteroom', [ 'slug' => $sala->slug ] ) }}"><i class="material-icons">close</i></a>
+                          </td>
+                      </tr>
+                  @endforeach
+              </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
 </div>
-</div>
+
 <script>
 
   

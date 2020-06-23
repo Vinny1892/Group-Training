@@ -17,7 +17,7 @@
                 </li>
                 @else
                 <li>
-                    <a href="{{ route('dashboard') }}" role="button" title="Entrar " class="">Painel</a>
+                    <a href="{{ route('user.edit' , ['slugName' => Auth::user()->slug]) }}" role="button" title="Entrar " class="">Painel</a>
                 </li>
                 @endif
             </ul>

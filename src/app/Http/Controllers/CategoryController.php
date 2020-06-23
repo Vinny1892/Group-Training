@@ -11,6 +11,9 @@ use Mockery\Exception;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role.admin');
+    }
 
 
     /**

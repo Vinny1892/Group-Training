@@ -26,6 +26,8 @@
               <p>Minha Conta</p>
             </a>
           </li>
+          @if(Auth::user()->role === "admin")
+
           <li class="nav-item {{ Route::current()->getName() == 'modalidade' ? "active" : '' }}">
 
             <a class="nav-link" href="{{ route('modalidade') }}">
@@ -33,18 +35,22 @@
           <p>Modalidade</p>
         </a>
       </li>
+      @endif
   <li class="nav-item {{ Route::current()->getName() == 'sala' ? "active" : 'createroom' }}">
     <a class="nav-link" href="{{ route('sala') }}">
   <i class="material-icons">room</i>
   <p>Sala</p>
 </a>
 </li>
+@if(Auth::user()->role === "admin")
+
       <li class="nav-item {{ Route::current()->getName() == 'category' ? "active" : '' }}">
         <a class="nav-link" href="{{ route('category') }}">
       <i class="material-icons">category</i>
       <p>Categoria</p>
     </a>
   </li>
+  @endif
   
         </ul>
       </div>

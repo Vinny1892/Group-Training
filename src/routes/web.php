@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CanInstall;
 use Illuminate\Support\Facades\Route;
 
 
@@ -70,7 +71,7 @@ Route::get('/painel/tag/criar', "TagController@create")->name('tag');
 
 Route::get('/teste', function(){
     response('Funcionou teste');
-})->middleware('role.admin');
+})->middleware(CanInstall::class);
 
 //DashBoard Routes
     Route::get("dashboard/{slugName}/edit" , "DashboardController@editUser")->name('user.edit');
@@ -101,6 +102,8 @@ Route::get('dashboard/tag/{slugTag}/delete',"TagController@destroy")->name('tag.
 
 Route::get('painel/{slugName}/adminisse',"DashboardController@makeAdmin")->name("adminisse");
 
+Route::get('admin',"InstallController@show")->name('install');
+Route::post('admin' , "InstallController@storageAdmir")->name('storage.admir');
 
 
 ////Exemplo de rota com parâmetro opcional.
