@@ -31,14 +31,11 @@ async function getRooms() {
             })
 }
 
-
 //Trata eventos gerais, como criação e deleção de salas;
 io.on("connection", socket => {
     socket.on("roomCreated", newRoom => { setRoomEvents(newRoom) })
-
     socket.on("roomDeleted", RoomDeleted => { })
 })
-
 
 //Dita quais eventos cada sala deverá tratar;
 function setRoomEvents(room) {
@@ -55,7 +52,6 @@ function setRoomEvents(room) {
         })
     })
 }
-
 
 http.listen("4000" , ()=>{
     console.log("API CHAT up on port 4000")

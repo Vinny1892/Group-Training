@@ -112,7 +112,7 @@
     <div class="card">
   <div class="card-header card-header-primary">
     <h4 class="card-title">Tabela Geral do Sistema</h4>
-    <p >Dados gerais do sistema </p>
+    <p > total de registro do  sistema </p>
   </div>
   <div class="card-body table-responsive">
     <table class="table table-hover" >
