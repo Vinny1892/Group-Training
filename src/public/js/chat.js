@@ -1,11 +1,7 @@
-console.log(roomID);
-console.log(domainWS);
-
 let button = document.querySelector("#btn_send_chat")
 let chat = document.querySelector("#chat")
 let user = JSON.parse(document.querySelector("#user").getAttribute('value').toString())
-let room = JSON.parse(document.querySelector("#room").getAttribute('value').toString())
-let field = document.getElementById("contentMessage");
+let field = document.getElementById("contentMessage")
 
 let socket = io(`${domainWS}:4000/${roomID}`);
 
@@ -17,9 +13,11 @@ socket.on("ReceivedMessage", function(message){
 
 socket.on('previousMessage', function(messages){
     let type
-    for(message of messages){
-        type = message.id == user._id ? "eu" : "outro"
-        renderMessage(message, type)
+    if(messages != undefined) {
+        for(message of messages){
+            type = message.id == user._id ? "eu" : "outro"
+            renderMessage(message, type)
+        }
     }
 })
 

@@ -27,8 +27,8 @@
 
 	<div id="main-panel" class="card-body">  
 	@if(isset($room))   
-		<form action="{{ route('updateroom', ['room'=> $room->_id]) }}" method="POST" enctype="multipart/form-data">
-		<input type="hidden" id="roomSlug" name="roomSlug" value="{{$room->slug}}">
+		<form action="{{ route('updateroom') }}" method="POST" enctype="multipart/form-data">
+		<input type="hidden" id="room_id" name="room_id" value="{{$room->_id}}">
 	@else
 		<form action="{{ route('saveroom')  }}" id="formStoreRoom" method="POST" enctype="multipart/form-data">
 	@endif		
@@ -86,6 +86,7 @@
 				<div class="form-group col-md-6">
 			  		<label for="modalitySlug">Modalidade</label>
 					<select id="modalitySlug" name="modalitySlug" required>
+						<option></option>
 						@foreach($allModalities as $modality)
 							@if($room && $room->modality)
 								@if($room->modality['slug'] == $modality->slug)
@@ -97,7 +98,6 @@
 							@else
 								<option value="{{$modality->slug}}">{{$modality->name}}</option>
 							@endif
-							
 						@endforeach
 					</select>
 				</div>
@@ -140,13 +140,13 @@
 			<div id="dates" class="">
 				<!-- insere hrml via JS -->
 			</div>
-			
-
 			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
+
 			@if(isset($room))   
-			<button type="submit" class="btn btn-success pull-right">Salvar Sala</button>
+				<button type="submit" class="btn btn-success pull-right">Salvar edição da sala: {{$room->name}}</button>
+			@else
+				<button type="button" onclick="salvarForm()" class="btn btn-success pull-right">Salvar nova Sala</button>
 			@endif
-			<button type="button" onclick="salvarForm()" class="btn btn-success pull-right">Salvar Sala</button>
 
 			
 			<div class="clearfix"></div>
@@ -285,11 +285,12 @@
 </script>
 <script>
 	function salvarForm(){
-		 Array.from(document.getElementsByClassName('message')).forEach(el => el.remove())
+		Array.from(document.getElementsByClassName('message')).forEach(el => el.remove())
 
 		$('#formStoreRoom').ajaxForm({
 		dataType:'json', 
         success: (room) => {
+			console.log(room)
 			let body = document.getElementById('main-panel');
 
 			 if(room.erros){
@@ -302,7 +303,6 @@
 					div.classList.add('alert-danger');
 					body.prepend(div);
 				});
-				
 			 }else{
 				let div = document.createElement('div');
 				div.classList.add("message");
@@ -311,10 +311,10 @@
 			 	div.classList.add('alert-success');
 				body.prepend(div);
 				let domainWS =  '{{  env("DOMAINWS" , "localhost") }}'
-				//socket =io(domainWS:4000/);
-				//socket.emit('onCreate' , room);
+				socket = io(`${domainWS}:4000`);
+				socket.emit('roomCreated' , room);
+	    		location.reload();
 			 }
-			
 			}
     	}).submit();
 	}	
