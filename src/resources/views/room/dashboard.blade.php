@@ -285,11 +285,12 @@
 </script>
 <script>
 	function salvarForm(){
-		 Array.from(document.getElementsByClassName('message')).forEach(el => el.remove())
+		Array.from(document.getElementsByClassName('message')).forEach(el => el.remove())
 
 		$('#formStoreRoom').ajaxForm({
 		dataType:'json', 
         success: (room) => {
+			console.log(room)
 			let body = document.getElementById('main-panel');
 
 			 if(room.erros){
@@ -302,7 +303,6 @@
 					div.classList.add('alert-danger');
 					body.prepend(div);
 				});
-				
 			 }else{
 				let div = document.createElement('div');
 				div.classList.add("message");
@@ -311,10 +311,10 @@
 			 	div.classList.add('alert-success');
 				body.prepend(div);
 				let domainWS =  '{{  env("DOMAINWS" , "localhost") }}'
-				//socket =io(domainWS:4000/);
-				//socket.emit('onCreate' , room);
+				socket = io(`${domainWS}:4000`);
+				
+				socket.emit('roomCreated' , room);
 			 }
-			
 			}
     	}).submit();
 	}	

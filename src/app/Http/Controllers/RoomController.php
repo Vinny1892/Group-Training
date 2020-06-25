@@ -59,7 +59,7 @@ class RoomController extends Controller{
                 ];
                 $room = Room::create($credentials);
                 Modality::updateListRooms($simplifiedModality, $room->_id);
-                return response(['message' => "Sala criada com sucesso", 'itemSaved' => $credentials , "funcionou" => true]);
+                return response(['message' => "Sala criada com sucesso", 'itemSaved' => $room, "funcionou" => true]);
             } catch (Exception $exception){
                 echo "Erro ao inserir sala";
             }
