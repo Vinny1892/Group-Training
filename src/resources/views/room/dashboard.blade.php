@@ -158,7 +158,7 @@
 <!-- ----------------------------------- -->
 <div>
     <h4>Salas</h4>
-    <?php if (sizeof($allRooms) > 0): ?>
+    <?php if (sizeof($roomsOfUser) > 0): ?>
         <!-- Listagem Salas -->
         <div class="col-lg-6 col-md-12">
             <div class="card">
@@ -176,7 +176,7 @@
                             <th>Apagar</th>
                         </thead>
                         <tbody>
-                            @foreach($allRooms as $sala)
+                            @foreach($roomsOfUser as $sala)
                                 <tr>
                                     <td>{{$sala->_id}}</td>
                                     <td>{{$sala->name}}</td>
