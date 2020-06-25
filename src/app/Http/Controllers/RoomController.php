@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller{
 
@@ -162,12 +163,11 @@ class RoomController extends Controller{
 
 
     public function apiIndex(Request $request){
-
-
-        $allRooms = Room::select("_id")->get();
+        //$allRooms = Room::select("_id")->get();
+        $roomsOfUser = Room::where('id_user_adm', '=', Auth::user()->_id)->get();
         $ip = $request->server("SERVER_ADDR");
         Log::info("HOST " .  $ip . " Request List User");
-        return response(["rooms" => $allRooms]);
+        return response(["rooms" => $roomsOfUser]);
     }
 
     public function index()
@@ -176,10 +176,10 @@ class RoomController extends Controller{
         //$alltags = Tag::all();
         $cardTitle = 'Criar Sala';
         $room = null;
-        $allRooms = Room::all();
+        $roomsOfUser = Room::where('id_user_adm', '=', Auth::user()->_id)->get();
         $allModalities = Modality::all();
         $allCategories = Category::all();
-        return view('room.dashboard',compact('allRooms', 'allModalities', 'allCategories', 'room', 'cardTitle'/*, '$allplaceType'*/) );
+        return view('room.dashboard',compact('roomsOfUser', 'allModalities', 'allCategories', 'room', 'cardTitle'/*, '$allplaceType'*/) );
     }
 
     public function destroy($roomSlug)
@@ -252,10 +252,11 @@ class RoomController extends Controller{
         $allModalities = Modality::all();
         $allCategories = Category::all();
         //$alltags = Tag::all();
-        $allRooms = Room::all();
+        //$allRooms = Room::all();
+        $roomsOfUser = Room::where('id_user_adm', '=', Auth::user()->_id)->get();
         $modality = Modality::find($room->modality['_id']);
         $cardTitle = 'Editando Sala: '.$room->name;
-        return view('room.dashboard', compact('modality', 'allModalities', 'allCategories', 'room', 'cardTitle', 'allRooms'/*, 'alltags'*/));
+        return view('room.dashboard', compact('modality', 'allModalities', 'allCategories', 'room', 'cardTitle', 'roomsOfUser'/*, 'alltags'*/));
     }
 
     //acho que via post, se passar esse parametro MODEL, nao vem o objeto, e sim uma string desse objeto
