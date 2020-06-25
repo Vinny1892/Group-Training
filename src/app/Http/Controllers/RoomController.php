@@ -163,11 +163,10 @@ class RoomController extends Controller{
 
 
     public function apiIndex(Request $request){
-        //$allRooms = Room::select("_id")->get();
-        $roomsOfUser = Room::where('id_user_adm', '=', Auth::user()->_id)->get();
+        $allRooms = Room::select("_id")->get();
         $ip = $request->server("SERVER_ADDR");
         Log::info("HOST " .  $ip . " Request List User");
-        return response(["rooms" => $roomsOfUser]);
+        return response(["rooms" => $allRooms]);
     }
 
     public function index()
