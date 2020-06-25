@@ -27,17 +27,18 @@ class RoomController extends Controller{
     public function store(Request $request)
     {
         $validator = Validator::make(
-            $request->only(['name','description'/*, 'profileImage'*/]), 
+            $request->only(['name','description', 'profileImage', 'modalitySlug']), 
             [
-                "name" => ["required","string", "max:25", "unique:rooms,name"],
-                "description" => ["required" , "string" , "max:60"],
-                /*"profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'*/
+                "name" => ["required","string", "max:50", "unique:rooms,name"],
+                "description" => ["required" , "string" , "max:200"],
+                "modalitySlug" => ["required", "string", "max:50"],
+                "profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable'
             ]
         );
         if ($validator->fails() ){
             return response(["funcionou" => "false" , "erros" => $validator->errors()]);  
             //Redirect::route('sala')->withErrors($validator)->withInput() ;
-        }elseif( Self::existsRoom($request->name) ) {
+        }elseif( Self::notExistsRoom($request->name) ) {
             try{      
                 $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
                 $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
@@ -185,16 +186,21 @@ class RoomController extends Controller{
     {
         $room = Room::where('slug','=' ,$roomSlug)->first();
         Room::deleteImg($room->pathImage);
+        //dd($room->modality);
         Modality::deleteRoom($room->modality['_id'], $room->_id);
         $room->delete();
         return redirect()->route('sala')->with('success','Sala deletada com sucesso');
-
     }
 
 
     /* verifica se ja existe sala com este nome*/
-    private static function existsRoom($name){
+    private static function notExistsRoom($name){
         return Room::where('name', '=', $name)->first() == null;
+    }
+
+    /* verifica se ja existe sala com este nome*/
+    private static function existsRoomID($_id){
+        return Room::find($_id) != null;
     }
 
     /*todas as salas de uma determinada modalidade*/
@@ -253,27 +259,38 @@ class RoomController extends Controller{
     }
 
     //acho que via post, se passar esse parametro MODEL, nao vem o objeto, e sim uma string desse objeto
-    public function update(Request $request, Room $room)
+    public function update(Request $request)
     {
         $validator = Validator::make(
-            $request->only(['name','description'/*, 'profileImage'*/]), 
+            $request->only(['name','description', 'profileImage', 'room_id']), 
             [
-                "name" => ["required","string", "unique:rooms,name,_id,$room->_id" , "max:25"],
+                "name" => ["required","string", "max:25"],
                 "description" => ["required" , "string" , "max:60"],
-                /*"profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'*/
+                "room_id" => ["required"],
+                "profileImage" => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             ]
         );
         if ($validator->fails() ){
-            return  Redirect::route('sala')->withErrors($validator)->withInput() ;
-        }elseif( Self::existsRoom($request->name) ) {
+            if (Self::existsRoomID($request->room_id)) {
+                $sala = Room::find($request->room_id);
+                return  Redirect::route('editroom', ['slug' => $sala->slug])->withErrors($validator)->withInput() ;
+            }else{
+                return  Redirect::route('sala')->withErrors("message", "esse ID não existe")->withInput() ;
+            }
+            
+        }elseif( Self::existsRoomID($request->room_id) ) {
             try{   
 
                 $pathImage = Self::createPathImage($request->file('profileImage'), $request->name);
                 $simplifiedCategories = Self::creteArrayCategories($request->categoriesSlug);
                 $dates = Self::createArrayDates($request);
-                $simplifiedModality = Self::getModality($request->modalitySlug); 
-                //$room = Room::where('slug', '=', $request->roomSlug)->first();
+                $simplifiedModality = Self::getModality($request->modalitySlug);
+                $room = Room::find($request->room_id);
                 $oldModalityID = $room->modality['_id'];
+                if ($pathImage == "") {
+                //dd($pathImage);
+                    $pathImage = $room->pathImage;
+                }
                 $room->update(
                     [
                         "name" => "$request->name",
@@ -291,11 +308,12 @@ class RoomController extends Controller{
                     ]
                 );
                 Modality::updateListRooms($simplifiedModality, $room->_id, $oldModalityID);
+                return redirect()->route('sala')->with('message','Sala editada com sucesso');
             } catch (Exception $exception){
                 return  Redirect::route('sala')->withErrors("Erro ao Atualizar")->withInput() ;
             }
         }else{
-            return Redirect::route('sala')->with("message", "Sala Atualizada com Sucesso");
+            return Redirect::route('sala')->withErrors("message", "Não existe sala com este _id");
         }
     }
     //}
