@@ -311,15 +311,9 @@
 			 	div.classList.add('alert-success');
 				body.prepend(div);
 				let domainWS =  '{{  env("DOMAINWS" , "localhost") }}'
-<<<<<<< HEAD
-				//socket =io(domainWS:4000/);
-				//socket.emit('onCreate' , room);
-	    		location.reload();
-=======
 				socket = io(`${domainWS}:4000`);
-				
 				socket.emit('roomCreated' , room);
->>>>>>> 836efb6074887429aefa47071d567c93e9cb56b4
+	    		location.reload();
 			 }
 			}
     	}).submit();
