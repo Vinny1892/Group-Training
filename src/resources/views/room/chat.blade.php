@@ -53,5 +53,6 @@
     let domainWS =  '{{  env("DOMAINWS" , "localhost") }}'
     let roomID = "{{ $room->_id  }}";
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 <script src="{{ asset('js/chat.js')}}"></script>
 </html>

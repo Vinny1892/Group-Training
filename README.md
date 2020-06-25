@@ -41,7 +41,7 @@ docker-compose exec  app-grouptraining php artisan key:generate
 docker-compose exec  app-grouptraining php artisan migrate
 ```
 
-[Abre o projeto no seu navegador](https://localhost:8085)
+[Abre o projeto no seu navegador](https://localhost:8080)
 
 
 ## Contribuidores
