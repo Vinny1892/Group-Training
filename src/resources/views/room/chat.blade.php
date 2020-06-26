@@ -8,6 +8,7 @@
     <title>{{$room->slug}}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/chat.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{asset('assetsDashboard/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
 </head>
 
 <body>
@@ -38,6 +39,9 @@
             <span>
                 <div class="room-name">{{ $room->name }}</div>
                 <!-- <span class="qtd_user_on">Total de usuários online: ?</span> -->
+                <button type="button" class="btn-get-info-room" data-toggle="modal" data-target="#exampleModalCenter">
+                    Informações da sala
+                </button>
             </span>
         </header>
         <main class="corpo-chat">
@@ -51,6 +55,68 @@
                 </div>
             </div>
         </main>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Informações da sala</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="info">
+                            <span class="title">Nome da sala:</span>
+                            <span>{{ $room->name }}</span>
+                        </div>
+
+                        <div class="info">
+                            <span class="title">Descrição:</span>
+                            <span>{{ $room->description }}</span>
+                        </div>
+
+                        <div class="info">
+                            <span class="title">Categorias:</span>
+                            @foreach ($room->categories as $category)
+                            <span class="category">{{$category["name"]}}</span>
+                            @endforeach
+                        </div>
+
+
+                        <div class="info">
+                            <span class="title">Datas agendadas:</span>
+                            
+                            @foreach ($room->date as $date)
+                            <div class="date">
+                                <div>
+                                    <span class="title">Local:</span>
+                                    <span>{{$date['place']}}</span>
+                                </div>
+                                <div>
+                                    <span class="title">Data:</span>
+                                    <span>{{$date['date']}}</span>
+                                </div>
+                                <div>
+                                    <span class="title">Data de inicio:</span>
+                                    <span>{{$date['start_time']}}</span>
+                                </div>
+                                <div>
+                                    <span class="title">Data de fim:</span>
+                                    <span>{{$date['end_time']}}</span>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script>
@@ -64,5 +130,9 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 <script src="{{ asset('js/chat.js')}}"></script>
+
+<script src="{{ asset('assetsDashboard/js/core/jquery.min.js') }}"></script>
+<script src="{{asset('assetsDashboard/js/core/popper.min.js')}}"></script>
+<script src="{{asset('assetsDashboard/js/core/bootstrap-material-design.min.js')}}"></script>
 
 </html>

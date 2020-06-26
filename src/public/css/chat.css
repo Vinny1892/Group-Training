@@ -87,6 +87,12 @@ table {
     display: flex;
     align-items: center;
     font-size: 18px;
+    transition: .3s;
+}
+
+.btn-voltar:hover {
+    color: #ffffff83;
+    transition: .3s;
 }
 
 .corpo-chat {
@@ -135,11 +141,11 @@ table {
 .area-de-msg .outro, .eu {
     position: relative;
     max-width: 500px;
+    padding: 3px 10px;
 }
 
 .area-de-msg .eu {
     border-radius: 0 7px 7px 7px;
-    padding: 10px;
     margin-bottom: 3px;
     background: #48c379;
     color: #ffffff;
@@ -160,7 +166,6 @@ table {
 
 .area-de-msg .outro {
     border-radius: 7px 0 7px 7px;
-    padding: 10px;
     margin-bottom: 3px;
     background: #5780d8;
     color: white;
@@ -182,7 +187,6 @@ table {
 .area-de-msg .outro .name {
     font-size: 13px;
     font-weight: 700;
-    margin-bottom: 6px;
 }
 
 .escreve {
@@ -229,6 +233,42 @@ table {
     transition: .3s;
     background: #858585;
     transition: .3s;
+}
+
+.btn-get-info-room {
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-top: 5px;
+    transition: .3s;
+    background: transparent;
+}
+
+.btn-get-info-room:hover {
+    background: #ffffff21;
+    transition: .3s;
+}
+
+.info {
+    margin: 10px 0;
+}
+
+.info .title {
+    font-weight: 600;
+}
+
+.info .category {
+    padding: 5px 15px;
+    margin: 2px;
+    background: #1a2740;
+    color: white;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.date {
+    padding: 10px;
 }
 
 @media (max-width: 1200px) {
