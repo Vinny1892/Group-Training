@@ -156,7 +156,7 @@
 </div>
 
 <!-- ----------------------------------- -->
-<div>
+<div class="rooms-list">
     <h4>Salas</h4>
     <?php if (sizeof($roomsOfUser) > 0): ?>
         <!-- Listagem Salas -->
@@ -198,7 +198,7 @@
         </div>
     </div>
     <?php else: ?>
-        <?php echo "nenhuma modalidade ainda"; ?>       
+        <?php echo "Nnhuma sala ainda"; ?>       
     <?php endif; ?>       
 </div>
 </div>
