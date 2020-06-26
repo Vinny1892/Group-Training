@@ -36,7 +36,7 @@
 <section class="section-empresa">
     <div class="container">
         <h4 class="text-center">Empresas parceiras</h4>
-        <div class="row">
+        <div class="row empresas-parceiras">
 
 
             @foreach ($patrocinadores as $patrocinador)

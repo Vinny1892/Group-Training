@@ -18,9 +18,25 @@
 }
 
 .main-content {
+    overflow-y: auto;
     width: 100%;
     padding: 40px;
 }
+
+.main-content::-webkit-scrollbar {
+    height: 7px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #a7a7a7;
+    border-radius: 9px;
+    transition: .3s;
+}
+
 
 .title-search-rooms {
     margin-top: 5px;
@@ -122,4 +138,10 @@
     padding: 20px;
     margin: 20px;
     float: left;
+}
+
+.empresas-parceiras {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
