@@ -69,7 +69,7 @@ table {
     height: 100px;
     margin: 0 30px;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
 }
 
 .room-name {
