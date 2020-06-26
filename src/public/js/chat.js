@@ -40,33 +40,39 @@ function sendMessage() {
 }
 
 function renderMessage(messageObject, type){
+    
     let newMessageBox = document.createElement("div")
-    let tabulacao = document.createElement("span")
-    let newMessageText = document.createElement("span")
-    let newMessageTime = document.createElement("span")
     
     //type = "eu" para adicionar mensagens do seu usuário
     //type = "outro" para adicionar mensagens de outros usuarios
-    newMessageBox.classList.add(type)
+    
+    if(type == "eu") {
+        const myUserMessage = `
+        <div class='eu'>
+            <div class='message'>
+                <span class='message-text'>${messageObject.message}</span>
+            </div>
+            <span class='horario'>${messageObject.time}</span>
+        </div>
+        `
+        newMessageBox.innerHTML =  myUserMessage;
 
-    newMessageTime.classList.add("horario")
-    newMessageText.innerText = messageObject.message
-    newMessageTime.innerText = messageObject.time
-
-    if(type == "outro") {
-        let newMessageAuthor = document.createElement("div")
-        newMessageAuthor.classList.add("nome")
-        newMessageAuthor.innerText = messageObject.author
-        newMessageBox.appendChild(newMessageAuthor)
+    } else {
+        const otherUserMessage = `
+        <div class='outro'>
+            <div class='message'>
+                <span class='name'>${messageObject.author}</span>
+                <span class='message-text'>${messageObject.message}</span>
+            </div>
+            <span class='horario'>${messageObject.time}</span>
+        </div>
+        `
+        newMessageBox.innerHTML =  otherUserMessage;
     }
 
-    newMessageText.classList.add("msg")
-    tabulacao.classList.add("tab")
+    chat.appendChild(newMessageBox.children[0]);
 
-    tabulacao.appendChild(newMessageText)
-    newMessageBox.appendChild(tabulacao)
-    newMessageBox.appendChild(newMessageTime)
-    chat.appendChild(newMessageBox)
+    chat.scrollTop = chat.scrollHeight;    
 }
 
 button.addEventListener('click', async function () {
