@@ -3,7 +3,7 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         @if (session('message'))
         <div class="alert alert-success">
           {{ session('message') }}
@@ -18,30 +18,30 @@
       @endif
           <div class="card">
           <div class="card-header card-header-success">
-            <h4 class="card-title">Edit Profile</h4>
-            <p class="card-category">Complete your profile</p>
+            <h4 class="card-title">Edição de Perfil</h4>
+            <p class="card-category">Complete o seu Perfil</p>
           </div>
           <div class="card-body">
             <form method="POST" action="{{ route('user.update', ['user' => $user->_id]) }}" >
               @csrf
               @method('PUT')
               <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6 pl-3 pr-3">
+                  <label for="inputName">Nome</label>
+                  <input type="text" value="{{ $user->name }}" class="form-control" name="name" placeholder="Escreva seu nome">
+                </div>
+                <div class="form-group col-md-6 pl-3 pr-3">
                   <label>Email</label>
                   <input type="email" value="{{ $user->email }}" class="form-control" name="email" placeholder="Email"/>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 pl-3 pr-3">
                   <label for="inputPassword4">Senha</label>
                 <input type="password"  class="form-control" name="password" placeholder="Insira Nova Senha" >
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 pl-3 pr-3">
                   <label for="inputPassword4">Confirmação Senha</label>
-                <input type="password"  class="form-control" name="password_confirmation" placeholder="Atualizar Senha">
+                <input type="password"  class="form-control" name="password_confirmation" placeholder="Confirme a Senha">
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="inputName">Nome</label>
-              <input type="text" value="{{ $user->name }}" class="form-control" name="name" placeholder="Escreva seu nome">
               </div>
               <button type="submit" class="btn btn-success pull-right">Atualizar Credenciais</button>
               <div class="clearfix"></div>
