@@ -22,22 +22,21 @@
 				<form action="{{ route('savemodality') }}" method="POST" enctype="multipart/form-data">
 					@csrf
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6 pl-3 pr-3">
 							<label for="name">Nome</label>
 							<input type="text" name="name" class="form-control" value="{{$modality ? $modality->name : old('name')}}">
 						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6 pl-3 pr-3">
 							<label for="description">Descrição</label>
 							<textarea class="form-control" name="description">{{$modality ? $modality->description : old('description')}}</textarea>
 						</div>
 					</div>
-					<div class="form-row">
-						<p class="col-12">
+					<div class="form-row mt-3">
+						<div class="col-md-12 pl-3 pr-3">
 							<label for="profileImage">Imagem</label>
-						</p>
-						<input type="file" name="profileImage">
+							<br>
+							<input type="file" name="profileImage">
+						</div>
 					</div>
 
 					<input type="hidden" name="_id" value="{{$modality ? $modality->_id : old('_id')}}">
