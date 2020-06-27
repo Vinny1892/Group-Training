@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <div class="col s6">
+        <!-- <div class="col s6">
           <div class="card facebook m-lateral-20">
             <div class="card-content card-action">
               <a href="{{ route('login.facebook') }}">
@@ -34,7 +34,7 @@
               </a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <form method="POST" action="{{ route('register.storage') }}" class="row">
         {{ csrf_field() }}
