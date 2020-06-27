@@ -34,20 +34,22 @@
 	@endif		
 			@csrf
 			<div class="form-row">
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-6 pl-3 pr-3">
 				  <label for="name">Nome</label>
-				<input type="text" name="name" class="form-control"  placeholder="Nome Sala" value="{{$room ? $room->name : old('name') }}">
+					<input type="text" name="name" class="form-control"  placeholder="Nome Sala" value="{{$room ? $room->name : old('name') }}">
+				</div>
+				<div class="form-group col-md-6 pl-3 pr-3">
+			  		<label for="#">Senha</label>
+					<input type="password" name="key" id="key" class="form-control"  placeholder="chave">
 				</div>
 			</div>
 			<div class="form-row">
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-6 pl-3 pr-3">
 					<label for="description">Descrição</label>
 					<textarea  class="form-control"  name="description" placeholder="Insira Descrição da Sala" >{{$room ? $room->description : old('description')}}</textarea>
 				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="#">Público</label>
+				<div class="form-group col-md-6 pl-3 pr-3">
+					<label for="#">Visibilidade da sala</label><br>
 					<input type="radio" id="public" name="public" value="public" 
 					@if($room && $room->public == "public")
 						{{'checked'}}
@@ -60,12 +62,6 @@
 					@endif
 					>
 					<label for="private">Privado</label><br>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="#">senha</label>
-					<input type="password" name="key" id="key" class="form-control"  placeholder="chave">
 				</div>
 			</div>
 			
@@ -83,10 +79,10 @@
 			</div>
 			-->
 			<div class="form-row">
-				<div class="form-group col-md-6">
-			  		<label for="modalitySlug">Modalidade</label>
-					<select id="modalitySlug" name="modalitySlug" required>
-						<option></option>
+				<div class="form-group col-md-6 pl-3 pr-3">
+			  		<label for="modalitySlug">Modalidade</label> <br>
+					<select id="modalitySlug" name="modalitySlug" required class="form-control">
+						<option>Selecione</option>
 						@foreach($allModalities as $modality)
 							@if($room && $room->modality)
 								@if($room->modality['slug'] == $modality->slug)
@@ -101,39 +97,39 @@
 						@endforeach
 					</select>
 				</div>
-			</div>
-			
-			<div class="form-row" id="categorias">
-		  		<label for="category">Categorias</label>
-		  		<select id="categoriesSlug" name="categoriesSlug[]" multiple>
-					@if($room)
-						<?php $show = true ?>
-						@foreach($allCategories as $category )
-							@foreach($room->categories as $categorySelect)
-								@if($categorySelect)
-									@if($category->slug == $categorySelect['slug']))
-										<option value="{{$category->slug}}" selected> {{$category->name}} </option>
-										<?php $show = false ?>
-									@endif
-								@endif
-							@endforeach
-							@if($show)
-								<option value="{{$category->slug}}" > {{$category->name}} </option>
-							@endif
+				<div id="categorias" class="form-group col-md-6 pl-3 pr-3">
+					<label for="category">Categorias</label>
+					<select id="categoriesSlug" name="categoriesSlug[]" multiple class="form-control">
+						@if($room)
 							<?php $show = true ?>
-						@endforeach
-					@else
-						@foreach($allCategories as $category )
-							<option value="{{$category->slug}}" > {{$category->name}} </option>
-						@endforeach
-					@endif
-				</select>
+							@foreach($allCategories as $category )
+								@foreach($room->categories as $categorySelect)
+									@if($categorySelect)
+										@if($category->slug == $categorySelect['slug']))
+											<option value="{{$category->slug}}" selected> {{$category->name}} </option>
+											<?php $show = false ?>
+										@endif
+									@endif
+								@endforeach
+								@if($show)
+									<option value="{{$category->slug}}" > {{$category->name}} </option>
+								@endif
+								<?php $show = true ?>
+							@endforeach
+						@else
+							@foreach($allCategories as $category )
+								<option value="{{$category->slug}}" > {{$category->name}} </option>
+							@endforeach
+						@endif
+					</select>
+				</div>
 			</div>
-			<div class="form-row">
-				<p class="col-12">
-					<label for="inputimage">Imagem</label>
-				</p>
-				<input type="file" name="profileImage">
+			<div class="form-row mt-3">
+				<div class="col-md-12 pl-3 pr-3">
+					<label for="inputimage">Imagem</label> 
+					<br>
+					<input type="file" name="profileImage">
+				</div>
 			</div>
 
 			
@@ -142,31 +138,34 @@
 			</div>
 			<input type="hidden" name="id_user_adm" value="{{Auth::user()->_id}}">
 
-			@if(isset($room))   
-				<button type="submit" class="btn btn-success pull-right">Salvar edição da sala: {{$room->name}}</button>
-			@else
-				<button type="button" onclick="salvarForm()" class="btn btn-success pull-right">Salvar nova Sala</button>
-			@endif
-
-			
-			<div class="clearfix"></div>
+			<div class="form-row">
+				<div class="col-md-6 pl-3 pr-3">
+					<button type="button" class="btn btn-outline" onclick="insertCardDate()">Adicionar mais datas</button>
+				</div>
+				<div class="col-md-6 pl-3 pr-3">
+					@if(isset($room))   
+						<button type="submit" class="btn btn-success pull-right">Salvar edição da sala: {{$room->name}}</button>
+					@else
+						<button type="button" onclick="salvarForm()" class="btn btn-success pull-right">Salvar nova Sala</button>
+					@endif
+				</div>
+			</div>
 		</form>
-				<button onclick="insertCardDate()">Adicionar mais datas</button>
 	</div>
 </div>
 
 <!-- ----------------------------------- -->
 <div class="rooms-list">
-    <h4>Salas</h4>
-    <?php if (sizeof($roomsOfUser) > 0): ?>
+	<div class="row">
         <!-- Listagem Salas -->
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
                     <h4 class="card-title">Salas</h4>
                     <p class="card-category">Salas Cadastradas </p>
                 </div>
                 <div class="card-body table-responsive">
+    			<?php if (sizeof($roomsOfUser) > 0): ?>
                     <table class="table table-hover">
                         <thead class="text-primary">
                             <th>ID</th>
@@ -191,20 +190,17 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+					</table>
+			<?php else: ?>
+				<div class="col-lg-12 mt-3">
+					<h5>Nenhuma sala cadastrada ainda!</h5>
+				</div> 
+			<?php endif; ?>  
                 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php else: ?>
-        <?php echo "Nnhuma sala ainda"; ?>       
-    <?php endif; ?>       
-</div>
-</div>
-</div>
-</div>
- 
+			</div>
+		</div>     
+	</div>
+</div> 
 
 <script>
 	let contador = 0;
@@ -214,30 +210,25 @@
 		let vazio = 1;
 		cardDate.innerHTML += "<div class="+'card'+">"+
 			
-			"<div class="+'form-row'+">"+
-				"<div class="+'form-group col-md-6'+">"+
+			'<div class="form-row m-0 p-3">'+
+				'<div class="form-group col-md-6 pl-3 pr-3">'+
 			  		"<label>Data</label>"+
 					"<input type="+'date'+" name="+'date'+contador+" class="+'form-control'+" value="+(date ? date.date : '')+">"+
 				"</div>"+
-			"</div>"+
-
-			"<div class="+'form-row'+">"+
-				"<div class="+'form-group col-md-6'+">"+
-			  		"<label>horário de início</label>"+
-					"<input type="+'time'+" name="+'start_time'+contador+" class="+'form-control'+"  placeholder="+'horário de início'+" value="+(date ? date.start_time : '')+">"+
+				'<div class="form-group col-md-6 pl-3 pr-3">'+
+				  "<label for="+'place'+">Local</label>"+
+				"<input type="+'text'+" name="+'place'+contador+" class="+'form-control'+"  placeholder="+'Local'+" value="+(date ? date.place : '')+">"+
 				"</div>"+
 			"</div>"+
 
-			"<div class="+'form-row'+">"+
-				"<div class="+'form-group col-md-6'+">"+
+			'<div class="form-row m-0 p-3">'+
+				'<div class="form-group col-md-6 pl-3 pr-3">'+
 			  		"<label>horário de término</label>"+
 					"<input type="+'time'+" name="+'end_time'+contador+" class="+'form-control'+"  placeholder="+'horário de término'+" value="+(date ? date.end_time : '')+">"+
 				"</div>"+
-			"</div>"+		
-			"<div class="+'form-row'+">"+
-				"<div class="+'form-group col-md-6'+">"+
-				  "<label for="+'place'+">Local</label>"+
-				"<input type="+'text'+" name="+'place'+contador+" class="+'form-control'+"  placeholder="+'Local'+" value="+(date ? date.place : '')+">"+
+				'<div class="form-group col-md-6 pl-3 pr-3">'+
+			  		"<label>horário de início</label>"+
+					"<input type="+'time'+" name="+'start_time'+contador+" class="+'form-control'+"  placeholder="+'horário de início'+" value="+(date ? date.start_time : '')+">"+
 				"</div>"+
 			"</div>"+
 
