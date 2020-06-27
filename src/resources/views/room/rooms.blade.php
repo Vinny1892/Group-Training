@@ -1,23 +1,8 @@
 @extends('room.main')
 @section('content')
   <main class="container">
-    <h2>Salas da Modalidade {{ $modality->name }}</h2>
+    <h4>Salas da Modalidade {{ $modality->name }}</h4>
     <div class="row">
-      <div class="filtro">
-        <div>
-          <label>Categoria</label>
-          <select id="category"></select>
-          <!-- insere tag via js -->
-          <button  onclick="showRoomByCategory()">Buscar</button>
-        </div> 
-        <div>
-          <label>TAG</label>
-          <select id="tag"></select>
-          <!-- insere tag via js -->
-      <button  onclick="showRoomByTag()">Buscar</button>
-        </div> 
-        <button  onclick="allCategories()">Listar Todas</button>
-      </div>
       <div id="cardRoom">
         @foreach($rooms as $room)
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -39,7 +24,6 @@
                   <div class="card-body">
                     <h4 class="card-title">{{$room->name}}</h4>
                     <p class="card-text">{{$room->description}}</p>
-                    <div class="card-action"> </div>
                   </div>
                   <div class="card-footer text-muted">
                     2 usuários ativos
@@ -54,7 +38,7 @@
    <script >
     function allCategories(){
       let categories = [];
-      <?php $i = 0;?>
+      <?php $i = 0; ?>
       @foreach($categories as $category)
         let category<?php echo "$i";?> = {
           name: '{{ $category->name }}',

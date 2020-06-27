@@ -184,7 +184,6 @@ nav a:focus,
 nav a:hover {
     color: white;
     font-weight: bold;
-    background: rgba(234, 234, 234, 0.1) !important;
 }
 
 a:focus {
@@ -1887,7 +1886,6 @@ button {
 .footer {
     background-color: #253556;
     border-color: #253556;
-    padding-bottom: 3em;
     color: #fff
 }
 

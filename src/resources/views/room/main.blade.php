@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Group Training</title>
+    <link href="" rel="shortcut icon" type="image/png" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600&display=swap">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modality Page</title>
+    <link href="{{ asset('css/modality.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/sala.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group Training</title>
-    <link rel="stylesheet" href="{{ asset('css/sala.css') }}">
-    <!-- Latest compiled and minified CSS -->
-    <!-- Incluir -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 </head>
 
-  <main>
-    <header>
-      <h1>cabeçalho</h1>
-    </header>
-    @yield('content')
-  </main>
+<body>
+    @include('home.header')
+    <main>
+        @yield('content')
+    </main>
 
+    @include('home.footer')
+</body>
 
-<footer>
-    rodapé
-</footer>
 </html>
