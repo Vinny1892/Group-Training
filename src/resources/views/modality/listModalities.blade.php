@@ -32,7 +32,7 @@
                         </table>
                     <?php else : ?>
                         <div class="col-lg-12 mt-3">
-                            <h5>Nenhuma sala cadastrada ainda!</h5>
+                            <h5>Nenhuma modalidade cadastrada ainda!</h5>
                         </div> 
                     <?php endif; ?>
                 </div>
