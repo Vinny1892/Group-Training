@@ -16,7 +16,7 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         @if (session('message'))
           <div class="alert alert-success">
             {{ session('message') }}
@@ -44,15 +44,13 @@
             @endif
               @csrf
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 pl-3 pr-3">
                   <label for="inputEmail4">Nome</label>
-                <input type="text" name="name"  class="form-control" value="{{$category ? $category->name : old('name') }}" placeholder="Nome Categoria">
+                <input type="text" name="name"  class="form-control" value="{{$category ? $category->name : old('name') }}" placeholder="Nome">
                 </div>
-            </div>
-                <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 pl-3 pr-3">
                   <label for="inputPassword4">Descrição</label>
-                <textarea  class="form-control"  name="description" placeholder="Insira Descrição da Categoria">{{$category ? $category->description : old('description') }}</textarea>
+                <textarea  class="form-control"  name="description" placeholder="Descrição da Categoria">{{$category ? $category->description : old('description') }}</textarea>
                 </div>
               </div>
         
@@ -69,13 +67,14 @@
 
 
 <!-- Listagem Categorias -->
-<div class="col-lg-6 col-md-12">
+<div class="col-lg-12 col-md-12">
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">Categorias</h4>
         <p class="card-category">Categorias Cadastradas </p>
       </div>
       <div class="card-body table-responsive">
+      <?php if (sizeof($categorys) > 0) : ?>
         <table class="table table-hover" id='tableCategory'>
           <thead class="text-primary">
             <th>ID</th>
@@ -98,37 +97,11 @@
           </tbody>
         </table>
 
-       <div class="">
-        <ul class="pagination justify-content-center">
-          <li class="page-item {{ $categorys->currentPage() == 1 ? "disabled" : "" }}">
-            <a class="page-link"  href="{{ $categorys->previousPageUrl() }}">Previous</a>
-          </li>
-          {{-- {{ $categorys->links() }} --}}
-         @for($i=1 ; $i <= $categorys->lastPage(); $i++)
-
-         
-          <li class="page-item {{ $categorys->currentPage() == $i ? "active" : "" }}">
-            <a class="page-link" href="{{ $categorys->url($i) }}"> 
-              {{  $i }} 
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          {{-- <li class="page-item active">
-            <span class="page-link">
-              2
-              <span class="sr-only">(current)</span>
-            </span> 
-          </li>--}}
-          @endfor
-      
-          <li class="page-item {{ $categorys->currentPage() == $categorys->lastPage()  ? "disabled" : ""  }} ">
-            <a class="page-link" href="{{ $categorys->nextPageUrl() }}">Next</a>
-          </li>
-        </ul>
-
-      </nav>
-
-       </div>
+        <?php else : ?>
+            <div class="col-lg-12 mt-3">
+                <h5>Nenhuma categoria cadastrada ainda!</h5>
+            </div> 
+        <?php endif; ?>
 
 
       </div>
