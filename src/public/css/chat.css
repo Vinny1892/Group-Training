@@ -173,7 +173,7 @@ table {
     display: flex;
 }
 
-.area-de-msg .outro::after {
+.area-de-msg .outro::before {
     content: '';
     width: 10px;
     height: 10px;

@@ -39,8 +39,8 @@
 					<input type="text" name="name" class="form-control"  placeholder="Nome Sala" value="{{$room ? $room->name : old('name') }}">
 				</div>
 				<div class="form-group col-md-6 pl-3 pr-3">
-			  		<label for="#">Senha</label>
-					<input type="password" name="key" id="key" class="form-control"  placeholder="chave">
+			  		<label hidden for="#">Senha</label>
+					<input hidden type="password" name="key" id="key" class="form-control"  placeholder="chave">
 				</div>
 			</div>
 			<div class="form-row">
@@ -49,19 +49,19 @@
 					<textarea  class="form-control"  name="description" placeholder="Insira Descrição da Sala" >{{$room ? $room->description : old('description')}}</textarea>
 				</div>
 				<div class="form-group col-md-6 pl-3 pr-3">
-					<label for="#">Visibilidade da sala</label><br>
-					<input type="radio" id="public" name="public" value="public" 
+					<label hidden for="#">Visibilidade da sala</label><br>
+					<input type="radio" id="public" hidden name="public" value="public" 
 					@if($room && $room->public == "public")
 						{{'checked'}}
 					@endif
 					>
-					<label for="public">Publico</label><br>
-					<input type="radio" id="private" name="public" value="private"
+					<label hidden for="public">Publico</label><br>
+					<input type="radio" id="private" hidden name="public" value="private"
 					@if($room && $room->public == "private")
 						{{'checked'}}
 					@endif
 					>
-					<label for="private">Privado</label><br>
+					<label hidden for="private">Privado</label><br>
 				</div>
 			</div>
 			
@@ -222,15 +222,15 @@
 			"</div>"+
 
 			'<div class="form-row m-0 p-3">'+
+			'<div class="form-group col-md-6 pl-3 pr-3">'+
+			  		"<label>horário de início</label>"+
+					"<input type="+'time'+" name="+'start_time'+contador+" class="+'form-control'+"  placeholder="+'horário de início'+" value="+(date ? date.start_time : '')+">"+
+				"</div>"+
 				'<div class="form-group col-md-6 pl-3 pr-3">'+
 			  		"<label>horário de término</label>"+
 					"<input type="+'time'+" name="+'end_time'+contador+" class="+'form-control'+"  placeholder="+'horário de término'+" value="+(date ? date.end_time : '')+">"+
 				"</div>"+
-				'<div class="form-group col-md-6 pl-3 pr-3">'+
-			  		"<label>horário de início</label>"+
-					"<input type="+'time'+" name="+'start_time'+contador+" class="+'form-control'+"  placeholder="+'horário de início'+" value="+(date ? date.start_time : '')+">"+
-				"</div>"+
-			"</div>"+
+							"</div>"+
 
 		"</div>";
 		contador++;

@@ -25,9 +25,7 @@
                     <h4 class="card-title">{{$room->name}}</h4>
                     <p class="card-text">{{$room->description}}</p>
                   </div>
-                  <div class="card-footer text-muted">
-                    2 usuários ativos
-                  </div>
+
               </div>
             </a>
           </div>
