@@ -74,9 +74,13 @@ services:
       - /usr/app/node_modules
     ports:
       - 4000:4000
+    depends_on: 
+      - nginx
+      - app-grouptraining
     networks:
       network-develop:
         ipv4_address: 172.100.0.8
+      
 networks:
   network-develop:
     driver: bridge
