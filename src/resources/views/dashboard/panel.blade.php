@@ -52,12 +52,14 @@
                 <th>Usuarios</th>
                 <th>Categorias</th>
                 <th>Modalidade</th>
+                <th>Salas</th>
               </thead>
               <tbody>
                 <tr>
                   <td>{{$usersTotal}}</td>
                   <td>{{$categorysTotal}}</td>
                   <td>{{$modalityTotal }}</td>
+                <td>{{ $roomsTotal }}</td>
                 </tr>
               </tbody>
               </thead>
