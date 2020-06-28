@@ -22,29 +22,26 @@ git clone https://github.com/Vinny1892/Group-Training.git
 ```
 
 ```
-cd Group-Training/
+cd Group-Training/src
+```
+```
+mv .env.example .env
+```
+```
+cd ..
 ```
 
 ```
 docker-compose up
 ```
+Após o processo finalizar, abra outro terminal e execute:
 ```
 docker-compose exec  app-grouptraining composer install
-```
-
-```
 docker-compose exec  app-grouptraining php artisan key:generate
-```
-
-```
 docker-compose exec  app-grouptraining php artisan migrate
-
 ```
 
-```
-abre seu navegador localhost:8080
-```
-
+[Abre o projeto no seu navegador](https://localhost:8080)
 
 
 ## Contribuidores
@@ -56,7 +53,6 @@ As seguintes pessoas contribuiram para este projeto:
 * [Gustavo Candido](https://github.com/GustavoGcdo)
 * [Lucas Sandim](https://github.com/sandiml)
 * [Mateus Ragazzi](https://github.com/mateusragazzi)
-
 
 ## Licença de uso
 

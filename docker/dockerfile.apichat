@@ -1,0 +1,15 @@
+FROM node:latest
+
+WORKDIR /usr/app
+
+
+COPY src/chatAPI  .
+
+RUN ls -l
+
+
+RUN npm install
+
+#EXPOSE 3000
+
+CMD [ "npm", "start" ]

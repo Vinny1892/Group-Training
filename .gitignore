@@ -1,7 +1,10 @@
-vendor
-#docker-compose.yml
-#docker/dockerfile.app
-#docker/Dockerfile.mongo
-node_modules
-#.env
+src/vendor
+docker-compose.yml
+docker/dockerfile.app
+docker/Dockerfile.mongo
+docker/Dockerfile.apichat
+src/chatAPI/node_modules
 .idea/
+.phpunit.result.cache
+public/image/
+redis-data/
