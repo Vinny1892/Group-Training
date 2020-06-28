@@ -100,11 +100,11 @@
                                     <span>{{$date['date']}}</span>
                                 </div>
                                 <div>
-                                    <span class="title">Data de inicio:</span>
+                                    <span class="title">Horário de inicio:</span>
                                     <span>{{$date['start_time']}}</span>
                                 </div>
                                 <div>
-                                    <span class="title">Data de fim:</span>
+                                    <span class="title">Horário de término:</span>
                                     <span>{{$date['end_time']}}</span>
                                 </div>
                             </div>
