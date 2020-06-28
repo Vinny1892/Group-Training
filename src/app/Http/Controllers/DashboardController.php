@@ -23,8 +23,8 @@ class DashboardController extends Controller
     }
 
     public function show(Request $request ){
-        $allRooms = Room::paginate(6);
-        $users = User::paginate(6);
+        $allRooms = Room::all();
+        $users = User::all();
         $usersTotal = User::count(); 
         $categorysTotal =  Category::count();
         $modalityTotal= Modality::count();

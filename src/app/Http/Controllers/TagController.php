@@ -68,7 +68,7 @@ class TagController extends Controller
         $cardTitle = "Criar tag";
         $cardDescription = "inserir novas tags";
         $tag = null;
-        $tags = Tag::paginate(5);
+        $tags = Tag::al();
         return view('tag.formTag', \compact('tag','tags','cardTitle','cardDescription'));
 
     }
@@ -83,7 +83,7 @@ class TagController extends Controller
         $tag = Tag::where("slug", $slugTag)->first();
         $cardTitle = "Editar tag";
         $cardDescription = "Editar $tag->name";
-        $tags = Tag::paginate(5);
+        $tags = Tag::all();
         return view('tag.formTag', \compact('tag','tags','cardTitle','cardDescription'));
         //
     }

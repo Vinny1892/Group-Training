@@ -27,7 +27,7 @@ class CategoryController extends Controller
         $cardTitle = "Criar Categoria";
         $cardDescription = "criar uma nova categoria";
         $category = null;
-        $categorys = Category::paginate(6);
+        $categorys = Category::all();
         return view('category.form' , \compact('categorys','category','cardTitle','cardDescription'));
     }
 
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      */
     public function edit($slugCategory)
     {
-        $categorys = Category::paginate(6);
+        $categorys = Category::all();
         $category = Category::where('slug' , $slugCategory)->first();
         $cardTitle = "Editar Categoria $category->name";
         $cardDescription = "editando categoria $category->name";
