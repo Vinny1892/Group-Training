@@ -9,7 +9,6 @@
         <div>
           <label>Categoria</label>
           <select id="category">
-              <option>teste</option>
             <!-- insere tag via js -->
           </select>
           <button  onclick="showRoomByCategory()">Buscar</button>
