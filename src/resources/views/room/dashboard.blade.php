@@ -82,7 +82,7 @@
 				<div class="form-group col-md-6 pl-3 pr-3">
 			  		<label for="modalitySlug">Modalidade</label> <br>
 					<select id="modalitySlug" name="modalitySlug" required class="form-control">
-						<option>Selecione</option>
+						<option></option>
 						@foreach($allModalities as $modality)
 							@if($room && $room->modality)
 								@if($room->modality['slug'] == $modality->slug)
