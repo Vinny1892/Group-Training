@@ -3,6 +3,21 @@
   <main class="container">
     <h4>Salas da Modalidade {{ $modality->name }}</h4>
     <div class="row">
+      
+       <div class="row">
+      <div class="filtro">
+        <div>
+          <label>Categoria</label>
+          <select id="category">
+              <option>teste</option>
+            <!-- insere tag via js -->
+          </select>
+          <button  onclick="showRoomByCategory()">Buscar</button>
+        </div> 
+        <button  onclick="allCategories()">Listar Todas</button>
+      </div>
+
+    <div class="row">
       <div id="cardRoom">
         @foreach($rooms as $room)
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -77,6 +92,7 @@
 
     <script>
       let rooms = allRooms();
+      console.log();
       let categories = allCategories();
       if (rooms) {
         let opcoes = document.getElementById('category');
@@ -122,11 +138,9 @@
           '<div class="card">'+
             hasImage(room)+
             "<div class="+'card-body'+"> <h4 class="+'card-title'+">"+room.name+"</h4> <p class="+'card-text'+">"+room.description+"</p>"+
-                  "<div class="+'card-action'+"> </div></div>"+
-                  "<div class="+'card-footer text-muted'+">2 usuários ativos</div>"
-          +'</div>'
-          +"</a>"
-        +"</div>";
+          '</div>'+
+          "</a>"+
+        "</div>";
       }
 
       function hasImage(room){
@@ -148,6 +162,12 @@
       }
     </script>
   </main>
+
+  <style>
+    select {
+    display: initial !important; 
+}
+  </style>
 
 @endsection
 
